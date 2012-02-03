@@ -1,0 +1,16 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  track_id: 1
+  value: 1
+
+two:
+  user_id: 1
+  track_id: 2
+  value: 4
+  
+three:
+  user_id: 2
+  track_id: 1
+  value: 4

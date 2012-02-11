@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120131095828) do
+ActiveRecord::Schema.define(:version => 20120203004557) do
+
+  create_table "predictions", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "track_id"
+    t.integer  "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "ratings", :force => true do |t|
     t.integer  "user_id"
@@ -26,6 +34,14 @@ ActiveRecord::Schema.define(:version => 20120131095828) do
     t.string   "artist_name"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "unrated_predictions", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "track_id"
+    t.integer  "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|

@@ -38,9 +38,14 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.2.0)
+    cofi_cost (0.0.4)
+      gsl
+      narray
     erubis (2.7.0)
     execjs (1.3.0)
       multi_json (~> 1.0)
+    gsl (1.14.7)
+      narray (>= 0.5.9)
     haml (3.1.4)
     haml-rails (0.3.4)
       actionpack (~> 3.0)
@@ -63,6 +68,7 @@ GEM
     mocha (0.10.3)
       metaclass (~> 0.0.1)
     multi_json (1.0.4)
+    narray (0.6.0.1)
     nifty-generators (0.4.6)
     pg (0.12.2)
     polyglot (0.3.3)
@@ -116,10 +122,12 @@ PLATFORMS
 DEPENDENCIES
   bcrypt-ruby
   coffee-rails (~> 3.2.1)
+  cofi_cost (>= 0.0.4)
   haml
   haml-rails
   jquery-rails
   mocha
+  narray
   nifty-generators
   pg
   rails (= 3.2.0)

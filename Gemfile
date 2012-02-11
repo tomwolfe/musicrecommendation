@@ -46,3 +46,7 @@ gem 'bcrypt-ruby'
 gem 'haml'
 
 gem 'haml-rails'
+
+gem 'cofi_cost', '>=0.0.4'
+
+gem 'narray'

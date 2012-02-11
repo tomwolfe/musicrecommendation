@@ -1,4 +1,6 @@
 class TracksController < ApplicationController
+  before_filter :login_required, :except => [:index]
+  
   # GET /tracks
   # GET /tracks.json
   def index

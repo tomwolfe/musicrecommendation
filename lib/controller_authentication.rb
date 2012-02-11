@@ -45,4 +45,10 @@ module ControllerAuthentication
   def store_target_location
     session[:return_to] = request.url
   end
+  
+  def authenticate_user!
+    if current_user.nil?
+      redirect_to login_url, :alert => "You must first log in to access this page"
+    end
+  end
 end

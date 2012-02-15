@@ -24,7 +24,7 @@ class Rating < ActiveRecord::Base
     
     calc = CofiCost.new(rating_table, num_features, lambda, iterations, nil, nil)
     calc.min_cost
-    predictions = calc.calc_predictions
+    predictions = calc.predictions
     add_predictions(predictions, users_hash, tracks_hash, users, tracks)
   end
   
@@ -39,7 +39,7 @@ class Rating < ActiveRecord::Base
   def add_predictions(predictions, users_hash, tracks_hash, users, tracks)
     users.each_index do |i|
       tracks.each_index do |j|
-        predict = Predictions.find_or_initialize_by_user_id_and_track_id(users_hash.key(i), tracks_hash.key(j))
+        predict = Prediction.find_or_initialize_by_user_id_and_track_id(users_hash.key(i), tracks_hash.key(j))
         if predict.value.equal? predictions[i,j]
         else
           predict.value = predictions[i,j]

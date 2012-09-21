@@ -1,4 +1,4 @@
-Music recommender system using my Snowflake collaborative filtering playground.
+Music recommender system using the [cofi_cost gem] (https://github.com/tomwolfe/cofi_cost) collaborative filtering playground.
 
 Still under development.
 

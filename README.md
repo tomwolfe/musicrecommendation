@@ -1,12 +1,16 @@
+# MusicRecommendation
+
 Music recommender system using the [cofi_cost gem] (https://github.com/tomwolfe/cofi_cost) collaborative filtering playground.
 
-Still under development.
+It's still under development.
 
-==What works:
+## What works:
+
 User login
 Users Rating tracks/showing average rating for track/current_user_rating for track
 
-What does not:
+## What does not:
+
 recommendations:
   seeing how i'll be tying this in with the Musicbrainz.org database which currently
   contains ~11 million tracks this will probably be an expensive computation

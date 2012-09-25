@@ -6,19 +6,8 @@ I want to be able to sign in, sign out, and join with appropriate notifications 
   Background: on the "MusicRec home" page
     Given I am on the "MusicRec home" page
 
-  Scenario: the sign in form should be visable upon clicking "Sign In"
-    Given I am not signed in
-    When I click on "Sign In"
-    Then I should see the "Sign In" form
-      And I should be on the "MusicRec home" page
-    
-  Scenario: the sign in form should not be visable until "Sign In" is clicked
-    Given I am not signed in
-    Then I should not see the "Sign In" form
-
   Scenario: clicking on join should display the "New User" page
-    Given I am not signed in
-    When I click on "Join"
+    When I click on "New User"
     Then I should be on the "New User" page
       And I should see "Password"
 
@@ -26,12 +15,28 @@ I want to be able to sign in, sign out, and join with appropriate notifications 
     Given I fill in the "New User" form with valid inputs
     When I click "Create Account"
     Then I should be on the "MusicRec home" page
-      And I should see "Welcome back"
+      And I should see new user items
 
   Scenario: unsuccessfully joining the website with an invalid new user
     Given I fill in the "New User" form with invalid inputs
     When I click "Create Account"
     Then I should be on the "New User" page
       And I should see "Error"
+      
+  Scenario: clicking on "sign in" should display the "sign in" page
+    Given I have joined the website
+    When I click on "Sign In"
+    Then I should be on the "Sign In" page
+      And I should see "Password"
 
+  Scenario: sucessful sign in
+    Given I have joined the website
+    When I click on "Sign In"
+      And I fill in the "Sign In" form with valid credentials
+    Then I should see signed in items
   
+    Scenario: unsucessful sign in due to invalid credentials
+    When I click on "Sign In"
+      And I fill in the "Sign In" form with invalid credentials
+    Then I should be on the "Sign In" page
+      And I should see "No such user exists"

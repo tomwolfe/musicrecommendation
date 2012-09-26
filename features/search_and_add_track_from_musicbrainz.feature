@@ -24,3 +24,4 @@ I want to add tracks from MusicBrainz to MusicRec.
     Then I should be on the "View Track" page
       And I should see "Lynard Skynard"
       And I should see "Rate this track"
+      And I should see "0"

@@ -21,7 +21,7 @@ I want to add tracks from MusicBrainz to MusicRec.
   Scenario: search for a track that is not in the MusicRec database but is in the MusicBrainz database and add it from MusicBrainz to MusicRec
     When I search for "Free Bird"
       And I press the "Add" button
-    Then I should be on the "View Track" page
+    Then I should be on the "track" show page for "Free Bird"
       And I should see "Lynard Skynard"
       And I should see "Rate this track"
       And I should see "0"

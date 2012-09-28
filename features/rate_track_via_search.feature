@@ -5,16 +5,16 @@ I want to rate tracks.
 
   Background: signed in on the "Search" page
     Given I am signed in
-      And I am on the "Ratings" page
       And the following tracks exist:
       | title           | artist        |
       | Free Bird       | Led Zeppelin  |
+      And I am on the "ratings" index page
       And I click on "Free Bird"
 
   Scenario: successfully update a tracks rating (default 0-unrated)
     When I fill in "rating" with "5"
       And I press the "Update Rating" button
-    Then I should be on the "Ratings" page
+    Then I should be on the "ratings" index page
       And I should see "Rating successfully updated"
       And I should see "5"
 

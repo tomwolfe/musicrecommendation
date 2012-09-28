@@ -3,8 +3,8 @@ As a music fan
 So that I can get personalized recommendations
 I want to be able to sign in, sign out, and join with appropriate notifications that those actions failed or succedded.
 
-  Background: on the "MusicRec home" page
-    Given I am on the "MusicRec home" page
+  Background: on the "home" page
+    Given I am on the "home" page
       And the following users exist:
       | email     | password      |
       | user@b.com| password      |
@@ -17,7 +17,7 @@ I want to be able to sign in, sign out, and join with appropriate notifications 
   Scenario: successfully joining the website with a valid new user
     Given I fill in the "New User" form with "user@a.com" and "password"
     When I press the "Create Account" button
-    Then I should be on the "MusicRec home" page
+    Then I should be on the "home" page
       And I should see "new user" items
 
   Scenario: unsuccessfully joining the website with an invalid new user
@@ -35,11 +35,11 @@ I want to be able to sign in, sign out, and join with appropriate notifications 
     When I click on "Sign In"
       And I fill in the "Sign In" form with "user@b.com" and "password"
       And I press the "Sign In" button
-    Then I should be on the "MusicRec home" page
+    Then I should be on the "home" page
       And I should see "signed in" items
       
   Scenario: view homepage before login
-    Then I should be on the "MusicRec home" page
+    Then I should be on the "home" page
       And I should see "not signed in" items
   
   Scenario: unsuccessful sign in due to invalid credentials

@@ -23,6 +23,11 @@ When /I should see "(*.)"/ do |see|
   page.should have_content(see)
 end
 
+When /I fill in the "(*.)" form with "(*.)" and "(*.)"/ do |form,email,pass|
+  form=format_path(form)
+  eval("visit #{form}_path")
+end
+
 When /the following (*.) exist/ do |things, things_table|
   thing=things[0..-2].capitalize # remove plurality
   things_table.hashes.each do |thing_table|

@@ -15,10 +15,12 @@ I want to be able to sign in, sign out, and join with appropriate notifications 
       And I should see "Password"
 
   Scenario: successfully joining the website with a valid new user
-    Given I fill in the "New User" form with "user@a.com" and "password"
+    Given I am on the "New User" page
+      And I fill in "Email" with "user@a.com"
+      And I fill in "Password" with "password"
     When I press the "Create Account" button
     Then I should be on the "home" page
-      And I should see "new user" items
+      And I should see new user items
 
   Scenario: unsuccessfully joining the website with an invalid new user
     Given I fill in the "New User" form with "user@.com" and "p"
@@ -36,11 +38,11 @@ I want to be able to sign in, sign out, and join with appropriate notifications 
       And I fill in the "Sign In" form with "user@b.com" and "password"
       And I press the "Sign In" button
     Then I should be on the "home" page
-      And I should see "signed in" items
+      And I should see signed in items
       
   Scenario: view homepage before login
     Then I should be on the "home" page
-      And I should see "not signed in" items
+      And I should not see signed in items
   
   Scenario: unsuccessful sign in due to invalid credentials
     When I click on "Sign In"

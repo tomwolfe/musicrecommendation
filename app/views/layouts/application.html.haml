@@ -11,6 +11,15 @@
 
   %body
     #container
+      #user_header
+        - if current_user
+          = "Logged in as #{current_user.email}"
+          = link_to "Edit account", edit_user_path(current_user)
+          = link_to "Sign Out", signout_path, method: delete
+        - else
+          = link_to "Sign Up", signup_path
+          " or "
+          = link_to "Sign In", signin_path
       - flash.each do |name, msg|
         = content_tag :div, msg, :id => "flash_#{name}"
 

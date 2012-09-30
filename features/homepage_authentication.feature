@@ -30,11 +30,11 @@ I want to be able to sign in and sign out with appropriate notifications that th
       And I press the "Sign In" button
     Then I should be on the "home" page
       And I should see signed in items
+      And I should see "Logged In!"
           
   Scenario: unsuccessful sign in due to invalid credentials
     When I click on "Sign In"
       And I fill in "Email" with "user@com"
       And I fill in "Password" with "p"
     Then I should be on the "Sign In" page
-      And I should see "Invalid email"
-      And I should see "Password must be"
+      And I should see "Invalid email or password"

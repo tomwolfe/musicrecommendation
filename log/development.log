@@ -6844,3 +6844,123 @@ Connecting to database specified by database.yml
   [1m[36m (0.3ms)[0m  [1mPRAGMA index_list("schema_migrations")[0m
   [1m[35m (177.4ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
   [1m[36m (6.4ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Connecting to database specified by database.yml
+  [1m[36m (0.6ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreateUsers (20120128100723)
+  [1m[35m (0.3ms)[0m  select sqlite_version(*)
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35m (4.1ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar(255), "password_hash" varchar(255), "password_salt" varchar(255), "password_digest" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.5ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20120128100723')[0m
+  [1m[35m (31.4ms)[0m  commit transaction
+Migrating to CreateRatings (20120131094538)
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35m (1.4ms)[0m  CREATE TABLE "ratings" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "track_id" integer, "value" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.6ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20120131094538')[0m
+  [1m[35m (19.8ms)[0m  commit transaction
+Migrating to CreateTracks (20120131095828)
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35m (1.2ms)[0m  CREATE TABLE "tracks" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "artist_name" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.5ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20120131095828')[0m
+  [1m[35m (25.7ms)[0m  commit transaction
+Migrating to CreatePredictions (20120215025840)
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35m (1.5ms)[0m  CREATE TABLE "predictions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "track_id" integer, "value" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.6ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20120215025840')[0m
+  [1m[35m (24.8ms)[0m  commit transaction
+Migrating to CreateUnratedPredictions (20120215025909)
+  [1m[36m (0.3ms)[0m  [1mbegin transaction[0m
+  [1m[35m (1.8ms)[0m  CREATE TABLE "unrated_predictions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "track_id" integer, "value" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.5ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20120215025909')[0m
+  [1m[35m (19.1ms)[0m  commit transaction
+  [1m[36m (1.7ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (0.5ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 
+  [1m[36m (0.2ms)[0m  [1mPRAGMA index_list("predictions")[0m
+  [1m[35m (0.2ms)[0m  PRAGMA index_list("ratings")
+  [1m[36m (0.2ms)[0m  [1mPRAGMA index_list("tracks")[0m
+  [1m[35m (0.2ms)[0m  PRAGMA index_list("unrated_predictions")
+  [1m[36m (0.2ms)[0m  [1mPRAGMA index_list("users")[0m
+Connecting to database specified by database.yml
+  [1m[36m (0.6ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (0.7ms)[0m  select sqlite_version(*)
+  [1m[36m (21.3ms)[0m  [1mCREATE TABLE "predictions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "track_id" integer, "value" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (17.7ms)[0m  CREATE TABLE "ratings" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "track_id" integer, "value" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (16.7ms)[0m  [1mCREATE TABLE "tracks" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "artist_name" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (18.2ms)[0m  CREATE TABLE "unrated_predictions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "track_id" integer, "value" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (19.2ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar(255), "password_hash" varchar(255), "password_salt" varchar(255), "password_digest" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (18.9ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36m (0.2ms)[0m  [1mPRAGMA index_list("schema_migrations")[0m
+  [1m[35m (15.4ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.4ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (17.9ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20120215025909')
+  [1m[36m (17.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20120215025840')[0m
+  [1m[35m (17.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20120128100723')
+  [1m[36m (16.9ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20120131094538')[0m
+  [1m[35m (17.8ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20120131095828')
+Connecting to database specified by database.yml
+  [1m[36m (0.5ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (0.7ms)[0m  select sqlite_version(*)
+  [1m[36m (21.6ms)[0m  [1mCREATE TABLE "predictions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "track_id" integer, "value" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (17.3ms)[0m  CREATE TABLE "ratings" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "track_id" integer, "value" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (18.0ms)[0m  [1mCREATE TABLE "tracks" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "artist_name" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (15.5ms)[0m  CREATE TABLE "unrated_predictions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "track_id" integer, "value" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (16.4ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar(255), "password_hash" varchar(255), "password_salt" varchar(255), "password_digest" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (14.9ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36m (0.2ms)[0m  [1mPRAGMA index_list("schema_migrations")[0m
+  [1m[35m (16.3ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.4ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (15.8ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20120215025909')
+  [1m[36m (19.8ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20120215025840')[0m
+  [1m[35m (17.6ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20120128100723')
+  [1m[36m (18.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20120131094538')[0m
+  [1m[35m (16.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20120131095828')
+Connecting to database specified by database.yml
+  [1m[36m (0.8ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (0.7ms)[0m  select sqlite_version(*)
+  [1m[36m (24.6ms)[0m  [1mCREATE TABLE "predictions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "track_id" integer, "value" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (16.6ms)[0m  CREATE TABLE "ratings" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "track_id" integer, "value" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (22.4ms)[0m  [1mCREATE TABLE "tracks" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "artist_name" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (18.8ms)[0m  CREATE TABLE "unrated_predictions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "track_id" integer, "value" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (21.0ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar(255), "password_hash" varchar(255), "password_salt" varchar(255), "password_digest" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (17.0ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36m (0.2ms)[0m  [1mPRAGMA index_list("schema_migrations")[0m
+  [1m[35m (18.9ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.3ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (17.9ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20120215025909')
+  [1m[36m (17.9ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20120215025840')[0m
+  [1m[35m (22.8ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20120128100723')
+  [1m[36m (18.5ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20120131094538')[0m
+  [1m[35m (18.1ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20120131095828')
+Connecting to database specified by database.yml
+  [1m[36m (0.5ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (0.7ms)[0m  select sqlite_version(*)
+  [1m[36m (37.8ms)[0m  [1mCREATE TABLE "predictions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "track_id" integer, "value" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (15.8ms)[0m  CREATE TABLE "ratings" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "track_id" integer, "value" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (17.6ms)[0m  [1mCREATE TABLE "tracks" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "artist_name" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (16.9ms)[0m  CREATE TABLE "unrated_predictions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "track_id" integer, "value" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (15.7ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar(255), "password_hash" varchar(255), "password_salt" varchar(255), "password_digest" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (16.9ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36m (0.3ms)[0m  [1mPRAGMA index_list("schema_migrations")[0m
+  [1m[35m (16.6ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.5ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (16.1ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20120215025909')
+  [1m[36m (16.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20120215025840')[0m
+  [1m[35m (14.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20120128100723')
+  [1m[36m (16.8ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20120131094538')[0m
+  [1m[35m (15.6ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20120131095828')
+Connecting to database specified by database.yml
+  [1m[36m (0.5ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (1.0ms)[0m  select sqlite_version(*)
+  [1m[36m (26.6ms)[0m  [1mCREATE TABLE "predictions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "track_id" integer, "value" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (18.1ms)[0m  CREATE TABLE "ratings" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "track_id" integer, "value" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (20.2ms)[0m  [1mCREATE TABLE "tracks" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "artist_name" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (21.8ms)[0m  CREATE TABLE "unrated_predictions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "track_id" integer, "value" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (17.8ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar(255), "password_hash" varchar(255), "password_salt" varchar(255), "password_digest" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (22.6ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36m (0.3ms)[0m  [1mPRAGMA index_list("schema_migrations")[0m
+  [1m[35m (22.3ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.5ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (21.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20120215025909')
+  [1m[36m (21.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20120215025840')[0m
+  [1m[35m (21.6ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20120128100723')
+  [1m[36m (24.6ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20120131094538')[0m
+  [1m[35m (19.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20120131095828')

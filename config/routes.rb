@@ -1,11 +1,7 @@
 Musicrecommendation::Application.routes.draw do
-  match 'user/edit' => 'users#edit', :as => :edit_current_user
-
-  match 'signup' => 'users#new', :as => :signup
-
-  match 'logout' => 'sessions#destroy', :as => :logout
-
-  match 'login' => 'sessions#new', :as => :login
+  get 'signup', to: 'users#new', as: 'signup'
+  get 'signout', to: 'sessions#destroy', as: 'signout'
+  get 'signin', to: 'sessions#new', as: 'signin'
 
   resources :sessions
 
@@ -15,7 +11,7 @@ Musicrecommendation::Application.routes.draw do
   
   resources :ratings
   
-  root to: 'tracks#index'
+  root to: 'home#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

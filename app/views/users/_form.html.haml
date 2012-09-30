@@ -1,9 +1,12 @@
 = form_for @user do |f|
-  = f.error_messages
-  %p
-    = f.label :username
-    %br
-    = f.text_field :username
+  - if @user.errors.any?
+    .error_messages
+    %h2
+      = pluralize(@talent.errors.count, "error")
+      "prohibited this user from being saved:"
+    %ul 
+      - @user.errors.full_messages.each do |msg|
+        %li= msg
   %p
     = f.label :email, "Email Address"
     %br

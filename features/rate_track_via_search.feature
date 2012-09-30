@@ -8,7 +8,7 @@ I want to rate tracks.
       And the following tracks exist:
       | title           | artist        |
       | Free Bird       | Led Zeppelin  |
-      And I am on the "ratings" index page
+      And I am on the "Ratings" page
       And I click on "Free Bird"
 
   Scenario: successfully update a tracks rating (default 0-unrated)
@@ -21,5 +21,5 @@ I want to rate tracks.
   Scenario: unsuccessfully update a tracks rating (default 0-unrated)
     When I fill in "rating" with "-2"
       And I press the "Update Rating" button
-    Then I should be on the "Edit Ratings" page
+    Then I should be on the "Edit Rating" page
       And I should see "Error"

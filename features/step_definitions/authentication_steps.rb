@@ -12,3 +12,8 @@ When /I should( not)?see signed in items/ do |negate|
   Then %Q(I should#{negate} see the link "Search for a track to rate")
   Then %Q(I should#{negate} see "Your Most Recent Ratings")
 end
+
+When /^I sign in as "(.*)"$/ do |email|
+  @current_user = User.find_by_email!(email)
+  session[:user_id] = @current_user.id
+end

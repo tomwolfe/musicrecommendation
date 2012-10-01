@@ -4,7 +4,11 @@ So that I can rate tracks not already in the database
 I want to add tracks from MusicBrainz to MusicRec.
 
   Background: signed in and on the "Search" page
-    Given I am signed in
+    Given I am on the "View Home" page
+      And the following users exist:
+      | email     | password      |
+      | user@b.com| password      |
+      And I sign in as "user@b.com"
       And I am on the "Search" page
       
   Scenario: search for a track that is not in the MusicBrainz database (and thus can't be in the MusicRec database)

@@ -3,7 +3,7 @@ When /I should see new user items/ do
       And %Q(I should see signed in items)
 end
 
-When /I should( not)?see signed in items/ do |negate|
+When /I should( not)? see signed in items/ do |negate|
   Then %Q(I should#{negate} see the link "Sign Out" in the "header" section)
   negate ? eval('Then %Q(I should see the link "Sign In" in the "header" section)') : eval('Then %Q(I should not see the link "Sign In" in the "header" section)')
   negate ? eval('Then %Q(I should see the link "Join" in the "header" section)') : eval('Then %Q(I should not see the link "Join" in the "header" section)')

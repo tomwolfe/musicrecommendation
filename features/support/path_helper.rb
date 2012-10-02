@@ -1,6 +1,7 @@
 module PathHelpers
   def format_path(path)
-    path.gsub!(/\s/,'_').downcase!
+    path.match(/\s+/) ? path.gsub!(/\s+/,"_") : path
+    path.downcase!
   end
 end
 World(PathHelpers)

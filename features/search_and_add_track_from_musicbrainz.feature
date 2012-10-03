@@ -4,11 +4,8 @@ So that I can rate tracks not already in the database
 I want to add tracks from MusicBrainz to MusicRec.
 
   Background: signed in and on the "Search" page
-    Given I am on the "View Home" page
-      And the following users exist:
-      | email     | password      |
-      | user@b.com| password      |
-      And I sign in as "user@b.com"
+    Given I am on the "Home" page
+      And I sign in
       And I am on the "Search" page
       
   Scenario: search for a track that is not in the MusicBrainz database (and thus can't be in the MusicRec database)
@@ -18,14 +15,14 @@ I want to add tracks from MusicBrainz to MusicRec.
       And I should see "Add this track to MusicBrainz"
       
   Scenario: search for a track that is not in the MusicRec database but is in the MusicBrainz database
-    When I search for the track "Free Bird"
+    When I search for the track "Freebird"
     Then I should see "Lynard Skynard"
       And I should see "Add to MusicRec from MusicBrainz"
       
   Scenario: search for a track that is not in the MusicRec database but is in the MusicBrainz database and add it from MusicBrainz to MusicRec
-    When I search for the track "Free Bird"
+    When I search for the track "Freebird"
       And I press the "Add" button
-    Then I should be on the "track" show page for "Free Bird"
+    Then I should be on the "track" show page for field "name" with value "Freebird"
       And I should see "Lynard Skynard"
       And I should see "Rate this track"
       And I should see "0"

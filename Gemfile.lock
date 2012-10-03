@@ -72,6 +72,11 @@ GEM
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    factory_girl (4.1.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.1.0)
+      factory_girl (~> 4.1.0)
+      railties (>= 3.0.0)
     ffi (1.1.5)
     gherkin (2.11.2)
       json (>= 1.4.6)
@@ -170,6 +175,7 @@ DEPENDENCIES
   cofi_cost (>= 0.0.4)
   cucumber-rails
   database_cleaner
+  factory_girl_rails
   gsl!
   haml
   haml-rails

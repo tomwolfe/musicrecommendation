@@ -3,11 +3,9 @@ As a music fan
 So that I can get personalized recommendations
 I want to be able to sign in and sign out with appropriate notifications that those actions failed or succedded.
 
-  Background: on the "View Home" page
-    Given I am on the "View Home" page
-      And the following users exist:
-      | email     | password      |
-      | user@b.com| password      |
+  Background: on the "Home" page with user in db
+    Given I am on the "Home" page
+      And a user exists
 
   Scenario: clicking on "Join" should display the "New User" page
     When I click on "Join"

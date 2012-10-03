@@ -2,16 +2,14 @@ Feature: Join site
 
   Background:  on the "New User" page
     Given I am on the "New User" page
-      And the following users exist:
-      | email     | password      |
-      | user@b.com| password      |
+      And a user exists
       
   Scenario: successfully joining the website with a valid new user
     Given I fill in "Email" with "user@a.com"
       And I fill in "Password" with "password"
       And I fill in "Confirm Password" with "password"
     When I press the "Sign up" button
-    Then I should be on the "home" page
+    Then I should be on the "Home" page
       And I should see new user items
 
   Scenario: unsuccessfully joining the website with an invalid new user

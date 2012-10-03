@@ -4,12 +4,10 @@ So that I can have an overview of my recent track ratings, and recommended track
 I want to see my most recent ratings, top recommended unrated tracks (predictions) and a link to search for more tracks to rate.
 
   Background: I am signed in, I have rated a track, and I'm on the homepage
-    Given the following users exist:
-      | email     | password      |
-      | user@b.com| password      |
-      And I sign in as "user@b.com"
-      And I have rated a track
-      And I am on the "MusicRec home" page
+    Given a track exists
+      And I sign in
+      And I rate the track as "2"
+      And I am on the "Home" page
       
   Scenario: I should see "More Ratings/More Predictions/Your Rating/Rating Guess"
     Then I should see items pertaining to having rated a track

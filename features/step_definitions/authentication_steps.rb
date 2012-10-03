@@ -13,7 +13,12 @@ When /I should( not)? see signed in items/ do |negate|
   Then %Q(I should#{negate} see "Your Most Recent Ratings")
 end
 
-When /^I sign in as "(.*)"$/ do |email|
-  @current_user = User.find_by_email!(email)
-  session[:user_id] = @current_user.id
+When /^I sign in$/ do
+  step %Q(a user exists)
+  @current_user = User.find(1)
+  cookies[:stub_user_id] = @current_user.id
+end
+
+When /^a (.*) exists$/ do |thing|
+  FactoryGirl.create(thing.to_sym)
 end

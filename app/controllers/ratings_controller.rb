@@ -14,7 +14,7 @@ class RatingsController < ApplicationController
     end
   end
 
-  def update
+  def edit
     @track = Track.find_by_id(params[:track_id])
     @rating = current_user.ratings.find_by_track_id(@track.id)
     if @rating.update_attributes(params[:rating])

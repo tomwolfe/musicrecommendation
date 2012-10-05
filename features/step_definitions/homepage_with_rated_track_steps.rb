@@ -6,6 +6,7 @@ When /^I rate the track as "(.*)"$/ do |rating_value|
   # does not work, probably for security?
   # not sure if something like:
   # Rating.create!(user, track, rating_value) exists
+  # maybe: user.ratings.create!(track.id)
   rating = Rating.new
   rating.user_id, rating.track_id, rating.value = user.id, track.id, rating_value
   rating.save!

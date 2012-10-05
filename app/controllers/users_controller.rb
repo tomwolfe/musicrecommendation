@@ -11,7 +11,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to root_url, notice: "Thanks for joining"
     else
-      render "new"
+      render :new
     end
   end
 
@@ -24,7 +24,7 @@ class UsersController < ApplicationController
     if @user.update_attributes(params[:user])
       redirect_to root_url, notice: "Your profile has been updated."
     else
-      render "edit"
+      render :edit
     end
   end
 end

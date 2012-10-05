@@ -1,5 +1,5 @@
 class TracksController < ApplicationController
-  before_filter :login_required, :except => [:index]
+  before_filter :authorize, :except => [:index, :show]
   
   # GET /tracks
   # GET /tracks.json

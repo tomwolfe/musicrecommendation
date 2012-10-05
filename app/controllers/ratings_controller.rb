@@ -1,5 +1,5 @@
 class RatingsController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authorize
 
   def create
     @track = Track.find_by_id(params[:track_id])

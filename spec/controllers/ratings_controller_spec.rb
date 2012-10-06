@@ -119,8 +119,24 @@ describe RatingsController do
   end
   
   describe '#new' do
+    it 'calls the new method on Rating and returns a Rating object' do
+      Rating.should_receive(:new).and_return(mock('Rating'))
+      get :new
+    end
+    it 'makes the new rating object available to the template' do
+      get :new
+      assigns(:rating).should == mock('Rating')
+    end
   end
   
   describe '#show' do
+    it 'receives the find method and returns the Rating' do
+      Rating.should_receive(:find).with(@fake_rating).and_return(@fake_rating)
+      get :show, @fake_rating
+    end
+    it 'makes the rating object available to the template' do
+      get :show, @fake_rating
+      assigns(:rating).should == @fake_rating
+    end
   end
 end

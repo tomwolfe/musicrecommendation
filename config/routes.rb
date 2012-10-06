@@ -1,6 +1,6 @@
 Musicrecommendation::Application.routes.draw do
   get 'signup', to: 'users#new', as: 'signup'
-  get 'signout', to: 'sessions#destroy', as: 'signout'
+  delete 'signout', to: 'sessions#destroy', as: 'signout'
   get 'signin', to: 'sessions#new', as: 'signin'
 
   resources :sessions

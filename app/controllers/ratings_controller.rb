@@ -26,7 +26,8 @@ class RatingsController < ApplicationController
 
   def update
     #@track = Track.find_by_id(params[:id])
-    @rating = current_user.ratings.find_by_track_id(params[:rating])
+    # I'm not sure if this'll work (track_id in params[:rating] hash?)
+    @rating = current_user.ratings.find_by_track_id(params[:track_id])
     if @rating.update_attributes(params[:rating])
       respond_to do |format|
         format.html { redirect_to track_path(@track), notice: "Your rating has been updated" }

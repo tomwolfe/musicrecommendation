@@ -14,7 +14,7 @@ group :production do
 end
 
 group :test do
-  gem 'mocha'
+  #gem 'mocha'
   gem 'cucumber-rails'
   gem 'database_cleaner'
   gem 'capybara'

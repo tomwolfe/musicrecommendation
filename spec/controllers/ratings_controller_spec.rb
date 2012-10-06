@@ -13,12 +13,14 @@ describe RatingsController do
   end
   
   describe '#create' do
-    it 'creates a rating' do
-      Rating.should_receive(:create).and_return(@fake_rating)
+    it 'calls save' do
+      Rating.stub(:save).and_return(true)
+      Rating.should_receive(:save).and_return(true)
       post :create, rating: @fake_rating
     end
     context 'valid rating' do
       before :each do
+        Rating.stub(:save).and_return(true)
         post :create, rating: @fake_rating
       end
       it 'makes the results available to the template' do
@@ -33,11 +35,12 @@ describe RatingsController do
     end
     context 'invalid rating' do
       before :each do
-        @invalid_rating = mock('Rating', id: '1', user_id: '1', track_id: '1', value: '-2', find_by_track_id: @track)
-        post :create, rating: @invalid_rating
+        Rating.stub(:save).and_return(false)
+        @fake_rating.stub(:value).and_return('-2')
+        post :create, rating: @fake_rating
       end
       it 'makes the results available to the template' do
-        assigns(:rating).should == @invalid_rating
+        assigns(:rating).should == @fake_rating
       end
       it 'shows the template to create a rating' do
         response.should render_template('new')
@@ -50,28 +53,30 @@ describe RatingsController do
   
   describe '#edit' do
     before :each do
-      @real_rating = FactoryGirl.create(:rating)
+      Rating.stub(:find).and_return(@fake_rating)
+      #@real_rating = FactoryGirl.create(:rating)
     end
     it 'receives the find method' do
-      Rating.should_receive(:find).with(@real_rating).and_return(@real_rating)
-      get :edit, rating: @real_rating
+      Rating.should_receive(:find).with(@fake_rating).and_return(@fake_rating)
+      get :edit, rating: @fake_rating
     end
     it 'makes the results available to the template' do
-      get :edit, rating: @real_rating
-      assigns(:rating).should == @real_rating
+      get :edit, rating: @fake_rating
+      assigns(:rating).should == @fake_rating
     end
     it 'renders the edit template' do
-      get :edit, rating: @real_rating
+      get :edit, rating: @fake_rating
       response.should render_template('edit')
     end
   end
   
   describe '#update' do
     before :each do
-      @real_rating = FactoryGirl.create(:rating)
+      Rating.stub(:update_attributes).and_return(true)
+      Rating.stub(:find_by_track_id)
     end
     it 'finds the rating to update' do
-      Rating.should_receive(:find).with(@real_rating).and_return(@real_rating)
+      Rating.should_receive(:find_by_track_id).with(@fake_rating).and_return(@fake_rating)
       put :update, rating: @real_rating
     end
     it 'makes the results available to the template' do

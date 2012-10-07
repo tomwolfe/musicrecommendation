@@ -1,11 +1,9 @@
 class RatingsController < ApplicationController
-  before_filter :authorize
+  #before_filter :authorize
 
   def create
-    #@track = Track.find_by_id(params[:track_id])
     @rating = Rating.new(params[:rating])
-    #@rating.track_id = @track.id
-    #@rating.user_id = current_user.id
+    @rating.user_id = current_user.id
     if @rating.save
       respond_to do |format|
         format.html { redirect_to track_path(@rating.track_id), notice: "Your rating has been saved" }
@@ -17,17 +15,17 @@ class RatingsController < ApplicationController
   end
   
   def edit
-    @track = Track.find(params[:id])
+    @rating = Rating.find(params[:id])
   end
   
   def new
-    @track = Track.new
+    @rating = Rating.new
   end
 
   def update
     #@track = Track.find_by_id(params[:id])
     # I'm not sure if this'll work (track_id in params[:rating] hash?)
-    @rating = current_user.ratings.find_by_track_id(params[:track_id])
+    @rating = current_user.ratings.find_by_track_id(params[:rating][:track_id])
     if @rating.update_attributes(params[:rating])
       respond_to do |format|
         format.html { redirect_to track_path(@track), notice: "Your rating has been updated" }

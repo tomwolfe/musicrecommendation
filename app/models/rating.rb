@@ -1,5 +1,5 @@
 class Rating < ActiveRecord::Base
-  attr_accessible :value
+  attr_accessible :value, :track_id
   after_save :generate_predictions
 
   belongs_to :track

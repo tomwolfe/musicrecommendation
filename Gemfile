@@ -20,6 +20,7 @@ group :test do
   gem 'capybara'
   gem 'rspec-expectations'
   gem 'factory_girl_rails'
+  gem 'ZenTest'
 end
 
 gem 'rails'

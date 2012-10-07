@@ -2,6 +2,9 @@ require 'spec_helper'
 
 describe RatingsController do
   before :each do
+    Rating.skip_callback(:save, :after, :generate_predictions)
+    ApplicationController.any_instance.stub(:current_user).and_return(mock_model('User', id: '1'))
+    @stub_rating = stub_model(Rating, id: '1', user_id: '1', track_id: '1')
     # very hacky, I'm not sure of a better way to handle this
     @track = mock('Track', id: '1')
     @fake_rating = mock('Rating', id: '1', user_id: '1', track_id: '1', value: '1')
@@ -10,6 +13,10 @@ describe RatingsController do
   end
   
   describe '#create' do
+    it 'calls new' do
+      Rating.should_receive(:new).with("track_id" => '1', "value" => '1').and_return(@stub_rating)
+      post :create, rating: {track_id: @stub_rating, value: @stub_rating}
+    end
     it 'calls save' do
       Rating.stub(:save).and_return(true)
       Rating.should_receive(:save)

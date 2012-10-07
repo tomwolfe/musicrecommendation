@@ -9,26 +9,26 @@ describe RatingsController do
     @track = mock('Track', id: '1')
     @fake_rating = mock('Rating', id: '1', user_id: '1', track_id: '1', value: '1')
     @current_user = mock('User', id: '1')
+    @rating_hash = {rating: {track_id: @stub_rating, value: @stub_rating}}
     ApplicationController.any_instance.stub(:current_user).and_return(@current_user)
   end
   
   describe '#create' do
     it 'calls new' do
       Rating.should_receive(:new).with("track_id" => '1', "value" => '1').and_return(@stub_rating)
-      post :create, rating: {track_id: @stub_rating, value: @stub_rating}
+      post :create, @rating_hash
     end
     it 'calls save' do
-      Rating.stub(:save).and_return(true)
-      Rating.should_receive(:save)
-      post :create, rating: @fake_rating
+      Rating.any_instance.should_receive(:save)
+      post :create, @rating_hash
     end
     context 'valid rating' do
       before :each do
         Rating.stub(:save).and_return(true)
-        post :create, rating: @fake_rating
+        post :create, @rating_hash
       end
       it 'makes the results available to the template' do
-        assigns(:rating).should == @fake_rating
+        assigns(:rating).should == @stub_rating
       end
       it 'redirects to the new rating' do
         response.should redirect_to(rating_path(@fake_rating))

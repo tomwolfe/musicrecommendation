@@ -1,12 +1,5 @@
 = form_for @rating do |f|
-  - if @rating.errors.any?
-    .error_messages
-    %h2
-      = pluralize(@rating.errors.count, "error")
-      "prohibited this rating from being saved:"
-    %ul 
-      - @rating.errors.full_messages.each do |msg|
-        %li= msg
+  = render "shared/error_messages", target: @rating
   %p
     = f.label :value, "Value"
     %br

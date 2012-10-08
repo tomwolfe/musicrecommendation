@@ -1,23 +1,13 @@
 = form_for @user do |f|
-  - if @user.errors.any?
-    .error_messages
-    %h2
-      = pluralize(@user.errors.count, "error")
-      "prohibited this user from being saved:"
-    %ul 
-      - @user.errors.full_messages.each do |msg|
-        %li= msg
-  %p
+  = render "shared/error_messages", target: @user
+  .field
     = f.label :email, "Email Address"
-    %br
     = f.text_field :email
-  %p
+  .field
     = f.label :password
-    %br
     = f.password_field :password
-  %p
+  .field
     = f.label :password_confirmation, "Confirm Password"
-    %br
     = f.password_field :password_confirmation
-  %p
+  .actions
     = f.submit (@user.new_record? ? "Sign up" : "Update")

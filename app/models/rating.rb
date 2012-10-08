@@ -1,6 +1,9 @@
 class Rating < ActiveRecord::Base
   attr_accessible :value, :track_id
   after_save :generate_predictions
+  
+  validates :value, numericality: {less_than_or_equal_to: 5, greater_than_or_equal_to: 0}
+  validates :value, presence: true
 
   belongs_to :track
   belongs_to :user

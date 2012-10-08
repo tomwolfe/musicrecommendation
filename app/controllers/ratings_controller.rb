@@ -1,12 +1,12 @@
 class RatingsController < ApplicationController
-  #before_filter :authorize
+  before_filter :authorize
 
   def create
     @rating = Rating.new(params[:rating])
     @rating.user_id = current_user.id
     if @rating.save
       respond_to do |format|
-        format.html { redirect_to track_path(@rating.track_id), notice: "Your rating has been saved" }
+        format.html { redirect_to rating_path(@rating), notice: "Rating successfully created" }
         format.js
       end
     else

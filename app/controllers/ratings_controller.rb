@@ -23,11 +23,10 @@ class RatingsController < ApplicationController
   end
 
   def update
-    # I'm not sure if this'll work (track_id in params[:rating] hash?)
-    @rating = current_user.ratings.find_by_track_id(params[:rating][:track_id])
+    @rating = current_user.ratings.find_by_id(params[:id])
     if @rating.update_attributes(params[:rating])
       respond_to do |format|
-        format.html { redirect_to track_path(@track), notice: "Your rating has been updated" }
+        format.html { redirect_to rating_path(@rating), notice: "Your rating has been updated" }
         format.js
       end
     else

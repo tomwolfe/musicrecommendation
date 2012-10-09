@@ -3,11 +3,9 @@ require 'spec_helper'
 describe RatingsController do
   before :each do
     Rating.skip_callback(:save, :after, :generate_predictions)
-    @track = FactoryGirl.create(:track)
-    @user = FactoryGirl.create(:user)
     @rating = FactoryGirl.create(:rating)
     @rating_hash = {rating: {track_id: @rating, value: @rating}}
-    ApplicationController.any_instance.stub(:current_user).and_return(@user)
+    ApplicationController.any_instance.stub(:current_user).and_return(@rating.user)
   end
   
   describe '#create' do
@@ -65,15 +63,13 @@ describe RatingsController do
   end
   
   describe '#update' do
-    before :each do
-      Rating.any_instance.stub(:update_attributes).and_return(true)
-      Rating.any_instance.stub(:find_by_track_id).and_return(@rating)
-      User.any_instance.stub(:ratings).and_return(@rating)
+    it 'calls find_by_id' do
+      @rating.user.ratings.should_receive(:find_by_id).with('1').and_return(@rating)
+      put :update, id: 1
     end
-    it 'calls ratings on user' do
-      pending
-      #User.should_receive(:ratings)
-      #put :update, {rating: {value: 1}, id: 1}
+    it 'updates attributes' do
+      Rating.any_instance.should_receive(:update_attributes).with("track_id" => '1', "value" => '1').and_return(true)
+      put :update, {id: 1, rating: { value: 1, track_id: 1 }}
     end
   end
 end

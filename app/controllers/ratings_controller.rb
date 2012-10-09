@@ -1,6 +1,6 @@
 class RatingsController < ApplicationController
-  before_filter :authorize
-
+  skip_before_filter :authorize, only: [:index]
+  
   def create
     @rating = Rating.new(params[:rating])
     @rating.user_id = current_user.id

@@ -20,7 +20,7 @@ describe RatingsController do
     
     context 'valid rating' do
       before :each do
-        Rating.stub(:save).and_return(true)
+        Rating.stub(:valid?).and_return(true)
         post :create, @rating_hash
       end
       it 'makes the results available to the template' do
@@ -35,7 +35,7 @@ describe RatingsController do
     end
     context 'invalid rating' do
       before :each do
-        Rating.any_instance.stub(:save).and_return(false)
+        Rating.any_instance.stub(:valid?).and_return(false)
         @rating_hash[:rating][:value]=-2
         post :create, @rating_hash
       end

@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :ratings
+  has_many :predictions
   has_many :rated_tracks, :through => :ratings, :source => :tracks
   has_secure_password
   

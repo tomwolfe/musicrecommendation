@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(:version => 20120215025909) do
   create_table "predictions", :force => true do |t|
     t.integer  "user_id"
     t.integer  "track_id"
-    t.integer  "value"
+    t.float    "value"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -32,14 +32,15 @@ ActiveRecord::Schema.define(:version => 20120215025909) do
   create_table "tracks", :force => true do |t|
     t.string   "name"
     t.string   "artist_name"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.float    "average_rating"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "unrated_predictions", :force => true do |t|
     t.integer  "user_id"
     t.integer  "track_id"
-    t.integer  "value"
+    t.float    "value"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

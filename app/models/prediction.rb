@@ -1,5 +1,8 @@
 class Prediction < ActiveRecord::Base
-  def self.generate_predictions
+  belongs_to :track
+  belongs_to :user
+  
+  def self.generate_predictions(iterations = 10)
     users = User.select(:id)
     tracks = Track.select(:id)
     ratings = Rating.all
@@ -14,7 +17,6 @@ class Prediction < ActiveRecord::Base
     
     num_features = 5
     lambda = 1
-    iterations = 10
     
     calc = CofiCost.new(rating_table, num_features, lambda, iterations, nil, nil)
     calc.min_cost

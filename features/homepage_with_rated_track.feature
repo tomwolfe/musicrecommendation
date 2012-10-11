@@ -4,10 +4,9 @@ So that I can have an overview of my recent track ratings, and recommended track
 I want to see my most recent ratings, top recommended unrated tracks (predictions) and a link to search for more tracks to rate.
 
   Background: I am signed in, I have rated a track, and I'm on the homepage
-    Given a track exists
-      And I sign in
-      And I rate the track as "2"
+    Given a rating exists
       And I am on the "Home" page
+      And I am signed in
       
   Scenario: I should see "More Ratings/More Predictions/Your Rating/Rating Guess"
     Then I should see items pertaining to having rated a track
@@ -16,6 +15,7 @@ I want to see my most recent ratings, top recommended unrated tracks (prediction
     When I click on "More Ratings"
     Then I should be on the "Ratings" page
       And I should see "Your Ratings"
+      And I should see "Freebird"
 
   Scenario: navigating to the predictions page
     When I click on "More Predictions"

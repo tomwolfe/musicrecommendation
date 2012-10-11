@@ -1,4 +1,6 @@
 Musicrecommendation::Application.routes.draw do
+  get "home/show"
+
   get 'signup', to: 'users#new', as: 'signup'
   delete 'signout', to: 'sessions#destroy', as: 'signout'
   get 'signin', to: 'sessions#new', as: 'signin'

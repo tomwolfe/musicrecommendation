@@ -2,28 +2,38 @@ require 'spec_helper'
 
 describe HomeController do
   before :each do
+    Rating.skip_callback(:save, :after, :generate_predictions)
     @rating = FactoryGirl.create(:rating)
-    ApplicationController.any_instance.stub(:current_user).and_return(@rating.user)
+    ApplicationController.any_instance.stub(:current_user).and_return(nil)
   end
 
-  describe '#signed_in_items' do
-    it 'calls ratings on current_user' do
-      @rating.user.should_receive(:ratings)
-      get :signed_in_items
+  describe '#index' do
+    context 'signed in' do
+      before :each do
+        ApplicationController.any_instance.stub(:current_user).and_return(@rating.user)
+        FactoryGirl.create(:track)
+        Prediction.generate_predictions(1)
+        Prediction.any_instance.stub(:value).and_return(2)
+        get :index
+      end
+      it 'makes @predictions available to the view which should only include predictions for unrated tracks (in this case the second track)' do
+        assigns(:predictions).should == [stub_model(Prediction, value: 2, id: 2, track_id: 2)]
+      end
+      it 'makes @ratings available to the view' do
+        assigns(:ratings).should == [@rating]
+      end
     end
-    it 'makes @ratings available to the view' do
-      get :signed_in_items
-      assigns(:ratings).should == [@rating]
+    
+    context 'not signed in' do
+      it 'makes @tracks available to the view' do
+        get :index
+        assigns(:tracks).should == [@rating.track]
+      end
     end
-    it 'makes @predictions available to the view' do
-      pending "need to figure out what/how to mock/stub so @predictions won't be nil"
-      track2=FactoryGirl.create(:track)
-      Prediction.generate_predictions(1)
-      mock_model('Prediction', track_id: 1)
-      get :signed_in_items
-      assigns(:predictions).should == 
-    end
-    context 'no ratings' do
+    
+    it 'renders the index template' do
+      get :index
+      response.should render_template('index')
     end
   end
 end

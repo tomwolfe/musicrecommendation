@@ -1,19 +1,11 @@
 Musicrecommendation::Application.routes.draw do
-  get "home/show"
+  root to: 'home#index'
 
   get 'signup', to: 'users#new', as: 'signup'
   delete 'signout', to: 'sessions#destroy', as: 'signout'
   get 'signin', to: 'sessions#new', as: 'signin'
 
-  resources :sessions
-
-  resources :users
-
-  resources :tracks
-  
-  resources :ratings
-  
-  root to: 'home#index'
+  resources :sessions, :users, :tracks, :ratings
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

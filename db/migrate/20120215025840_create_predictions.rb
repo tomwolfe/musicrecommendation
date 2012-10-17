@@ -7,5 +7,7 @@ class CreatePredictions < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :predictions, :user_id
+    add_index :predictions, :track_id
   end
 end

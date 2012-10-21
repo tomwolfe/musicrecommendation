@@ -2,6 +2,11 @@ class Prediction < ActiveRecord::Base
   belongs_to :track
   belongs_to :user
   
+  def self.get_unrated_predictions(current_user, order="value DESC", limit=10)
+    not_yet_rated_tracks = Track.select("id").where('id not in (?)', current_user.ratings.pluck(:track_id))
+    current_user.predictions.where('track_id in (?)', not_yet_rated_tracks).order(order).limit(limit)
+  end
+  
   def self.generate_predictions(iterations = 10)
     users = User.select(:id)
     tracks = Track.select(:id)

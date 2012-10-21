@@ -16,6 +16,11 @@ describe HomeController do
         Prediction.any_instance.stub(:value).and_return(2)
         get :index
       end
+      it 'calls get_unrated_predictions on Prediction with the current_user' do
+        # does not seem to be actually checking the return value...
+        Prediction.should_receive(:get_unrated_predictions).with(@rating.user).and_return([Prediction.find(2)])
+        get :index
+      end
       it 'makes @predictions available to the view which should only include predictions for unrated tracks (in this case the second track)' do
         assigns(:predictions).should == [stub_model(Prediction, value: 2, id: 2, track_id: 2)]
       end

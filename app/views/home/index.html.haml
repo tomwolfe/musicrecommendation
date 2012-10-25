@@ -1,0 +1,12 @@
+- title "Home"
+
+- if current_user
+  - if @ratings.empty?
+    %p You have not rated any tracks yet. Search below to find a track to rate.
+  - else
+    = render "ratings/index", target: @ratings
+    = render "predictions/index", target: @unrated_predictions
+- else
+  %p Our top rated tracks. Join or login to get personalized recommendations based on your ratings.
+  = render "tracks/index", target: @tracks
+-# TODO: add a search field backed by a new search model/controller/etc

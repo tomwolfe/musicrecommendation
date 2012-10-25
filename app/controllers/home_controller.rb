@@ -3,10 +3,8 @@ class HomeController < ApplicationController
 
   def index
     if current_user
-      @ratings = current_user.ratings.order("created_at DESC").limit(10)
-      unless @ratings.empty? or nil
-        @predictions = Prediction.get_unrated_predictions(current_user)
-      end
+      @ratings = current_user.ratings.where("value IS NOT NULL").order("created_at DESC").limit(10)
+      @unrated_predictions = current_user.ratings.where("value IS NULL").order("prediction DESC").limit(10)
     else
       @tracks = Track.order("average_rating DESC").limit(10)
     end

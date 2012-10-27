@@ -1,12 +1,12 @@
 .tracks
   %table
-  %tr
-    %th Artist name
-    %th Track name
-    %th Average rating
-
-  - target.each do |track|
     %tr
-      %td= track.artist_name
-      %td= track.name
-      %td= track.average_rating
+      %th Artist name
+      %th Track name
+      %th Average rating
+
+    - targets.each do |track|
+      %tr
+        %td= track.artist_name
+        %td= track.name
+        %td= track.average_rating

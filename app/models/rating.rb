@@ -12,7 +12,7 @@ class Rating < ActiveRecord::Base
   
   def generate_predictions(iterations=Rating.iterate, num_features = 5, lambda = 1)
     user_count, track_count = User.count, Track.count
-    ratings = Rating.select([:user_id, :track_id, :value])
+    ratings = Rating.select([:user_id, :track_id, :value]).where("value IS NOT NULL")
     
     # tradeoff between performance/space/complexity. for now User/Track cannot be destroyed w/o breaking predictions
     #   alternate solution https://github.com/tomwolfe/musicrecommendation/commit/ebd68d29f34d6da2c7b1ca6dc4b201399aa87423#app/models/rating.rb
@@ -39,7 +39,6 @@ class Rating < ActiveRecord::Base
   end
   
   def add_predictions(predictions, user_count, track_count)
-    #debugger
     # avoid endless loop of callbacks
     Rating.skip_callback(:save, :after, :generate_predictions)
     user_count.times do |i|

@@ -1,5 +1,5 @@
 -# one place where it seems erb > haml since there is no end tag thus lots of un-DRYness
-- target.first.value.nil?
+- targets.first.value.nil?
   .unrated_predictions
     %table
     %tr
@@ -8,7 +8,7 @@
       %th Prediction
       %th Difference from prediction
 
-    - target.each do |rating|
+    - targets.each do |rating|
       %tr
         %td= rating.track.artist_name
         %td= rating.track.name
@@ -23,7 +23,7 @@
       %th Your rating
       %th Destroy rating
 
-    - target.each do |rating|
+    - targets.each do |rating|
       %tr
         %td= rating.track.artist_name
         %td= rating.track.name

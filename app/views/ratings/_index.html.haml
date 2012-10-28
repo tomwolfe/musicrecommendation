@@ -1,36 +1,37 @@
--# one place where it seems erb > haml since there is no end tag thus lots of un-DRYness
-- targets.first.value.nil?
+-# TODO: fix this (view helpers maybe?) one place where it seems erb > haml since there is no end tag thus lots of un-DRYness
+-# TODO: figure out pagination
+- if targets.first.value.nil?
   .unrated_predictions
     %table
-    %tr
-      %th Artist name
-      %th Track name
-      %th Prediction
-      %th Difference from prediction
-
-    - targets.each do |rating|
       %tr
-        %td= rating.track.artist_name
-        %td= rating.track.name
-        %td= rating.prediction
-        %td= rating.difference
+        %th Artist name
+        %th Track name
+        %th Prediction
+        %th Difference from prediction
+
+      - targets.each do |rating|
+        %tr
+          %td= rating.track.artist_name
+          %td= rating.track.name
+          %td= rating.prediction
+          %td= rating.difference
 - else
   .ratings
     %table
-    %tr
-      %th Artist name
-      %th Track name
-      %th Your rating
-      %th Destroy rating
-
-    - targets.each do |rating|
       %tr
-        %td= rating.track.artist_name
-        %td= rating.track.name
-        %td= form_for rating do |f|
-          - (1..5).each do |v|
-            = f.label "value_#{v}"
-            = f.radio_button :value, v
-            = f.submit :Submit
-        %td= link_to 'Destroy', rating, confirm: 'Are you sure?', method: :delete
--# TODO: figure out pagination and if it'll work on home
+        %th Artist name
+        %th Track name
+        %th Your rating
+        %th Destroy rating
+
+      - targets.each do |rating|
+        %tr
+          %td= rating.track.artist_name
+          %td= rating.track.name
+          %td
+            = form_for rating do |f|
+              - (1..5).each do |v|
+                = f.label v
+                = f.radio_button :value, v
+              = f.submit :Submit
+          %td= link_to 'Destroy', rating, confirm: 'Are you sure?', method: :delete

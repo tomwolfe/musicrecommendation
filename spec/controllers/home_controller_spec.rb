@@ -1,11 +1,10 @@
-require 'spec_helper'
+require_relative '../spec_helper'
 
 describe HomeController do
   before :each do
     Rating.skip_callback(:save, :after, :generate_predictions)
-    Rating.stub(:iterate).and_return(1)
+    #Rating.stub(:iterate).and_return(1)
     @rating = FactoryGirl.create(:rating)
-    ApplicationController.any_instance.stub(:current_user).and_return(nil)
   end
 
   describe '#index' do
@@ -26,6 +25,9 @@ describe HomeController do
     end
     
     context 'not signed in' do
+    	before :each do
+    		ApplicationController.any_instance.stub(:current_user).and_return(nil)
+    	end
       it 'makes @tracks available to the view' do
         get :index
         assigns(:tracks).should == [@rating.track]

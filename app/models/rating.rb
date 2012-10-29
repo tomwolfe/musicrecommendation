@@ -5,12 +5,7 @@ class Rating < ActiveRecord::Base
   belongs_to :track
   belongs_to :user
   
-  # for testing so the number of iterations can be stubbed to run only once
-  def self.iterate
-    10
-  end
-  
-  def generate_predictions(iterations=Rating.iterate, num_features = 5, lambda = 1)
+  def generate_predictions(iterations=10, num_features = 5, lambda = 1)
     user_count, track_count = User.count, Track.count
     ratings = Rating.select([:user_id, :track_id, :value]).where("value IS NOT NULL")
     
@@ -22,11 +17,6 @@ class Rating < ActiveRecord::Base
     calc.min_cost
     predictions = calc.predictions
     add_predictions(predictions, user_count, track_count)
-  end
-  
-  private
-  def average_rating
-    track.update_attributes average_rating: track.ratings.average(:value)
   end
   
   def build_rating_table(ratings, user_count, track_count)
@@ -50,5 +40,10 @@ class Rating < ActiveRecord::Base
         end
       end
     end
+  end
+  
+  private
+  def average_rating
+    track.update_attributes average_rating: track.ratings.average(:value)
   end
 end

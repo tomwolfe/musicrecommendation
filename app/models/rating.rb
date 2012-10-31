@@ -38,10 +38,12 @@ class Rating < ActiveRecord::Base
       track_count.times do |j|
         rating = Rating.find_or_initialize_by_user_id_and_track_id(i+1, j+1)
         if rating.prediction.respond_to?(:-) # lol smiley face
+        	# only change the prediction if it's changed by more than 0.2
+        	# (should reduce DB updates)
 		      unless (rating.prediction - predictions[i,j]).abs.between?(0,0.2)
 		        add_prediction(rating, predictions[i,j])
 		      end
-		    else
+		    else # prediction is nil
 		    	add_prediction(rating, predictions[i,j])
         end
       end

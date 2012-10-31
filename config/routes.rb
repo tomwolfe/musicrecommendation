@@ -6,6 +6,8 @@ Musicrecommendation::Application.routes.draw do
   get 'signin', to: 'sessions#new', as: 'signin'
 
   resources :sessions, :users, :tracks, :ratings
+  
+  post 'tracks/search_tracks'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

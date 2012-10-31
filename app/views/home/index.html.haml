@@ -1,15 +1,17 @@
 - title "Home"
 
 - if current_user
-  - if @ratings.empty?
-    %p You have not rated any tracks yet. Search below to find a track to rate.
-  - else
-    = render "ratings/index", targets: @ratings
-    - if @unrated_predictions.empty?
-      %p No predictions available that you have not already rated.
-    - else
-      = render "ratings/index", targets: @unrated_predictions
+	- if @ratings.empty?
+		%p You have not rated any tracks yet. Search below to find a track to rate.
+	- else
+		%p Your most recent ratings:
+		= render "ratings/index", targets: @ratings
+		- if @unrated_predictions.empty?
+			%p No predictions available that you have not already rated.
+		- else
+			%p Our top predictions (for tracks you've yet to rate):
+			= render "ratings/index", targets: @unrated_predictions
 - else
-  %p Our top rated tracks. Join or login to get personalized recommendations based on your ratings.
-  = render "tracks/index", targets: @tracks
+	%p Our top rated tracks: (Join or login to get personalized recommendations based on your ratings.)
+	= render "tracks/index", targets: @tracks
 -# TODO: add a search field backed by a new search model/controller/etc

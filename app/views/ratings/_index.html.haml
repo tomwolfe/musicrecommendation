@@ -29,9 +29,5 @@
           %td= rating.track.artist_name
           %td= rating.track.name
           %td
-            = form_for rating do |f|
-              - (1..5).each do |v|
-                = f.label v
-                = f.radio_button :value, v
-              = f.submit :Submit
+            = render "ratings/form", target: rating
           %td= link_to 'Destroy', rating, confirm: 'Are you sure?', method: :delete

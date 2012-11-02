@@ -69,3 +69,5 @@ gem 'cofi_cost', '>=0.0.4'
 gem 'narray'
 
 gem 'gsl', :git => 'git://github.com/romanbsd/rb-gsl.git'
+
+gem 'rbrainz'

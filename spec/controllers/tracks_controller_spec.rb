@@ -5,6 +5,7 @@ describe TracksController do
 		before :each do
 			@params_hash = { name: 'Freebird', artist_name: 'Lynyrd Skynard' }
 			@track = FactoryGirl.create(:track)
+			#MusicBrainz::Webservice::Query.stub(:get_tracks).and_return()
 		end
 		it 'calls the model method that searches MusicBrainz' do
 			Track.should_receive(:find_in_musicbrainz).with(@params_hash)

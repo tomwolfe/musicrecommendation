@@ -29,9 +29,13 @@ ActiveRecord::Schema.define(:version => 20120131095828) do
     t.string   "name"
     t.string   "artist_name"
     t.float    "average_rating"
+    t.integer  "mb_id"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
+
+  add_index "tracks", ["artist_name"], :name => "index_tracks_on_artist_name"
+  add_index "tracks", ["name"], :name => "index_tracks_on_name"
 
   create_table "users", :force => true do |t|
     t.string   "email"

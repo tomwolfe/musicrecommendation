@@ -13,7 +13,7 @@
 		    %td= track.name
 		    %td= track.artist_name
 		    %td
-		    	= render "form", target: rating
+		    	= render "ratings/form", target: track.rating
 		    	
 %h1 Tracks in MusicBrainz
 	%table

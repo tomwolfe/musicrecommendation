@@ -14,6 +14,8 @@ class CreateRatings < ActiveRecord::Migration
   end
   
   def self.down
-    drop_table :ratingse
+    drop_table :ratings
+    remove_index :ratings, :user_id
+    remove_index :ratings, :track_id
   end
 end

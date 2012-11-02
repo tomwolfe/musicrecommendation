@@ -3,16 +3,16 @@ require_relative '../spec_helper'
 describe TracksController do
 	describe '#search_tracks' do
 		before :each do
-			@params_hash = { title: 'Freebird', artist: 'Lynard Skynard', albumn:  }
+			@params_hash = { name: 'Freebird', artist_name: 'Lynyrd Skynard' }
 			@track = FactoryGirl.create(:track)
 		end
 		it 'calls the model method that searches MusicBrainz' do
-			Track.should_receive(:search_musicbrainz).with(@params_hash)
-			post :search_tracks, @params_hash
+			Track.should_receive(:find_in_musicbrainz).with(@params_hash)
+			get :search_tracks, @params_hash
 		end
 		context 'assign variables for view. renders' do
 		before :each do
-			post :search_tracks, @params_hash
+			get :search_tracks, @params_hash
 		end
 			it 'makes results in our DB available to the view' do
 				pending

@@ -1,0 +1,30 @@
+- title "Search"
+
+= render 'search_form'
+
+%h1 Tracks in our database
+	%table
+		%tr
+			%th Track name
+			%th Artist name
+			%th Your Rating
+		- @tracks.each do |track|
+			%tr
+		    %td= track.name
+		    %td= track.artist_name
+		    %td
+		    	= render "form", target: rating
+		    	
+%h1 Tracks in MusicBrainz
+	%table
+		%tr
+			%th Track name
+			%th Artist name
+			%th Add to our database
+		- @tracks_in_musicbrainz_and_not_db.each do |track|
+			%tr
+		    %td= track.name
+		    %td= track.artist_name
+		    %td
+		    	= form_for track do |f|
+		    		= f.submit

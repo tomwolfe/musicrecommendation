@@ -1,0 +1,4 @@
+= form_tag('/tracks/search_tracks', method: 'get') do
+	= text_field_tag :track_name, params[:track_name]
+	= text_field_tag :artist_name, params[:artist_name]
+	= submit_tag "Search", name: nil

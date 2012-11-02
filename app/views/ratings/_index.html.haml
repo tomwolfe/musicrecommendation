@@ -29,5 +29,5 @@
           %td= rating.track.artist_name
           %td= rating.track.name
           %td
-            = render "ratings/form", target: rating
+            = render "form", target: rating
           %td= link_to 'Destroy', rating, confirm: 'Are you sure?', method: :delete

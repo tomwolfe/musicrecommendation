@@ -7,7 +7,7 @@ Musicrecommendation::Application.routes.draw do
 
   resources :sessions, :users, :tracks, :ratings
   
-  get 'tracks/search_tracks'
+  get 'tracks/search'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -9,13 +9,14 @@ class Track < ActiveRecord::Base
   	# requires at least one field not be empty
   	# FIXME: I'm not sure how to validate a form not backed by a model
   	unless track_name.empty? && artist_name.empty?
-  		mb_tracks = QUERY.get_tracks(MusicBrainz::Webservice::TrackFilter.new(title: track_name, artist: artist_name), limit: 10).to_a
+  		mb_tracks = QUERY.get_tracks(MusicBrainz::Webservice::TrackFilter.new(title: track_name, artist: artist_name, limit: 10)).to_a
   		mb_tracks.delete_if { |track| existing_tracks.include? track.entity.id.to_mbid }
   		mb_tracks.each do |track|
   			entity = track.entity
-				ar_mb_tracks << Track.new(name: entity.title, artist_name: entity.artist, mb_id: entity.id.to_mbid)
+				ar_mb_tracks << Track.new(name: entity.title, artist_name: entity.artist, mb_id: entity.id.uuid, releases: entity.releases.to_a.to_s)
 			end
   	end
+  	debugger
   	return ar_mb_tracks
   end
 end

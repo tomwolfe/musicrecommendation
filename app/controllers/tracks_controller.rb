@@ -1,4 +1,5 @@
 class TracksController < ApplicationController
+	#skip_before_filter :authorize, only: [:search]
   
   # GET /tracks
   # GET /tracks.json
@@ -82,7 +83,7 @@ class TracksController < ApplicationController
     end
   end
   
-  def search_tracks
+  def search
   	# using = rather than LIKE so it won't have to compare every record
   	@tracks = Track.where("name = ? OR artist_name = ?", params[:track_name], params[:artist_name]).limit(20)
   	@tracks_in_musicbrainz_and_not_db = Track.find_in_musicbrainz(@tracks.pluck(:mb_id), params[:track_name], params[:artist_name])

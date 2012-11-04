@@ -1,0 +1,10 @@
+%tr
+	%td= rating.track.artist_name
+	%td= rating.track.name
+	- unless rating.value.nil?
+		%td
+			= render "form", target: rating
+		%td= link_to 'Destroy', rating, confirm: 'Are you sure?', method: :delete
+	%td= rating.prediction
+	- unless rating.difference.nil?
+		%td= rating.difference	

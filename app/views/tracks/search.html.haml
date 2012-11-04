@@ -3,11 +3,8 @@
 = render 'search_form'
 
 %h1 Tracks in our database
-	%table
-		%tr
-			%th Track name
-			%th Artist name
-			%th Your Rating
+	= render "shared/tablehead"
+	%th Your Rating
 		- @tracks.each do |track|
 			%tr
 		    %td= track.name

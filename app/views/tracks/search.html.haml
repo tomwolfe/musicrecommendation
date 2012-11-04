@@ -4,24 +4,11 @@
 
 %h1 Tracks in our database
 	= render "shared/tablehead"
+	%th Average rating
 	%th Your Rating
-		- @tracks.each do |track|
-			%tr
-		    %td= track.name
-		    %td= track.artist_name
-		    %td
-		    	= render "ratings/form", target: track.rating
+	= render(@tracks) || "No tracks found"
 		    	
-%h1 Tracks in MusicBrainz
-	%table
-		%tr
-			%th Track name
-			%th Artist name
-			%th Add to our database
-		- @tracks_in_musicbrainz_and_not_db.each do |track|
-			%tr
-		    %td= track.name
-		    %td= track.artist_name
-		    %td
-		    	= form_for track do |f|
-		    		= f.submit
+%h1 Tracks in MusicBrainz that are not in our database
+	= render "shared/tablehead"
+	%th Add track to our database
+	= render(@tracks_in_musicbrainz_and_not_db) || "No tracks found in MusicBrainz"

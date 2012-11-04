@@ -8,8 +8,10 @@
 		%th Prediction
 		%th Difference from prediction
 		= render(@ratings) || "You have not yet rated any tracks. Search below to find a track to rate."
-		%h1 Your top rated predictions for track you've yet to rate:
+		
+		%h1 Your top rated predictions for tracks you've yet to rate:
 		= render "shared/tablehead"
+		%th Your rating
 		%th Prediction
 		= render(@unrated_predictions) || "No predictions available that you have not already rated."
 		= render "tracks/search_form"

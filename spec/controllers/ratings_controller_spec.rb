@@ -4,10 +4,79 @@ describe RatingsController do
   before :each do
     Rating.skip_callback(:save, :after, :generate_predictions)
     @rating = FactoryGirl.create(:rating)
-    @rating_hash = {id: @rating}
+    @rating_hash = {rating: {track_id: @rating, value: @rating}}
     ApplicationController.any_instance.stub(:current_user).and_return(@rating.user)
   end
+  
+   describe '#create' do
+    it 'calls new' do
+      Rating.should_receive(:new).with("track_id" => '1', "value" => '1').and_return(@rating)
+      post :create, @rating_hash
+    end
+    it 'calls save' do
+      Rating.any_instance.should_receive(:save)
+      post :create, @rating_hash
+    end
+    
+    context 'valid rating' do
+      before :each do
+        Rating.stub(:valid?).and_return(true)
+        post :create, @rating_hash
+      end
+      it 'makes the results available to the template' do
+        assigns(:rating).should == mock_model(Rating, id: 2, user_id: 1, track_id: 1, value: 1)
+      end
+      it 'has another rating in the db' do
+      	Rating.count.should == 2
+      end
+      it 'redirects to the home page' do
+        response.should redirect_to(root_path)
+      end
+      it 'displays a success message' do
+        flash[:notice].should == 'Rating successfully created'
+      end
+    end
+    context 'invalid rating' do
+      before :each do
+        Rating.any_instance.stub(:valid?).and_return(false)
+        @rating_hash[:rating][:value]=-2
+        post :create, @rating_hash
+      end
+      it 'redirects to the home page' do
+        response.should redirect_to(root_path)
+      end
+      it 'displays an error message' do
+        flash[:alert].should == 'Unable to create rating'
+      end
+    end
+  end
+  
+  describe '#update' do
+    it 'calls find_by_id' do
+      @rating.user.ratings.should_receive(:find_by_id).with('1').and_return(@rating)
+      put :update, id: 1
+    end
+    it 'calls updates attributes' do
+      Rating.any_instance.should_receive(:update_attributes).with("track_id" => '1', "value" => '1').and_return(true)
+      put :update, {id: 1, rating: { value: 1, track_id: 1 }}
+    end
+    context 'after update' do
+    	before :each do
+    		put :update, {id: 1, rating: { value: 1, track_id: 1 }}
+    	end
+		  it 'updates the value' do
+		  	Rating.first.value.should == 1
+		  end
+		  it 'redirects to the home page' do
+		  	response.should redirect_to(root_path)
+		  end
+		end
+  end
+  
   describe '#destroy' do
+  	before :each do
+  		@rating_hash = {id: @rating}
+  	end
   	context 'deletes before' do
 			before :each do
 				delete :destroy, @rating_hash
@@ -16,7 +85,10 @@ describe RatingsController do
 				Rating.count.should == 0
 			end
 			it 'redirects to the ratings_path' do
-				response.should redirect_to(ratings_path)
+				response.should redirect_to(root_path)
+			end
+			it 'displays a message that it deleted the rating' do
+				flash[:notice].should == "Rating deleted"
 			end
 		end
 		it 'receives find' do

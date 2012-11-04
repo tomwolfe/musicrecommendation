@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(:version => 20120131095828) do
     t.string   "artist_name"
     t.float    "average_rating"
     t.string   "mb_id"
+    t.string   "releases"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end

@@ -1,0 +1,6 @@
+- title "Show track #{@track.name}"
+
+= render "shared/tablehead"
+%th Average rating
+%th Your Rating
+= render(@track) || "Track not found found"

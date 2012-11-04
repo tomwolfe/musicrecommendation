@@ -13,10 +13,9 @@ class Track < ActiveRecord::Base
   		mb_tracks.delete_if { |track| existing_tracks.include? track.entity.id.to_mbid }
   		mb_tracks.each do |track|
   			entity = track.entity
-				ar_mb_tracks << Track.new(name: entity.title, artist_name: entity.artist, mb_id: entity.id.uuid, releases: entity.releases.to_a.to_s)
+				ar_mb_tracks << Track.new(name: entity.title, artist_name: entity.artist.to_s, mb_id: entity.id.uuid, releases: entity.releases.to_a.to_s)
 			end
   	end
-  	debugger
   	return ar_mb_tracks
   end
 end

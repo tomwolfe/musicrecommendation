@@ -15,7 +15,8 @@ class TracksController < ApplicationController
   # POST /tracks
   # POST /tracks.json
   def create
-    @track = Track.new(params[:track])
+  	# fix to mass assignment vulnerability
+    @track = Track.get_track_from_musicbrainz(params[:track][:mb_id])
 
     respond_to do |format|
       if @track.save

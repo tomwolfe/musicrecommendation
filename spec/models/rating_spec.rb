@@ -34,9 +34,24 @@ describe Rating do
 				end
 			end
 			describe '#add_predictions' do
+				before :each do
+					@rating.instance_variable_set(:@rating, @rating)
+					@rating.instance_variable_set(:@predictions, @prediction_table)
+				end
 				it 'adds the generated predictions to the database' do
-					@rating.add_predictions(@prediction_table)
+					@rating.add_predictions
 					Rating.pluck(:prediction).should eq([0.8, 0.7])
+				end
+			end
+			describe '#add_prediction_logic' do
+				it 'updates the prediction if it has changed by more than 0.2' do
+					pending
+				end
+				it 'does not updated the prediction if it has changed by less than 0.2' do
+					pending
+				end
+				it 'sets the prediction if it is currently nil' do
+					pending
 				end
 			end
 		end

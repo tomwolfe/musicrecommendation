@@ -23,18 +23,19 @@ describe Rating do
 		end
 		context 'generate_predictions support methods' do
 			before :each do
-				@user_count, @track_count = User.count, Track.count
+				@rating.instance_variable_set(:@user_count, 1)
+				@rating.instance_variable_set(:@track_count, 2)
 		  	@ratings = Rating.select([:user_id, :track_id, :value]).where("value IS NOT NULL")
 		  end
 			describe '#build_rating_table' do
 				it 'returns a multi-dim array holding the ratings for users and tracks (0.0 for unrated tracks)' do
-					rating_table = @rating.build_rating_table(@ratings, @user_count, @track_count)
+					rating_table = @rating.build_rating_table(@ratings)
 					rating_table.should be == NArray[ [ 1.0 ], [0.0] ]
 				end
 			end
 			describe '#add_predictions' do
 				it 'adds the generated predictions to the database' do
-					@rating.add_predictions(@prediction_table, @user_count, @track_count)
+					@rating.add_predictions(@prediction_table)
 					Rating.pluck(:prediction).should eq([0.8, 0.7])
 				end
 			end

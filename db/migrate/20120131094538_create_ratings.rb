@@ -9,12 +9,14 @@ class CreateRatings < ActiveRecord::Migration
       t.timestamps
     end
     
+    add_index :ratings, :value
     add_index :ratings, :user_id
     add_index :ratings, :track_id
   end
   
   def self.down
     drop_table :ratings
+    remove_index :ratings, :value
     remove_index :ratings, :user_id
     remove_index :ratings, :track_id
   end

@@ -63,6 +63,7 @@ class Rating < ActiveRecord::Base
 		end
   end
   
+  # FIXME: possible demeter violation, should probably be in Track model
   def average_rating
     track.update_attributes({average_rating: track.ratings.average(:value)}, without_protection: true)
   end

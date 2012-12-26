@@ -9,6 +9,7 @@ Musicrecommendation::Application.routes.draw do
 	
 	get 'tracks/search'
 	get 'home/signedout'
+	get 'home/signedin'
 
 	# The priority is based upon order of creation:
 	# first created -> highest priority.

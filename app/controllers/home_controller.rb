@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-	skip_before_filter :authorize, only: [:index]
+	skip_before_filter :authorize, only: [:signedout]
 
 	def signedin
 			# FIXME: in the home view we access the artist_name/etc of each ratings track.

@@ -9,6 +9,6 @@ private
   helper_method :current_user
   
   def authorize
-    redirect_to signin_url, alert: "Not Authorized" if current_user.nil?
+    redirect_to home_signedout_url, alert: "Not Authorized" if current_user.nil?
   end
 end

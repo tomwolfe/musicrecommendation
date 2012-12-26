@@ -22,8 +22,10 @@ ActiveRecord::Schema.define(:version => 20120131095828) do
     t.datetime "updated_at", :null => false
   end
 
+  add_index "ratings", ["created_at"], :name => "index_ratings_on_created_at"
   add_index "ratings", ["track_id"], :name => "index_ratings_on_track_id"
   add_index "ratings", ["user_id"], :name => "index_ratings_on_user_id"
+  add_index "ratings", ["value"], :name => "index_ratings_on_value"
 
   create_table "tracks", :force => true do |t|
     t.string   "name"
@@ -46,5 +48,7 @@ ActiveRecord::Schema.define(:version => 20120131095828) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end
+
+  add_index "users", ["email"], :name => "index_users_on_email"
 
 end

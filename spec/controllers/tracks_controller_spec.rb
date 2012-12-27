@@ -47,10 +47,11 @@ describe TracksController do
 	
 	describe '#create' do
 		before :each do
+			Track.stub(:get_track_from_musicbrainz).and_return(FactoryGirl.build(:track))
 			@create_hash = { track: { name: 'Freebird', artist_name: 'Lynyrd Skynyrd' } }
 		end
-		it 'calls new on track' do
-			Track.should_receive(:new).and_return(@track)
+		it 'calls get_track_from_musicbrainz on track' do
+			Track.should_receive(:get_track_from_musicbrainz)
 			post :create, @create_hash
 		end
 		context 'request before expectation' do

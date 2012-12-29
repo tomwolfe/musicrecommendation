@@ -16,7 +16,7 @@ class Track < ActiveRecord::Base
   	end
   end
   
-  def self.create_array_of_tracks(mb_tracks)
+  def self.create_tracks_array(mb_tracks)
   	ar_mb_tracks = Array.new
   	if mb_tracks.respond_to?(:each)
 			mb_tracks.each do |track|

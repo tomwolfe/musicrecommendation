@@ -15,9 +15,10 @@ describe Track do
 	  end
 	end
 	
-	describe '.create_array_of_tracks' do
+	describe '.create_tracks_array' do
 		it 'returns an array of Track objects' do
-			Track.create_array_of_tracks(@scored_collection).should eq(nil)
+			# just testing the name of the Track object...
+			Track.create_tracks_array(@scored_collection).first.name.should eq("bound for the floor")
 		end
 	end
 	

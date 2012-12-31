@@ -11,8 +11,8 @@ class Track < ActiveRecord::Base
   	# FIXME: I'm not sure how to validate a form not backed by a model
   	unless track_name.empty? && artist_name.empty?
   		mb_tracks = QUERY.get_tracks(MusicBrainz::Webservice::TrackFilter.new(title: track_name, artist: artist_name, limit: 10)).to_a
-  		mb_tracks.delete_if { |track| existing_tracks.include? track.entity.id.to_mbid }
-  		ar_mb_tracks = create_array_of_tracks(mb_tracks)
+  		mb_tracks.delete_if { |track| existing_tracks.include? track.entity.id.uuid }
+  		ar_mb_tracks = create_tracks_array(mb_tracks)
   	end
   end
   

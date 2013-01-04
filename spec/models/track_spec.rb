@@ -23,7 +23,7 @@ describe Track do
 		end
 		it 'returns an empty array if tracks found in musicbrainz are already in the database' do
 			# TODO: use factory instead.
-			Track.create!({name: @first_entity_in_collection.title, artist_name: @first_entity_in_collection.artist, mb_id: @first_entity_in_collection.id.uuid}, without_protection: true)
+			FactoryGirl.create(:track, name: @first_entity_in_collection.title, artist_name: @first_entity_in_collection.artist, mb_id: @first_entity_in_collection.id.uuid)
 			update_mbids
 			Track.find_in_musicbrainz(@all_track_mbids, @first_entity_in_collection.title, @first_entity_in_collection.artist).should be_empty 
 		end

@@ -6,5 +6,5 @@
 	- unless rating.value.nil?
 		%td= link_to 'Destroy', rating, confirm: 'Are you sure?', method: :delete
 	%td= rating.prediction
-	- unless rating.difference.nil?
-		%td= rating.difference	
+	- if rating.respond_to?(:difference)
+		%td= rating.difference

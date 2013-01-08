@@ -4,7 +4,7 @@ describe HomeController do
 	before :each do
 		Rating.skip_callback(:save, :after, :generate_predictions)
 		@rating = FactoryGirl.create(:rating)
-		prediction_table = NArray[[0.8],[0.7]]
+		prediction_table = NArray[[0.8]]
 		CofiCost.any_instance.stub(:predictions).and_return(prediction_table)
 		CofiCost.any_instance.stub(:min_cost).and_return(nil)
 	end
@@ -12,8 +12,7 @@ describe HomeController do
 	describe '#signedin' do
 		before :each do
 			ApplicationController.any_instance.stub(:current_user).and_return(@rating.user)
-			FactoryGirl.create(:track)
-			@rating.generate_predictions(1)
+			FactoryGirl.create(:track_create_empty_ratings)
 			get :signedin
 		end
 		it 'makes @predictions available to the view which should only include predictions for unrated tracks (in this case the second track)' do

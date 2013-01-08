@@ -1,24 +1,19 @@
 require_relative '../spec_helper'
 
-# oddly enough, gsl from git does not get installed in /var/lib/gems/... with
-# 'bundle install'. I had to manually clone git repo and build/install it
-
 describe Rating do
   before :each do
-  	Rating.skip_callback(:save, :after, :generate_predictions)
-   	@rating = FactoryGirl.create(:rating)
-    @track2 = FactoryGirl.create(:track)
+		@rating = FactoryGirl.create(:rating)
   end
   context 'prediction stuff' do
   	before :each do
-  		@prediction_table = NArray[[0.8],[0.7]]
+  		@prediction_table = NArray[[0.8]]
   		CofiCost.any_instance.stub(:predictions).and_return(@prediction_table)
 			CofiCost.any_instance.stub(:min_cost).and_return(nil)
 		end
 		describe '#generate_predictions' do
 			it 'sets the predictions' do
 				@rating.generate_predictions(1)
-			  Rating.pluck(:prediction).should eq([0.8, 0.7])
+				Rating.pluck(:prediction).should eq([0.8])
 			end
 		end
 		context 'generate_predictions support methods' do
@@ -40,7 +35,7 @@ describe Rating do
 				end
 				it 'adds the generated predictions to the database' do
 					@rating.add_predictions
-					Rating.pluck(:prediction).should eq([0.8, 0.7])
+					Rating.pluck(:prediction).should eq([0.8])
 				end
 			end
 			describe '#add_prediction_logic' do
@@ -68,9 +63,21 @@ describe Rating do
 			end
 		end
 	end
+	describe '.create_empty_ratings' do
+		# 1 tracks, 1 user and 1 rating available before each
+		it 'creates Track.count new ratings after adding a user' do
+			FactoryGirl.create(:user_create_empty_ratings)
+			Rating.count.should eq(2)
+		end
+		it 'creates User.count new ratings after adding a track' do
+			FactoryGirl.create(:track_create_empty_ratings)
+			Rating.count.should eq(2)
+		end
+	end
 	describe '#average_rating' do
 	  it 'sets the associated tracks average_rating' do
-	    @rating.track.average_rating.should eq(1.0)
+	    @rating.average_rating
+			@rating.track.average_rating.should eq(1.0)
 	  end
 	end
 end

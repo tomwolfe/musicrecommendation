@@ -34,17 +34,14 @@ class Rating < ActiveRecord::Base
 	def add_predictions
 		# avoid endless loop of callbacks
 		Rating.skip_callback(:save, :after, :generate_predictions)
-		# OPTIMIZE: might be better to store all ratings (Rating.select(:prediction))
-		#  in memory if Rating.count == @user_count * @track_count rather than doing
-		#  a bunch of DB lookups.
-		@user_count.times do |i|
-			@track_count.times do |j|
-				@rating = Rating.find_or_initialize_by_user_id_and_track_id(i+1, j+1)
-				add_prediction_logic(i,j)
-			end
+		# would like to use .select but that returns read-only objects
+		@ratings = Rating.all
+		@ratings.each do |rating|
+			@rating = rating
+			add_prediction_logic(rating.user_id-1, rating.track_id-1)
 		end
 	end
-	
+
 	def add_prediction(value)
 		@rating.prediction = value
 		@rating.save
@@ -62,8 +59,18 @@ class Rating < ActiveRecord::Base
 		end
 	end
 
-	private	
-	# FIXME: possible demeter violation, should probably be in Track model
+	def self.create_empty_ratings(user_or_track = "Track", id_of_track_or_user)
+		Rating.skip_callback(:save, :after, :generate_predictions)
+		class_name = user_or_track.to_s.classify.constantize
+		class_name.count.times do |i|
+			if user_or_track =~ /^Track/
+				Rating.create({user_id: id_of_track_or_user, track_id: i+1}, without_protection: true)
+			else
+				Rating.create({user_id: i+1, track_id: id_of_track_or_user}, without_protection: true)
+			end
+		end
+	end
+
 	def average_rating
 		track.update_attributes({average_rating: track.ratings.average(:value)}, without_protection: true)
 	end

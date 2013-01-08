@@ -1,13 +1,13 @@
 require_relative '../spec_helper'
 
 describe Rating do
-  before :each do
+	before :each do
 		@rating = FactoryGirl.create(:rating)
-  end
-  context 'prediction stuff' do
-  	before :each do
-  		@prediction_table = NArray[[0.8]]
-  		CofiCost.any_instance.stub(:predictions).and_return(@prediction_table)
+	end
+	context 'prediction stuff' do
+		before :each do
+			@prediction_table = NArray[[0.8]]
+			CofiCost.any_instance.stub(:predictions).and_return(@prediction_table)
 			CofiCost.any_instance.stub(:min_cost).and_return(nil)
 		end
 		describe '#generate_predictions' do
@@ -20,8 +20,8 @@ describe Rating do
 			before :each do
 				@rating.instance_variable_set(:@user_count, 1)
 				@rating.instance_variable_set(:@track_count, 2)
-		  	@ratings = Rating.select([:user_id, :track_id, :value]).where("value IS NOT NULL")
-		  end
+				@ratings = Rating.select([:user_id, :track_id, :value]).where("value IS NOT NULL")
+			end
 			describe '#build_rating_table' do
 				it 'returns a multi-dim array holding the ratings for users and tracks (0.0 for unrated tracks)' do
 					rating_table = @rating.build_rating_table(@ratings)
@@ -75,9 +75,9 @@ describe Rating do
 		end
 	end
 	describe '#average_rating' do
-	  it 'sets the associated tracks average_rating' do
-	    @rating.average_rating
+		it 'sets the associated tracks average_rating' do
+			@rating.average_rating
 			@rating.track.average_rating.should eq(1.0)
-	  end
+		end
 	end
 end

@@ -1,8 +1,8 @@
 FactoryGirl.define do
-  factory :rating do
-    value '1'
-    user
-    track
+	factory :rating do
+		value '1'
+		user
+		track
 		after(:build) do |rating|
 			rating.class.skip_callback(:save, :after, :generate_predictions)
 			rating.class.skip_callback(:save, :after, :average_rating)

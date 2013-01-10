@@ -5,9 +5,10 @@ Musicrecommendation::Application.routes.draw do
 	delete 'signout', to: 'sessions#destroy', as: 'signout'
 	get 'signin', to: 'sessions#new', as: 'signin'
 
+	get 'tracks/search'
+
 	resources :sessions, :users, :tracks, :ratings
 	
-	get 'tracks/search'
 	get 'home/signedout'
 	get 'home/signedin'
 

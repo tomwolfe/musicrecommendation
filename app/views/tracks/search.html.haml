@@ -3,12 +3,20 @@
 = render 'search_form'
 
 %h1 Tracks in our database
-	= render "shared/tablehead"
-	%th Average rating
-	%th Your Rating
+%table
+	%tr
+		%th Artist name
+		%th Track name
+		%th Average rating
+		%th Your Rating
 	= render(@tracks) || "No tracks found"
-		    	
+					
 %h1 Tracks in MusicBrainz that are not in our database
-	= render "shared/tablehead"
-	%th Add track to our database
+%table
+	%tr
+		%th Artist name
+		%th Track name
+		%th Average rating
+		%th Your Rating
+		%th Add track to our database
 	= render(@tracks_in_musicbrainz_and_not_db) || "No tracks found in MusicBrainz"

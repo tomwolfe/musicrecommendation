@@ -1,4 +1,4 @@
-= form_tag('/tracks/search_tracks', method: 'get') do
-	= text_field_tag :track_name, params[:track_name]
-	= text_field_tag :artist_name, params[:artist_name]
+= form_tag(tracks_search_path, method: 'get') do
+	= text_field_tag :track_name, params[:track_name], placeholder: "Track Name"
+	= text_field_tag :artist_name, params[:artist_name], placeholder: "Artist Name"
 	= submit_tag "Search", name: nil

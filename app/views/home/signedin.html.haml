@@ -1,16 +1,27 @@
 - title "Home"
 
+#ratings
 	%h1 Your most recent ratings:
-	= render "shared/tablehead"
-	%th Your rating
-	%th Destroy rating
-	%th Prediction
-	%th Difference from prediction
-	= render(@ratings) || "You have not yet rated any tracks. Search below to find a track to rate."
-	
+	%table
+		%tr
+			%th Artist name
+			%th Track name
+			%th Your rating
+			%th Destroy rating
+			%th Prediction
+			%th Difference from prediction
+		= render(@ratings)
+	= @ratings.empty? ? "You have not yet rated any tracks. Search below to find a track to rate." : nil
+
 	%h1 Your top rated predictions for tracks you've yet to rate:
-	= render "shared/tablehead"
-	%th Your rating
-	%th Prediction
-	= render(@unrated_predictions) || "No predictions available that you have not already rated."
+	%table
+		%tr
+			%th Artist name
+			%th Track name
+			%th Your rating
+			%th Prediction
+		= render(@unrated_predictions)
+	= @unrated_predictions.empty? ? "No predictions available that you have not already rated." : nil
+
+#search
 	= render "tracks/search_form"

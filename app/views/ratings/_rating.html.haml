@@ -3,8 +3,6 @@
 	%td= rating.track.name
 	%td
 		= render "form", target: rating
-	- unless rating.value.nil?
-		%td= link_to 'Destroy', rating, confirm: 'Are you sure?', method: :delete
+	%td= link_to 'Destroy', rating, confirm: 'Are you sure?', method: :delete
 	%td= rating.prediction
-	- if rating.respond_to?(:difference)
-		%td= rating.difference
+	%td= rating.difference

@@ -1,6 +1,12 @@
 - title "Home"
 
-%h1 Our top rated tracks: (Join or login to get personalized recommendations based on your ratings.)
-= render "shared/tablehead"
-%th Average rating
-= render(@tracks) || "No tracks. Search below to add some from MusicBrainz."
+%h2 Personalized music recommendations using collaborative filtering.
+
+%h2 Our top rated tracks:
+%table
+	%tr
+		%th Artist Name
+		%th Track Name
+		%th Average Rating
+		%th Your Rating
+	= render(@tracks) || "No tracks."

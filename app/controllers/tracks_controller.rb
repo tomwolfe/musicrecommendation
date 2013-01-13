@@ -15,8 +15,7 @@ class TracksController < ApplicationController
   # POST /tracks
   # POST /tracks.json
   def create
-  	# fix to mass assignment vulnerability
-    @track = Track.get_track_from_musicbrainz(params[:track][:mb_id])
+		@track = Track.new(params[:track])
 
     respond_to do |format|
       if @track.save
@@ -31,8 +30,9 @@ class TracksController < ApplicationController
   
   # GET /tracks/search
   def search
-  	# using = rather than LIKE so it won't have to compare every record
-  	@tracks = Track.where("name = ? OR artist_name = ?", params[:track_name], params[:artist_name]).limit(20)
+  	# OPTIMIZE: would rather use = rather than LIKE so it won't have to compare every record
+		# but with capitalization etc...
+  	@tracks = Track.where("name LIKE ? OR artist_name LIKE ?", params[:track_name], params[:artist_name]).limit(20)
   	@tracks_in_musicbrainz_and_not_db = Track.find_in_musicbrainz(@tracks.pluck(:mb_id), params[:track_name], params[:artist_name])
   end
 end

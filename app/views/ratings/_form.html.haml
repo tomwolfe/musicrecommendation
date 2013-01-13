@@ -1,5 +1,3 @@
-= form_for target do |f|
-	- (1..5).each do |v|
-		= f.label v
-		= f.radio_button :value, v
-	= f.submit
+- (1..5).each do |v|
+	= f.label v
+	= f.radio_button :value, v

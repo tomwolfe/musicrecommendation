@@ -8,6 +8,8 @@
 		%th Artist name
 		%th Track name
 		%th Average rating
+		%th Releases
+		%th MusicBrainz id
 		%th Your Rating
 	= render(@tracks) || "No tracks found"
 					
@@ -17,6 +19,7 @@
 		%th Artist name
 		%th Track name
 		%th Average rating
+		%th Releases
+		%th MusicBrainz id
 		%th Your Rating
-		%th Add track to our database
-	= render(@tracks_in_musicbrainz_and_not_db) || "No tracks found in MusicBrainz"
+	= render(:partial => "track", :collection => @tracks_in_musicbrainz_and_not_db) || "No tracks found in MusicBrainz"

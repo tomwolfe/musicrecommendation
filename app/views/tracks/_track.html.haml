@@ -2,9 +2,13 @@
 	%td= track.artist_name
 	%td= track.name
 	%td= track.average_rating
+	%td= track.releases
+	%td= track.mb_id
 	%td
-	-# perhaps put this whole form_for in another partial? partial in a partial?
 		= form_for track do |f|
+			= f.hidden_field :mb_id
+			= f.hidden_field :name
+			= f.hidden_field :artist_name
 			= f.fields_for :ratings do |builder|
-				= render "ratings/form", target: builder
+				= render "ratings/form", f: builder
 			= f.submit

@@ -1,13 +1,14 @@
 class Track < ActiveRecord::Base
 	has_many :ratings, dependent: :destroy
 	has_many :raters, :through => :ratings, :source => :users
-	attr_accessible :ratings_attributes
+	attr_accessible :ratings_attributes, :name, :artist_name, :mb_id
 	accepts_nested_attributes_for :ratings, allow_destroy: true
 	# FIXME: (identical issue in User model) creates User.count ratings
 	# would like to pass a block (I can't get it to work w/ skip_callback,
 	# I can only get it to work with a method name)
 	# after_create {|track| Rating.create_empty_ratings("User", track.id)}
 	after_create :create_empty_ratings
+	validate :must_be_in_musicbrainz
 
 	QUERY = MusicBrainz::Webservice::Query.new
 	
@@ -32,10 +33,28 @@ class Track < ActiveRecord::Base
 		end
 		return ar_mb_tracks
 	end
-	
-	def self.get_track_from_musicbrainz(mbid)
-		track = QUERY.get_track_by_id(mbid)
-		Track.new({name: track.title, artist_name: track.artist.to_s, mb_id: track.id.uuid, releases: track.releases.to_a.to_s}, without_protection: true)
+
+	# TODO: make this into a validation (at least check mb_id/name)
+	def must_be_in_musicbrainz
+		# FIXME (not sure of best solution, ideas below that won't work w/ reasons)
+		# would like to do the following but it just returns the tracks title
+		# with no way to get the artist/etc
+		mbtrack = QUERY.get_track_by_id(mb_id)
+		#	http://musicbrainz.org/ws/1/track/9a0589c9-7dc9-4c5c-9fda-af6cd863095c?type=xml
+
+		# would like the following, however, what's returned seems to be stochastic
+		#tracks = QUERY.get_tracks(MusicBrainz::Webservice::TrackFilter.new(title: track_hash[:track_name], artist: track_hash[:artist_name], limit: 10)).to_a
+		#tracks.select! { |track| track_hash[:mb_id] == track.entity.id.uuid }
+		#track = tracks.first.entity
+
+		# could also do an expires_at: 1.day.from_now in create_tracks_array, but
+		# that'd mess up some logic for creating ratings/predictions...
+		if (mbtrack.title != name)
+			errors.add(:name, "name #{name} (#{mbtrack.title}) not the same as the track with mb_id #{mb_id} (#{mbtrack.id.uuid}) in MusicBrainz")
+		end
+		if (mbtrack.id.uuid != mb_id)
+			errors.add(:mb_id, "mb_id #{mb_id} not found in Musicbrainz")
+		end
 	end
 	
 	def create_empty_ratings

@@ -6,7 +6,8 @@ end
 
 describe Track do
 	before :each do
-		@track = MusicBrainz::Model::Track.new("http://musicbrainz.org/track/ea0ad976-5750-4885-9f33-2c656dfc4a42", "bound for the floor")
+		@title = "Bound for the Floor"
+		@track = MusicBrainz::Model::Track.new("http://musicbrainz.org/track/ea0ad976-5750-4885-9f33-2c656dfc4a42", @title)
 		@track.artist = "local h"
 		@scored_collection = MusicBrainz::Model::ScoredCollection.new << @track
 		Track::QUERY.stub(:get_tracks).and_return(@scored_collection)
@@ -21,8 +22,8 @@ describe Track do
 			Track.find_in_musicbrainz(@all_track_mbids, @first_entity_in_collection.title, @first_entity_in_collection.artist).first.name.should eq(@first_entity_in_collection.title)
 		end
 		it 'returns an empty array if tracks found in musicbrainz are already in the database' do
-			# TODO: use factory instead.
-			FactoryGirl.create(:track, name: @first_entity_in_collection.title, artist_name: @first_entity_in_collection.artist, mb_id: @first_entity_in_collection.id.uuid)
+			track=FactoryGirl.build(:track, name: @first_entity_in_collection.title, artist_name: @first_entity_in_collection.artist, mb_id: @first_entity_in_collection.id.uuid)
+			track.save(:validate => false)
 			update_mbids
 			Track.find_in_musicbrainz(@all_track_mbids, @first_entity_in_collection.title, @first_entity_in_collection.artist).should be_empty 
 		end
@@ -31,17 +32,22 @@ describe Track do
 	describe '.create_tracks_array' do
 		it 'returns an array of Track objects' do
 			# only tests the name of the Track object...
-			Track.create_tracks_array(@scored_collection).first.name.should eq("bound for the floor")
+			Track.create_tracks_array(@scored_collection).first.name.should eq(@title)
 		end
 	end
 	
-	describe '.get_track_from_musicbrainz' do
-		it 'returns a Track object given a valid mbid' do
+	describe '#must_be_in_musicbrainz' do
+		it 'creates no errors given a valid track' do
 			Track::QUERY.stub(:get_track_by_id).and_return(@track)
-			Track.get_track_from_musicbrainz(@first_entity_in_collection.id.uuid).name.should eq("bound for the floor") 
+			FactoryGirl.build(:track, name: @title, mb_id: @first_entity_in_collection.id.uuid).should be_valid
 		end
-		it 'raises an InvalidMBIDError given an invalid mbid' do
-			lambda { Track.get_track_from_musicbrainz("hi").should raise_error(MusicBrainz::Model::InvalidMBIDError) }
+		it 'raises an InvalidMBIDError given an invalid mb_id' do
+			FactoryGirl.build(:track, mb_id: "hi")
+			lambda { FactoryGirl.build(:track, mb_id: "hi").valid?.should raise_error(MusicBrainz::Model::InvalidMBIDError) }
+		end
+		it 'creates errors given a valid mb_id but non-matching name' do
+			Track::QUERY.stub(:get_track_by_id).and_return(@track)
+			FactoryGirl.build(:track, name: "wrong name", mb_id: @first_entity_in_collection.id.uuid).should_not be_valid
 		end
 	end
 end

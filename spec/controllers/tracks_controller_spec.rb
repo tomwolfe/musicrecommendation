@@ -3,7 +3,9 @@ require_relative '../spec_helper'
 describe TracksController do
 	before :each do
 		@params_hash = { track_name: 'Freebird', artist_name: 'Lynyrd Skynyrd' }
-		@track = FactoryGirl.create(:track)
+		@track = FactoryGirl.build(:track)
+		@track.save(:validate => false)
+		#User.skip_callback(:create, :after, :create_empty_ratings)
 		@user = FactoryGirl.create(:user)
 		ApplicationController.any_instance.stub(:current_user).and_return(@user)
 	end
@@ -47,29 +49,21 @@ describe TracksController do
 	
 	describe '#create' do
 		before :each do
-			Track.stub(:get_track_from_musicbrainz).and_return(FactoryGirl.build(:track))
+			Track.any_instance.stub(:must_be_in_musicbrainz).and_return(true)
 			@create_hash = { track: { name: 'Freebird', artist_name: 'Lynyrd Skynyrd' } }
-		end
-		it 'calls get_track_from_musicbrainz on track' do
-			Track.should_receive(:get_track_from_musicbrainz)
 			post :create, @create_hash
 		end
-		context 'request before expectation' do
-			before :each do
-				post :create, @create_hash
-			end
-			it 'should redirect to the show track page' do
-				response.should redirect_to(track_path(2))
-			end
-			it 'should make @track available to the view' do
-				assigns(:track).should == stub_model(Track, id: 2, name: @track, artist_name: @track)
-			end
-			it 'writes the track to the database' do
-				Track.count.should == 2
-			end
-			it 'sets the flash' do
-				flash[:notice].should == 'Track was successfully created.'
-			end
+		it 'should redirect to the show track page' do
+			response.should redirect_to(track_path(2))
+		end
+		it 'should make @track available to the view' do
+			assigns(:track).should == stub_model(Track, id: 2, name: @track, artist_name: @track)
+		end
+		it 'writes the track to the database' do
+			Track.count.should == 2
+		end
+		it 'sets the flash' do
+			flash[:notice].should == 'Track was successfully created.'
 		end
 	end
 end

@@ -22,4 +22,4 @@
 		%th Releases
 		%th MusicBrainz id
 		%th Your Rating
-	= render(:partial => "track", :collection => @tracks_in_musicbrainz_and_not_db) || "No tracks found in MusicBrainz"
+	= render(@tracks_in_musicbrainz_and_not_db) || "No tracks found in MusicBrainz"

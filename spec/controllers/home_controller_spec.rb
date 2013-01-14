@@ -3,6 +3,7 @@ require_relative '../spec_helper'
 describe HomeController do
 	before :each do
 		Rating.skip_callback(:save, :after, :generate_predictions)
+		Track.any_instance.stub(:must_be_in_musicbrainz).and_return(true)
 		@rating = FactoryGirl.create(:rating)
 		prediction_table = NArray[[0.8]]
 		CofiCost.any_instance.stub(:predictions).and_return(prediction_table)

@@ -2,6 +2,7 @@ require_relative '../spec_helper'
 
 describe Rating do
 	before :each do
+		Track.any_instance.stub(:must_be_in_musicbrainz).and_return(true)
 		@rating = FactoryGirl.create(:rating)
 	end
 	context 'prediction stuff' do

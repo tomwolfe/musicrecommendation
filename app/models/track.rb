@@ -1,7 +1,7 @@
 class Track < ActiveRecord::Base
 	has_many :ratings, dependent: :destroy
 	has_many :raters, :through => :ratings, :source => :users
-	attr_accessible :ratings_attributes, :name, :artist_name, :mb_id
+	attr_accessible :ratings_attributes, :name, :artist_name, :mb_id, :releases
 	accepts_nested_attributes_for :ratings, allow_destroy: true
 	# FIXME: (identical issue in User model) creates User.count ratings
 	# would like to pass a block (I can't get it to work w/ skip_callback,
@@ -34,11 +34,10 @@ class Track < ActiveRecord::Base
 		return ar_mb_tracks
 	end
 
-	# TODO: make this into a validation (at least check mb_id/name)
 	def must_be_in_musicbrainz
 		# FIXME (not sure of best solution, ideas below that won't work w/ reasons)
 		# would like to do the following but it just returns the tracks title
-		# with no way to get the artist/etc
+		# with no way to get the artist/etc (using as temp partial solution)
 		mbtrack = QUERY.get_track_by_id(mb_id)
 		#	http://musicbrainz.org/ws/1/track/9a0589c9-7dc9-4c5c-9fda-af6cd863095c?type=xml
 

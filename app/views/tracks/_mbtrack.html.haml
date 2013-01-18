@@ -1,0 +1,12 @@
+%tr
+	%td= mbtrack.artist_name
+	%td= mbtrack.name
+	%td= mbtrack.releases
+	%td= mbtrack.mb_id
+	%td
+		= form_for mbtrack do |f|
+			= f.hidden_field :mb_id
+			= f.hidden_field :name
+			= f.hidden_field :artist_name
+			= f.hidden_field :releases
+			= f.submit

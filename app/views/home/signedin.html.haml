@@ -7,7 +7,6 @@
 			%th Artist name
 			%th Track name
 			%th Your rating
-			%th Destroy rating
 			%th Prediction
 			%th Difference from prediction
 		= render(@ratings)
@@ -20,8 +19,9 @@
 			%th Track name
 			%th Your rating
 			%th Prediction
-		= render(@unrated_predictions)
+		= render(:partial => "ratings/unrated_prediction", :collection => @unrated_predictions)
 	= @unrated_predictions.empty? ? "No predictions available that you have not already rated." : nil
 
 #search
+	%h1 Search for a Track to rate
 	= render "tracks/search_form"

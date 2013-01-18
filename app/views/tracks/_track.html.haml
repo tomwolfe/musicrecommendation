@@ -6,10 +6,6 @@
 	%td= track.mb_id
 	%td
 		= form_for track do |f|
-			= f.hidden_field :mb_id
-			= f.hidden_field :name
-			= f.hidden_field :artist_name
-			= f.hidden_field :releases
 			= f.fields_for :ratings do |builder|
-				= render "ratings/form", f: builder
+				= render "ratings/nestedform", f: builder
 			= f.submit

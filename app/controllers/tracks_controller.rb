@@ -27,12 +27,19 @@ class TracksController < ApplicationController
       end
     end
   end
+
+	def update
+		@track = Track.find(params[:id])
+		if @track.update_attributes(params[:track])
+			redirect_to @track, notice: "Successfully updated rating."
+		end
+	end
   
   # GET /tracks/search
   def search
-  	# OPTIMIZE: would rather use = rather than LIKE so it won't have to compare every record
-		# but with capitalization etc...
-  	@tracks = Track.where("name LIKE ? OR artist_name LIKE ?", params[:track_name], params[:artist_name]).limit(20)
+		# should still use index even w/ LIKE since there's no wildcard
+		# http://stackoverflow.com/questions/6142235/sql-like-vs-performance
+  	@tracks = Track.where("name LIKE ? AND artist_name LIKE ?", "#{params[:track_name]}%", params[:artist_name]).limit(20)
   	@tracks_in_musicbrainz_and_not_db = Track.find_in_musicbrainz(@tracks.pluck(:mb_id), params[:track_name], params[:artist_name])
   end
 end

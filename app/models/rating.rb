@@ -43,8 +43,9 @@ class Rating < ActiveRecord::Base
 	end
 
 	def add_prediction(value)
-		@rating.prediction = value
-		@rating.save
+		# Rails v4 FIXME: @rating.update_columns(hash)
+		# where: hash = { prediction: value }
+		@rating.update_column(:prediction, value)
 	end
 	
 	def add_prediction_logic(i,j)
@@ -60,13 +61,15 @@ class Rating < ActiveRecord::Base
 	end
 
 	def self.create_empty_ratings(user_or_track = "Track", id_of_track_or_user)
-		Rating.skip_callback(:save, :after, :generate_predictions)
 		class_name = user_or_track.to_s.classify.constantize
 		class_name.count.times do |i|
-			if user_or_track =~ /^Track/
-				Rating.create({user_id: id_of_track_or_user, track_id: i+1}, without_protection: true)
-			else
-				Rating.create({user_id: i+1, track_id: id_of_track_or_user}, without_protection: true)
+			# config/initializers/without_callback.rb
+			Rating.without_callback(:save, :after, :generate_predictions) do
+				if user_or_track =~ /^Track/
+					Rating.create({user_id: id_of_track_or_user, track_id: i+1}, without_protection: true)
+				else
+					Rating.create({user_id: i+1, track_id: id_of_track_or_user}, without_protection: true)
+				end
 			end
 		end
 	end

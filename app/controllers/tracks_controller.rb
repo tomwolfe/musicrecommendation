@@ -31,7 +31,9 @@ class TracksController < ApplicationController
 	def update
 		@track = Track.find(params[:id])
 		if @track.update_attributes(params[:track])
-			redirect_to @track, notice: "Successfully updated rating."
+			redirect_to root_path, notice: 'Successfully updated track.'
+		else
+			redirect_to root_path, notice: 'Unable to update track.'
 		end
 	end
   

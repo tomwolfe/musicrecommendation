@@ -75,6 +75,8 @@ class Rating < ActiveRecord::Base
 	end
 
 	def average_rating
-		track.update_attributes({average_rating: track.ratings.average(:value)}, without_protection: true)
+		# Rails v4 fixme: will be update_columns(hash)
+		# where: hash = { average_rating: track.ratings.average(:value) }
+		track.update_column(:average_rating, track.ratings.average(:value))
 	end
 end

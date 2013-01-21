@@ -33,7 +33,6 @@ class Rating < ActiveRecord::Base
 	
 	def add_predictions
 		# avoid endless loop of callbacks
-		Rating.skip_callback(:save, :after, :generate_predictions)
 		# would like to use .select but that returns read-only objects
 		@ratings = Rating.all
 		@ratings.each do |rating|

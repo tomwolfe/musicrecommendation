@@ -2,22 +2,28 @@
 
 Music recommender system using the [cofi_cost gem] (https://github.com/tomwolfe/cofi_cost) collaborative filtering playground.
 
-It's still under development.
+It's still under active development.
 
-## What works:
+## Hacking
 
-User login
-Users Rating tracks/showing average rating for track/current_user_rating for track
+### Development
 
-## What does not:
+Tested on Debian Wheezy.
+Install libgsl0-dev and [nodejs](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager) (you'll have to compile it since it's not in Wheezy's repos).
 
-recommendations:
-  seeing how i'll be tying this in with the Musicbrainz.org database which currently
-  contains ~11 million tracks this will probably be an expensive computation
-  (11,000,000^num_users_with_ratings). So while it would be nice to rerun the
-  conjugate-gradient-descent algorithm to update the Predictions table each
-  time a user adds a rating it would probably be best to have a cron job that
-  runs once a day that updates the Predictions table. This might be solvable
-  with mini-batch-conjugate-gradient-descent, but I don't think an online
-  algorithm is best here since it does not seem like a great idea to throw
-  away user ratings.
+I might be missing something, I think that's all I needed to get it running from scratch.
+
+### Production
+
+To push to Heroku you'll need a buildpack that installs GSL. [Using a custom Buildpack](https://devcenter.heroku.com/articles/buildpacks#using-a-custom-buildpack)
+Buildpack that includes GSL [gsl-buildpack](https://github.com/tomwolfe/heroku-buildpack-gsl-ruby)_
+
+### To-do/completed task list
+
+[Google Spreadsheet](http://goo.gl/3CsWy) contact me at tomwolfe @ gmail dot com to edit.
+
+I'd love to use Pivitol Tracker, but I kind of like just using a spreadsheet and sorting what needs to be done first with the ratio of priority/difficulty.
+
+## License
+
+See COPYING	for legal information. It's an MIT license.

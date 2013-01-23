@@ -4,6 +4,10 @@ Music recommender system using the [cofi_cost gem] (https://github.com/tomwolfe/
 
 It's still under active development.
 
+# Build Status (travis-ci.org)
+
+[![Build Status](https://travis-ci.org/tomwolfe/musicrecommendation.png?branch=master)](https://travis-ci.org/tomwolfe/musicrecommendation)
+
 ## Hacking
 
 ### Development

@@ -5,7 +5,8 @@ rvm:
 env:
   - DB=sqlite
 script:
-  - RAILS_ENV=test bundle exec rake db:test:prepare
+  - RAILS_ENV=test bundle exec rake db:migrate --trace
+  - bundle exec rake db:test:prepare
   - bundle exec rspec spec/
 before_script:
   - cp config/database.yml.example config/database.yml

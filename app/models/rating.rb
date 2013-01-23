@@ -32,12 +32,11 @@ class Rating < ActiveRecord::Base
 	end
 	
 	def add_predictions
-		# avoid endless loop of callbacks
 		# would like to use .select but that returns read-only objects
 		@ratings = Rating.all
 		@ratings.each do |rating|
 			@rating = rating
-			add_prediction_logic(rating.user_id-1, rating.track_id-1)
+			add_prediction_logic
 		end
 	end
 
@@ -47,7 +46,8 @@ class Rating < ActiveRecord::Base
 		@rating.update_column(:prediction, value)
 	end
 	
-	def add_prediction_logic(i,j)
+	def add_prediction_logic
+		i, j = @rating.user_id-1, @rating.track_id-1
 		if @rating.prediction.respond_to?(:-) # lol smiley face
 			# only change the prediction if it's changed by more than 0.2
 			# (should reduce DB updates)

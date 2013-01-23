@@ -47,19 +47,19 @@ describe Rating do
 					@rating.should_receive(:add_prediction).with(0.8)
 					@rating.prediction = 1.1
 					@rating.instance_variable_set(:@rating, @rating)
-					@rating.add_prediction_logic(0,0)
+					@rating.add_prediction_logic
 				end
 				it 'does not updated the prediction if it has changed by less than 0.2' do
 					@rating.should_not_receive(:add_prediction)
 					@rating.prediction = 0.9
 					@rating.instance_variable_set(:@rating, @rating)
-					@rating.add_prediction_logic(0,0)
+					@rating.add_prediction_logic
 				end
 				it 'sets the prediction if it is currently nil' do
 					@rating.should_receive(:add_prediction).with(0.8)
 					@rating.prediction = nil
 					@rating.instance_variable_set(:@rating, @rating)
-					@rating.add_prediction_logic(0,0)
+					@rating.add_prediction_logic
 				end
 			end
 		end

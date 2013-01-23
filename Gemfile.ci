@@ -2,13 +2,14 @@ source 'https://rubygems.org'
 
 group :development do
   gem 'nifty-generators'
-	# for travis-ci (moved from :test+:development)
-  gem 'debugger'
 end
 
 group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails'
+	# for travis-ci I know you're not suppose to use ruby-debug
+	# but rspec spec/  fails with "cannot load such file -- ruby-debug"
+	gem 'debugger'
 end
 
 group :production do

@@ -46,14 +46,9 @@ class Track < ActiveRecord::Base
 		#tracks.select! { |track| track_hash[:mb_id] == track.entity.id.uuid }
 		#track = tracks.first.entity
 
-		# could also do an expires_at: 1.day.from_now in create_tracks_array, but
-		# that'd mess up some logic for creating ratings/predictions...
-		if (mbtrack.title != name)
-			errors.add(:name, "name #{name} (#{mbtrack.title}) not the same as the track with mb_id #{mb_id} (#{mbtrack.id.uuid}) in MusicBrainz")
-		end
-		if (mbtrack.id.uuid != mb_id)
-			errors.add(:mb_id, "mb_id #{mb_id} not found in Musicbrainz")
-		end
+		errors.add(:name, "name #{name} (#{mbtrack.title}) not the same as the track with mb_id #{mb_id} (#{mbtrack.id.uuid}) in MusicBrainz") if (mbtrack.title != name)
+		
+		errors.add(:mb_id, "mb_id #{mb_id} not found in Musicbrainz") if (mbtrack.id.uuid != mb_id)
 	end
 	
 	def create_empty_ratings

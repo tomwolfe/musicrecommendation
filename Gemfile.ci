@@ -22,7 +22,8 @@ group :test do
   gem 'capybara'
   gem 'rspec-expectations'
   gem 'factory_girl_rails'
-  gem 'ZenTest'
+  # remove zentest for travis-ci
+	#gem 'ZenTest'
 	# for travis-ci
 	gem 'rake'
 end

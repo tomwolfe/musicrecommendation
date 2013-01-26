@@ -2,20 +2,20 @@ require_relative '../spec_helper'
 
 describe TracksController do
 	before :each do
-		@params_hash = { track_name: 'Freebird', artist_name: 'Lynyrd Skynyrd' }
+		@params_hash = { track: { track_name: 'Freebird', artist_name: 'Lynyrd Skynyrd' } }
 		@track = FactoryGirl.build(:track)
 		@track.save(:validate => false)
-		#User.skip_callback(:create, :after, :create_empty_ratings)
 		@user = FactoryGirl.create(:user)
 		ApplicationController.any_instance.stub(:current_user).and_return(@user)
 	end
 	describe '#search' do
 		before :each do
+			@search = Search.new(@params_hash[:track])
 			@mb_track = FactoryGirl.build(:track)
-			Track.stub(:find_in_musicbrainz).and_return([@mb_track])
+			Search.any_instance.stub(:find_in_musicbrainz).and_return([@mb_track])
 		end
-		it 'calls Track.find_in_musicbrainz' do
-			Track.should_receive(:find_in_musicbrainz).with([nil], 'Freebird', 'Lynyrd Skynyrd')
+		it 'calls Search#find_in_musicbrainz' do
+			Search.any_instance.should_receive(:find_in_musicbrainz).with([nil])
 			get :search, @params_hash
 		end
 		context 'request before expectation' do
@@ -27,6 +27,9 @@ describe TracksController do
 			end
 			it 'makes @tracks_in_musicbrainz_and_not_db available to the view' do
 				assigns(:tracks_in_musicbrainz_and_not_db).should == [@mb_track]
+			end
+			it 'makes @search available to the view' do
+				assigns(:search).track_name.should == @params_hash[:track][:track_name] 
 			end
 			it 'renders the search template' do
 				response.should render_template(:search)

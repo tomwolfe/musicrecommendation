@@ -1,12 +1,16 @@
-- title "Home"
+- title "MusicRec Home"
 
-%h2 Personalized music recommendations using collaborative filtering.
+#info
+  %h2 Personalized music recommendations using collaborative filtering.
 
-%h2 Our top rated tracks:
-%table
-	%tr
-		%th Artist Name
-		%th Track Name
-		%th Average Rating
-		%th Your Rating
-	= render(@tracks) || "No tracks."
+  %h2 Our top rated tracks:
+
+#ratings
+  %table
+    %tr
+      %th Artist Name
+      %th Track Name
+      %th Average Rating
+      %th Your Rating
+    = render(@tracks)
+  = @tracks.empty? ? "No tracks." : nil

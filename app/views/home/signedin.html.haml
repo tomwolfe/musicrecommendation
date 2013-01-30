@@ -1,22 +1,25 @@
 - title "Home"
 
-#ratings
+.rating
 	%h1 Your most recent ratings:
 	%table
 		%tr
 			%th Artist name
 			%th Track name
-			%th Your rating
+      %th Releases
+      %th Your rating
 			%th Prediction
 			%th Difference from prediction
 		= render(@ratings)
 	= @ratings.empty? ? "You have not yet rated any tracks. Search below to find a track to rate." : nil
 
+.rating
 	%h1 Your top rated predictions for tracks you've yet to rate:
 	%table
 		%tr
 			%th Artist name
-			%th Track name
+      %th Track name
+      %th Releases
 			%th Your rating
 			%th Prediction
 		= render(:partial => "ratings/unrated_prediction", :collection => @unrated_predictions)

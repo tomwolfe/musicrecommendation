@@ -5,12 +5,13 @@
 
   %h2 Our top rated tracks:
 
-#ratings
+.rating
   %table
     %tr
       %th Artist Name
       %th Track Name
       %th Average Rating
+      %th Releases
       %th Your Rating
     = render(@tracks)
   = @tracks.empty? ? "No tracks." : nil

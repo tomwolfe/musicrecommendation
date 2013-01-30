@@ -1,15 +1,11 @@
+- title "Log In"
+
 = form_tag sessions_path do
-  %table
-    %tr
-      %td
-        = label_tag :email
-      %td
-        = text_field_tag :email, params[:email]
-    %tr
-      %td
-        = label_tag :password
-      %td
-        = password_field_tag :password
-    %tr.actions{colspan: '2'}
-      %td
-        = submit_tag 'Log In'
+  .field
+    = label_tag :email
+    = text_field_tag :email, params[:email]
+  .field
+    = label_tag :password
+    = password_field_tag :password
+  .actions
+    = submit_tag "Log In"

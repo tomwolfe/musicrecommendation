@@ -12,10 +12,13 @@ body {
   background-color: $light-green; }
 
 a {
-	color: $light-green;
 	text-decoration: none;
 	&:hover {
 		text-decoration: underline; } }
+
+#user_header, #footer {
+	a {
+		color: $light-green; } }
 
 div {
   &.field, &.actions {
@@ -52,7 +55,7 @@ div {
     font-size: 12px;
     list-style: square; } }
 
-#user_header, #title {
+#user_header, #title, #footer {
 	color: $light-green;
 	background-color: $main-color;
 	padding: 1% 2%; }
@@ -63,17 +66,37 @@ div {
 #title {
 	clear: left; }
 
-#info, #ratings {
-	margin: 1% 2%;
-	clear: both; }
-
-#ratings {
-	float: left; }
-
 table, th, td {
-	border: 1px $main-color;
+	border: 1px solid black;
 	border-collapse: collapse; }
 
 th {
-	background-color: $main-color;
-	color: $light-green; }
+	color: $light-green;
+	background-color: $main-color; }
+
+#footer {
+	clear: both;
+	a {
+		display: block;
+		text-align: right; } }
+
+#content {
+	margin: 1% 2%; }
+
+#home {
+	#info {
+		clear: both; }
+	.rating {
+		float: left; } }
+
+#users {
+	a {
+		color: $main-color; } 
+	label {
+		width: 10%;
+		float: left; } }
+
+#sessions {
+	label {
+		width: 6%;
+		float: left; } }

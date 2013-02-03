@@ -19,7 +19,7 @@ class TracksController < ApplicationController
 
     respond_to do |format|
       if @track.save
-        format.html { redirect_to @track, notice: 'Track was successfully created.' }
+        format.html { redirect_to @track, notice: "Track was successfully created." }
         format.json { render json: @track, status: :created, location: @track }
       else
         format.html { render action: "new" }
@@ -31,9 +31,9 @@ class TracksController < ApplicationController
 	def update
 		@track = Track.find(params[:id])
 		if @track.update_attributes(params[:track])
-			redirect_to root_path, notice: 'Successfully updated track.'
+			redirect_to root_path, notice: "Successfully updated track."
 		else
-			redirect_to root_path, notice: 'Unable to update track.'
+			redirect_to root_path, flash: { alert: "Unable to update track." }
 		end
 	end
   
@@ -41,12 +41,12 @@ class TracksController < ApplicationController
   def search
 		# should still use index even w/ LIKE since there's no wildcard
 		# http://stackoverflow.com/questions/6142235/sql-like-vs-performance
-		@search = Search.new(params[:track])
+		@search = Search.new(params[:search])
 		if @search.valid?
-			@tracks = Track.where("name LIKE ? AND artist_name LIKE ?", "#{params[:track][:track_name]}%", params[:track][:artist_name]).limit(20)
+			@tracks = Track.where("name LIKE ? AND artist_name LIKE ?", "#{params[:search][:track_name]}%", "#{params[:search][:artist_name]}%").limit(20)
 	  	@tracks_in_musicbrainz_and_not_db = @search.find_in_musicbrainz(@tracks.pluck(:mb_id))
 		else
-			render
+			redirect_to root_path, flash: { alert: "Invalid search parameters." }
 		end
   end
 end

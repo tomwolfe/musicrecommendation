@@ -16,6 +16,9 @@ describe HomeController do
 			FactoryGirl.create(:track_create_empty_ratings)
 			get :signedin
 		end
+		it 'makes @search available to the view' do
+			assigns(:search).should_not be_valid 
+		end
 		it 'makes @unrated_predictions available to the view which should only include predictions for unrated tracks (in this case the second track)' do
 			assigns(:unrated_predictions).should == [Rating.find(2)]
 		end

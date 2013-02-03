@@ -1,30 +1,30 @@
 - title "Home"
 
-.rating
-	%h1 Your most recent ratings:
-	%table
-		%tr
-			%th Artist name
-			%th Track name
-      %th Releases
-      %th Your rating
-			%th Prediction
-			%th Difference from prediction
-		= render(@ratings)
-	= @ratings.empty? ? "You have not yet rated any tracks. Search below to find a track to rate." : nil
-
-.rating
-	%h1 Your top rated predictions for tracks you've yet to rate:
-	%table
-		%tr
-			%th Artist name
+.item
+  %h1 Your most recent ratings:
+  %table
+    %tr
+      %th Artist name
       %th Track name
       %th Releases
-			%th Your rating
-			%th Prediction
-		= render(:partial => "ratings/unrated_prediction", :collection => @unrated_predictions)
-	= @unrated_predictions.empty? ? "No predictions available that you have not already rated." : nil
+      %th Your rating
+      %th Prediction
+      %th Difference from prediction
+    = render(@ratings)
+  = @ratings.empty? ? "You have not yet rated any tracks. Search below to find a track to rate." : nil
+
+.item
+  %h1 Top rated predictions (unrated)
+  %table
+    %tr
+      %th Artist name
+      %th Track name
+      %th Releases
+      %th Your rating
+      %th Prediction
+    = render(:partial => "ratings/unrated_prediction", :collection => @unrated_predictions)
+  = @unrated_predictions.empty? ? "No predictions available that you have not already rated." : nil
 
 #search
-	%h1 Search for a Track to rate
-	= render "tracks/search_form"
+  %h1 Search for a Track to rate
+  = render "tracks/search_form"

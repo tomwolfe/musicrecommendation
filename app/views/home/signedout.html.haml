@@ -3,15 +3,15 @@
 #info
   %h2 Personalized music recommendations using collaborative filtering.
 
+.item
   %h2 Our top rated tracks:
-
-.rating
   %table
     %tr
       %th Artist Name
       %th Track Name
       %th Average Rating
       %th Releases
+      %th Buy
       %th Your Rating
     = render(@tracks)
   = @tracks.empty? ? "No tracks." : nil

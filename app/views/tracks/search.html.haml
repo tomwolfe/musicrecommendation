@@ -1,24 +1,29 @@
 - title "Search"
 
-= render 'search_form'
+#search
+  = render 'search_form'
 
-%h1 Tracks in our database
-%table
-	%tr
-		%th Artist name
-		%th Track name
-		%th Average rating
-		%th Releases
-		%th MusicBrainz id
-		%th Your Rating
-	= render(@tracks) || "No tracks found"
-					
-%h1 Tracks in MusicBrainz that are not in our database
-%table
-	%tr
-		%th Artist name
-		%th Track name
-		%th Releases
-		%th MusicBrainz id
-		%th Add to our database
-	= render(:partial => "mbtrack", :collection => @tracks_in_musicbrainz_and_not_db) || "No tracks found in MusicBrainz"
+.item
+  %h1 Tracks in our database
+  %table
+    %tr
+      %th Artist name
+      %th Track name
+      %th Average rating
+      %th Releases
+      %th MusicBrainz id
+      %th Your Rating
+    = render(@tracks) || nil
+  = @tracks.empty? ? "No tracks found." : nil
+
+.item
+  %h1 Tracks in MusicBrainz that are not in our database
+  %table
+    %tr
+      %th Artist name
+      %th Track name
+      %th Releases
+      %th MusicBrainz id
+      %th Add to our database
+    = render(:partial => "mbtrack", :collection => @tracks_in_musicbrainz_and_not_db) || nil
+  = @tracks_in_musicbrainz_and_not_db.empty? ? "No tracks found in MusicBrainz" : nil

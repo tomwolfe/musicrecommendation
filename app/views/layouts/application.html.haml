@@ -30,8 +30,7 @@
           %h1= yield(:title)
 
       %div{id: params[:controller].parameterize}
-        #content
-          = yield
+        = yield
 
       #footer
         %p

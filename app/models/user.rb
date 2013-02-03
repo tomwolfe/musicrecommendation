@@ -8,7 +8,9 @@ class User < ActiveRecord::Base
 	
 	attr_accessible :email, :password, :password_confirmation
 	
-	validates_uniqueness_of :email
+	validates :email, uniqueness: true
+	validates :password, confirmation: true, length: { in: 6..30 }, presence: true
+	validates :email, format: { with: /^\S+@\S+\.\S+$/, message: "Probably not a valid email regex" }
 
 	def create_empty_ratings
 		Rating.create_empty_ratings("Track", self.id)

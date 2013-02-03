@@ -80,14 +80,19 @@ th {
 		display: block;
 		text-align: right; } }
 
-#content {
-	margin: 1% 2%; }
-
-#home {
+#home, #tracks, #ratings, #users, #sessions {
+	color: $main-color;
+	padding: 1% 1%;
+	margin: 1% 1%;
 	#info {
 		clear: both; }
-	.rating {
-		float: left; } }
+	.item, #search {
+		background-color: $light-green;
+		border: solid 1px $main-color;
+		border-radius: 10px;
+		float: left;
+		padding: 1% 1%;
+		margin: 1% 1%; } }
 
 #users {
 	a {

@@ -10,17 +10,18 @@ describe TracksController do
 	end
 	describe '#search' do
 		before :each do
+			@search_hash = { search: @params_hash[:track] }
 			@search = Search.new(@params_hash[:track])
 			@mb_track = FactoryGirl.build(:track)
 			Search.any_instance.stub(:find_in_musicbrainz).and_return([@mb_track])
 		end
 		it 'calls Search#find_in_musicbrainz' do
 			Search.any_instance.should_receive(:find_in_musicbrainz).with([nil])
-			get :search, @params_hash
+			get :search, @search_hash
 		end
 		context 'request before expectation' do
 			before :each do
-				get :search, @params_hash
+				get :search, @search_hash
 			end
 			it 'makes @tracks available to the view' do
 				assigns(:tracks).should == [@track]

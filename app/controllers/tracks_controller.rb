@@ -22,6 +22,8 @@ class TracksController < ApplicationController
         format.html { redirect_to @track, notice: "Track was successfully created." }
         format.json { render json: @track, status: :created, location: @track }
       else
+				# TODO: sort of a bug, but I don't want users to be able to modify tracks directly
+				# thus no #new action
         format.html { redirect_to root_path, flash: { alert: "Unable to create track." } }
         format.json { render json: @track.errors, status: :unprocessable_entity }
       end

@@ -1,0 +1,7 @@
+# for development (stubbed out in testing and 
+# https://devcenter.heroku.com/articles/config-vars#setting-up-config-vars-for-a-deployed-application
+# https://github.com/ambethia/recaptcha#heroku--shell-environment for heroku
+Recaptcha.configure do |config|
+	config.public_key  = 'enter'
+	config.private_key = 'keys'
+end

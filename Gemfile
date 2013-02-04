@@ -12,6 +12,7 @@ end
 
 group :production do
   gem 'pg'
+	gem 'thin'
 end
 
 group :test do
@@ -68,6 +69,8 @@ gem 'cofi_cost', '>=0.0.4'
 
 gem 'narray'
 
-gem 'gsl', :git => 'git://github.com/romanbsd/rb-gsl.git'
+gem 'gsl', git: 'git://github.com/romanbsd/rb-gsl.git'
 
 gem 'rbrainz'
+
+gem "recaptcha", require: "recaptcha/rails" 

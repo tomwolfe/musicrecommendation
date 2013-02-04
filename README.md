@@ -15,12 +15,21 @@ It's still under active development.
 Tested on Debian Wheezy.
 Install libgsl0-dev and [nodejs](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager) (you'll have to compile it since it's not in Wheezy's repos).
 
+[Get your own keys](http://recaptcha.net/whyrecaptcha.html) for recaptcha.
+Setup your recaptcha keys in config/initializers/recaptcha.rb.example and move it to config/initializers/recaptcha.rb
+
+Also, when installing the bundle: $ bundle install --without production
+to avoid using the 'thin' webserver
+
 I might be missing something, I think that's all I needed to get it running from scratch.
 
 ### Production
 
 To push to Heroku you'll need a buildpack that installs GSL. [Using a custom Buildpack](https://devcenter.heroku.com/articles/buildpacks#using-a-custom-buildpack)
 Buildpack that includes GSL [gsl-buildpack](https://github.com/tomwolfe/heroku-buildpack-gsl-ruby)_
+
+Setup config vars for recaptcha keys on heroku:
+$ heroku config:add RECAPTCHA_PUBLIC_KEY=YOURPUBLICKEY RECAPTCHA_PRIVATE_KEY=YOURPRIVATEKEY
 
 ### To-do/completed task list
 

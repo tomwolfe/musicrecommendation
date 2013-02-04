@@ -24,10 +24,13 @@ div {
   &.field, &.actions {
     margin-bottom: 10px; } }
 
+#flash_notice, #flash_alert, #flash_recaptcha_error {
+	padding: 0% 2%; }
+
 #flash_notice {
   color: green; }
 
-#flash_alert {
+#flash_alert, #flash_recaptcha_error {
 	color: red; }
 
 .field_with_errors {

@@ -11,3 +11,4 @@
     = f.password_field :password_confirmation
   .actions
     = f.submit (@user.new_record? ? "Sign up" : "Update")
+  = recaptcha_tags

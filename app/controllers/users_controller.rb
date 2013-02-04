@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
-    if @user.save
+    if verify_recaptcha(model: @user, message: "reCaptcha error") && @user.save
       session[:user_id] = @user.id
       redirect_to root_url, notice: "Thanks for joining"
     else

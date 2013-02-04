@@ -9,6 +9,8 @@ class Track < ActiveRecord::Base
 	# after_create {|track| Rating.create_empty_ratings("User", track.id)}
 	after_create :create_empty_ratings
 	validate :must_be_in_musicbrainz
+	validates :name, :artist_name, :mb_id, presence: true
+	validates :mb_id, uniqueness: true
 
 	QUERY = MusicBrainz::Webservice::Query.new
 

@@ -1,8 +1,8 @@
 class CreateRatings < ActiveRecord::Migration
 	def self.up
 		create_table :ratings do |t|
-			t.integer :user_id
-			t.integer :track_id
+			t.integer :user_id, null: false
+			t.integer :track_id, null: false
 			t.integer :value
 			t.float		:prediction
 

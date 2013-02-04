@@ -7,7 +7,8 @@ class Rating < ActiveRecord::Base
 	
 	validates :track_id, presence: true
 	validates :user_id, presence: true
-	
+	validates :value, inclusion: { in: (1..5).to_a << nil }
+
 	def generate_predictions(iterations=10, num_features = 5, lambda = 1)
 		@user_count, @track_count = User.count, Track.count
 		ratings = Rating.select([:user_id, :track_id, :value]).where("value IS NOT NULL")

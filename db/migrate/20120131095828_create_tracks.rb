@@ -1,10 +1,10 @@
 class CreateTracks < ActiveRecord::Migration
   def self.up
     create_table :tracks do |t|
-      t.string  :name
-      t.string  :artist_name
+      t.string  :name, null: false
+      t.string  :artist_name, null: false
       t.float   :average_rating
-      t.string	:mb_id
+      t.string	:mb_id, null: false
       t.string	:releases
 
       t.timestamps
@@ -12,11 +12,13 @@ class CreateTracks < ActiveRecord::Migration
     # index's for track search
     add_index :tracks, :name
     add_index :tracks, :artist_name
+		add_index :tracks, :mb_id, unique: true
   end
   
   def self.down
     drop_table :tracks
     remove_index :tracks, :name
     remove_index :tracks, :artist_name
+		remove_index :tracks, :mb_id
   end
 end

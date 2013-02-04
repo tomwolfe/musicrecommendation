@@ -16,7 +16,7 @@ describe TracksController do
 			Search.any_instance.stub(:find_in_musicbrainz).and_return([@mb_track])
 		end
 		it 'calls Search#find_in_musicbrainz' do
-			Search.any_instance.should_receive(:find_in_musicbrainz).with([nil])
+			Search.any_instance.should_receive(:find_in_musicbrainz).with([@track.mb_id])
 			get :search, @search_hash
 		end
 		context 'request before expectation' do
@@ -76,7 +76,7 @@ describe TracksController do
 	describe '#create' do
 		before :each do
 			Track.any_instance.stub(:must_be_in_musicbrainz).and_return(true)
-			@create_hash = { track: { name: 'Freebird', artist_name: 'Lynyrd Skynyrd' } }
+			@create_hash = { track: { name: 'Freebird', artist_name: 'Lynyrd Skynyrd', mb_id: "9a0589c9-7dc9-4c5c-9fda-af6cd8630940" } }
 			post :create, @create_hash
 		end
 		it 'redirects to the show track page' do

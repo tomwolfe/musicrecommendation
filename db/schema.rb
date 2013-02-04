@@ -14,8 +14,8 @@
 ActiveRecord::Schema.define(:version => 20120131095828) do
 
   create_table "ratings", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "track_id"
+    t.integer  "user_id",    :null => false
+    t.integer  "track_id",   :null => false
     t.integer  "value"
     t.float    "prediction"
     t.datetime "created_at", :null => false
@@ -28,20 +28,21 @@ ActiveRecord::Schema.define(:version => 20120131095828) do
   add_index "ratings", ["value"], :name => "index_ratings_on_value"
 
   create_table "tracks", :force => true do |t|
-    t.string   "name"
-    t.string   "artist_name"
+    t.string   "name",           :null => false
+    t.string   "artist_name",    :null => false
     t.float    "average_rating"
-    t.string   "mb_id"
+    t.string   "mb_id",          :null => false
     t.string   "releases"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
 
   add_index "tracks", ["artist_name"], :name => "index_tracks_on_artist_name"
+  add_index "tracks", ["mb_id"], :name => "index_tracks_on_mb_id", :unique => true
   add_index "tracks", ["name"], :name => "index_tracks_on_name"
 
   create_table "users", :force => true do |t|
-    t.string   "email"
+    t.string   "email",           :null => false
     t.string   "password_hash"
     t.string   "password_salt"
     t.string   "password_digest"
@@ -49,6 +50,6 @@ ActiveRecord::Schema.define(:version => 20120131095828) do
     t.datetime "updated_at",      :null => false
   end
 
-  add_index "users", ["email"], :name => "index_users_on_email"
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
 
 end

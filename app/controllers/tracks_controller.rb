@@ -22,7 +22,7 @@ class TracksController < ApplicationController
         format.html { redirect_to @track, notice: "Track was successfully created." }
         format.json { render json: @track, status: :created, location: @track }
       else
-        format.html { render action: "new" }
+        format.html { redirect_to root_path, flash: { alert: "Unable to create track." } }
         format.json { render json: @track.errors, status: :unprocessable_entity }
       end
     end

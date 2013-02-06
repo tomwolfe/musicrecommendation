@@ -48,7 +48,7 @@ class TracksController < ApplicationController
 			@tracks = Track.where("name LIKE ? AND artist_name LIKE ?", "#{params[:search][:track_name]}%", "#{params[:search][:artist_name]}%").limit(20)
 	  	@tracks_in_musicbrainz_and_not_db = @search.find_in_musicbrainz(@tracks.pluck(:mb_id))
 		else
-			redirect_to root_path, flash: { alert: "Invalid search parameters." }
+			redirect_to home_signedin_path(search: params[:search]), flash: { alert: "Invalid search parameters." }
 		end
   end
 end

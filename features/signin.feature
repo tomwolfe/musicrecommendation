@@ -7,11 +7,11 @@ Feature: Authentication
 	Scenario: successful sign in
 		When I fill in the "Sign In" form with valid data
 			And I press the "Sign In" button
-		Then I should be on the "Signedin" page
-			And I should see "Successfully signed in"
+		Then I should be on the "Home Signedin" page
+			And I should see "Successfully signed in!"
 					
 	Scenario: unsuccessful sign in due to invalid credentials
 		When I fill in the "Sign In" form with invalid data
 			And I press the "Sign In" button
-		Then I should be on the "New Session" page
-			And I should see "errors"
+		Then I should be on the "Sessions" page
+			And I should see "Invalid email or password"

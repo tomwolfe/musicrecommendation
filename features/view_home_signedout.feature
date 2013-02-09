@@ -1,7 +1,7 @@
 Feature: View the homepage while not signed in
 
 	Background: on the "Signedin" page
-		Given I am on the "Signedin" page
+		Given I am on the "Home signedin" page
 
 	Scenario: A Track has been rated
 		Given a rating exists

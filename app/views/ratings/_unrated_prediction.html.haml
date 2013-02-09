@@ -1,7 +1,7 @@
 %tr
-	%td= unrated_prediction.track.artist_name
-	%td= unrated_prediction.track.name
+  %td= unrated_prediction.track.artist_name
+  %td= unrated_prediction.track.name
   %td= unrated_prediction.track.releases
   %td
-		= render "ratings/form", target: unrated_prediction
-	%td= unrated_prediction.prediction
+    = render "ratings/form", target: unrated_prediction
+  %td= unrated_prediction.prediction

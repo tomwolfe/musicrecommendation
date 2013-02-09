@@ -33,9 +33,9 @@ class TracksController < ApplicationController
 	def update
 		@track = Track.find(params[:id])
 		if @track.update_attributes(params[:track])
-			redirect_to root_path, notice: "Successfully updated track."
+			redirect_to home_signedin_path, notice: "Successfully updated track."
 		else
-			redirect_to root_path, flash: { alert: "Unable to update track." }
+			redirect_to home_signedin_path, flash: { alert: "Unable to update track." }
 		end
 	end
   

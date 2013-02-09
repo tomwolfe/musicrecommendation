@@ -14,6 +14,9 @@ When /^a (.*) exists$/ do |thing|
 			Track.any_instance.stub(:must_be_in_musicbrainz).and_return(true)
 			track = FactoryGirl.create(:track, mb_id: "c992037c-1c88-4094-af97-bf466f7d0a87") #freebird
 			track.create_empty_ratings
+		when thing =~ /rating/i
+			Track.any_instance.stub(:must_be_in_musicbrainz).and_return(true)
+			FactoryGirl.create(:rating)
 		else FactoryGirl.create(thing.to_sym)
 	end
 end

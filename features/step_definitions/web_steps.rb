@@ -11,8 +11,8 @@ When /^a (.*) exists$/ do |thing|
 	case
 		when thing =~ /user/i then FactoryGirl.create(:user, email: "user@b.com")
 		when thing =~ /track$/i
-			track = FactoryGirl.build(:track, mb_id: "c992037c-1c88-4094-af97-bf466f7d0a87") #freebird
-			track.save(validate: false)
+			Track.any_instance.stub(:must_be_in_musicbrainz).and_return(true)
+			track = FactoryGirl.create(:track, mb_id: "c992037c-1c88-4094-af97-bf466f7d0a87") #freebird
 			track.create_empty_ratings
 		else FactoryGirl.create(thing.to_sym)
 	end
@@ -42,10 +42,13 @@ end
 
 When /^I press the "(.*)" button$/ do |button|
 	case
-		when button =~ /sign up/i then UsersController.any_instance.stub(:verify_recaptcha).and_return(true)
-		when button =~ /update track/i then Track.any_instance.stub(:update_attributes).and_return(true) # don't want musicbrainz api validation query
+		when button =~ /sign up/i
+			UsersController.any_instance.stub(:verify_recaptcha).and_return(true)
+			click_button(button)
+		when button =~ /update track/i
+			Rating.without_callback(:save, :after, :generate_predictions) { click_button(button) }
+		else click_button(button)
 	end
-	click_button(button)
 end
 
 When /^I choose (.*)$/ do |radio|

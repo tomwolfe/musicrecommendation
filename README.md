@@ -6,7 +6,7 @@ It's still under active development.
 
 # Build Status (travis-ci.org)
 
-[![Build Status](https://travis-ci.org/tomwolfe/musicrecommendation.png?branch=master)](https://travis-ci.org/tomwolfe/musicrecommendation)
+[![Build Status](https://travis-ci.org/tomwolfe/musicrecommendation.png)](https://travis-ci.org/tomwolfe/musicrecommendation)
 
 ## Hacking
 

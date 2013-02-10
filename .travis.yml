@@ -7,9 +7,7 @@ env:
 script:
   - RAILS_ENV=test bundle exec rake db:migrate --trace
   - bundle exec rake db:test:prepare
-  - bundle exec rspec spec/
-before_script:
-  - cp config/database.yml.example config/database.yml
+  - bundle exec rake spec cucumber
 gemfile: Gemfile.ci
 before_install:
   - sudo apt-get update -qq

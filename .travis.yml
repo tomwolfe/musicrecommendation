@@ -8,6 +8,7 @@ script:
   - RAILS_ENV=test bundle exec rake db:migrate --trace
   - bundle exec rake db:test:prepare
   - bundle exec rake spec cucumber
+before_script:
   - cp config/initializers/recaptcha.rb.example config/initializers/recaptcha.rb
 gemfile: Gemfile.ci
 before_install:

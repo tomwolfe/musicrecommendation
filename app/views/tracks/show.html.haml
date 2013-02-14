@@ -1,11 +1,12 @@
 - title "Show track #{@track.name}"
 
 %table
-	%tr
-		%th Artist name
-		%th Track name
-		%th Average rating
-		%th Releases
-		%th MusicBrainz id
-		%th Your rating
-		= render(@track) || "Track not found found"
+  %tr
+    %th Artist name
+    %th Track name
+    %th Average rating
+    %th Releases
+    %th MusicBrainz id
+    %th Your rating
+  = render(@track)
+= "Track not found found" unless @track

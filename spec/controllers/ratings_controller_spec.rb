@@ -9,7 +9,7 @@ describe RatingsController do
     ApplicationController.any_instance.stub(:current_user).and_return(@rating.user)
   end
   
-   describe '#create' do
+  describe '#create' do
     it 'calls new' do
       Rating.should_receive(:new).with("track_id" => '1', "value" => '1').and_return(@rating)
       post :create, @rating_hash
@@ -101,4 +101,19 @@ describe RatingsController do
 			delete :destroy, @rating_hash
 		end
   end
+
+	describe '#rated' do
+		before :each do
+			get :rated
+		end
+		it 'makes @page available to the view' do
+			assigns(:page).should == "1"
+		end
+		it 'makes @ratings available to the view' do
+			assigns(:ratings).should == [@rating]
+		end
+		it 'renders the rated template' do
+			response.should render_template(:rated)
+		end
+	end
 end

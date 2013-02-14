@@ -1,0 +1,15 @@
+- title "Your most recent ratings"
+- cache_params = { action: "rated", controller: "ratings", page: @page }
+
+- cache(cache_key("rating", cache_params)) do
+  .item
+    %table
+      %tr
+        %th Artist name
+        %th Track name
+        %th Releases
+        %th Your rating
+        %th Prediction
+        %th Difference from prediction
+      = render(@ratings)
+    = @ratings.empty? ? "No ratings." : will_paginate(@ratings)

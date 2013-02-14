@@ -7,17 +7,18 @@ When /^I should( not)? see "(.*)"$/ do |negate, see|
 	negate ? page.should(have_no_content(see)) : page.should(have_content(see))
 end
 
-When /^a (.*) exists$/ do |thing|
+When /^(.*) (.*)s? exists?$/ do |quantity, thing|
+	quantity == "a" ? quantity = 1 : quantity = quantity.to_i
 	case
-		when thing =~ /user/i then FactoryGirl.create(:user, email: "user@b.com")
+		when thing =~ /user/i then FactoryGirl.create_list(:user, quantity, email: "user@b.com")
 		when thing =~ /track$/i
 			Track.any_instance.stub(:must_be_in_musicbrainz).and_return(true)
-			track = FactoryGirl.create(:track, mb_id: "c992037c-1c88-4094-af97-bf466f7d0a87") #freebird
-			track.create_empty_ratings
+			tracks = FactoryGirl.create_list(:track, quantity, mb_id: "c992037c-1c88-4094-af97-bf466f7d0a87") #freebird
+			tracks.first.create_empty_ratings
 		when thing =~ /rating/i
 			Track.any_instance.stub(:must_be_in_musicbrainz).and_return(true)
-			FactoryGirl.create(:rating)
-		else FactoryGirl.create(thing.to_sym)
+			FactoryGirl.create_list(:rating, quantity)
+		else FactoryGirl.create_list(thing.to_sym, quantity)
 	end
 end
 

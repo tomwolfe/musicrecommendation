@@ -13,12 +13,14 @@ class CreateTracks < ActiveRecord::Migration
     add_index :tracks, :name
     add_index :tracks, :artist_name
 		add_index :tracks, :mb_id, unique: true
-  end
+		add_index :tracks, :updated_at
+	end
   
   def self.down
     drop_table :tracks
     remove_index :tracks, :name
     remove_index :tracks, :artist_name
 		remove_index :tracks, :mb_id
+		remove_index :tracks, :updated_at
   end
 end

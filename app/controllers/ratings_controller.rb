@@ -1,5 +1,4 @@
 class RatingsController < ApplicationController
-  #skip_before_filter :authorize, only: [:index]
   
   def create
     @rating = Rating.new(params[:rating])
@@ -36,4 +35,10 @@ class RatingsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+	# GET /rated/page/:page
+	def rated
+		@page = params[:page] || "1"
+		@ratings = current_user.ratings.includes(:track).where("value IS NOT NULL").select("id, user_id, track_id, value, prediction, updated_at, abs(prediction-value) AS difference").page(@page).order("updated_at DESC")
+	end
 end

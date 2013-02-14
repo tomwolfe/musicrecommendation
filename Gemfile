@@ -73,4 +73,6 @@ gem 'gsl', git: 'git://github.com/romanbsd/rb-gsl.git'
 
 gem 'rbrainz'
 
-gem "recaptcha", require: "recaptcha/rails" 
+gem "recaptcha", require: "recaptcha/rails"
+
+gem "will_paginate", "~> 3.0"

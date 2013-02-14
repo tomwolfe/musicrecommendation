@@ -1,7 +1,9 @@
-%tr
-  %td= unrated_prediction.track.artist_name
-  %td= unrated_prediction.track.name
-  %td= unrated_prediction.track.releases
-  %td
-    = render "ratings/form", target: unrated_prediction
-  %td= unrated_prediction.prediction
+-# can't do just cach(unrated_prediction) since it'll mix it up with normal ratings
+- cache("unrated_prediction_#{unrated_prediction.id}-#{unrated_prediction.updated_at.to_i}") do
+  %tr
+    %td= unrated_prediction.track.artist_name
+    %td= unrated_prediction.track.name
+    %td= unrated_prediction.track.releases
+    %td
+      = render "ratings/form", target: unrated_prediction
+    %td= number_with_precision(unrated_prediction.prediction, precision: 2)

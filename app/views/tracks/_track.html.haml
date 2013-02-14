@@ -1,11 +1,12 @@
-%tr
-	%td= track.artist_name
-	%td= track.name
-	%td= track.average_rating
-	%td= track.releases
-	%td= track.mb_id
-	%td
-		= form_for track do |f|
-			= f.fields_for :ratings do |builder|
-				= render "ratings/nestedform", f: builder
-			= f.submit
+- cache(track) do
+  %tr
+    %td= track.artist_name
+    %td= track.name
+    %td= track.average_rating
+    %td= track.releases
+    %td= track.mb_id
+    %td
+      = form_for track do |f|
+        = f.fields_for :ratings do |builder|
+          = render "ratings/nestedform", f: builder
+        = f.submit

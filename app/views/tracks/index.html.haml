@@ -1,0 +1,15 @@
+- title "Top rated tracks"
+- cache_params = { action: "index", controller: "tracks", page: @page }
+
+- cache(cache_key("track", cache_params)) do
+  .item
+    %table
+      %tr
+        %th Artist name
+        %th Track name
+        %th Average rating
+        %th Releases
+        %th MusicBrainz id
+        %th Your rating
+      = render(@tracks)
+    = @tracks.empty? ? "No tracks." : will_paginate(@tracks)

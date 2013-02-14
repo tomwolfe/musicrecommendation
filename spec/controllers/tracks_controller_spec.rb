@@ -92,4 +92,19 @@ describe TracksController do
 			flash[:notice].should == 'Track was successfully created.'
 		end
 	end
+
+	describe '#index' do
+		before :each do
+			get :index
+		end
+		it 'renders the index template' do
+			response.should render_template(:index)
+		end
+		it 'makes @tracks available to the view' do
+			assigns(:tracks).should == [@track]
+		end
+		it 'makes @page available to the view' do
+			assigns(:page).should == "1"
+		end
+	end
 end

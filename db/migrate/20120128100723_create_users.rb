@@ -9,7 +9,7 @@ class CreateUsers < ActiveRecord::Migration
     end
     
     add_index :users, :email, unique: true
-  end
+	end
 
   def self.down
     drop_table :users

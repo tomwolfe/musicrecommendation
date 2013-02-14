@@ -1,17 +1,19 @@
 - title "MusicRec Home"
+- cache_params = { action: "signedout", controller: "home" }
 
 #info
   %h2 Personalized music recommendations using collaborative filtering.
 
-.item
-  %h2 Our top rated tracks:
-  %table
-    %tr
-      %th Artist Name
-      %th Track Name
-      %th Average Rating
-      %th Releases
-      %th Buy
-      %th Your Rating
-    = render(@tracks)
-  = @tracks.empty? ? "No tracks." : nil
+- cache(cache_key("track", cache_params)) do
+  .item
+    %h2 Our top rated tracks:
+    %table
+      %tr
+        %th Artist Name
+        %th Track Name
+        %th Average Rating
+        %th Releases
+        %th MusicBrainz id
+        %th Your Rating
+      = render(@tracks)
+    = @tracks.empty? ? "No tracks." : link_to("More top rated tracks", "/tracks/page/1")

@@ -1,8 +1,9 @@
-%tr
-  %td= rating.track.artist_name
-  %td= rating.track.name
-  %td= rating.track.releases
-  %td
-    = render "ratings/form", target: rating
-  %td= rating.prediction
-  %td= rating.difference
+- cache(rating) do
+  %tr
+    %td= rating.track.artist_name
+    %td= rating.track.name
+    %td= rating.track.releases
+    %td
+      = render "ratings/form", target: rating
+    %td= number_with_precision(rating.prediction, precision: 2)
+    %td= number_with_precision(rating.difference, precision: 2)

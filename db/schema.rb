@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(:version => 20120131095828) do
   add_index "tracks", ["artist_name"], :name => "index_tracks_on_artist_name"
   add_index "tracks", ["mb_id"], :name => "index_tracks_on_mb_id", :unique => true
   add_index "tracks", ["name"], :name => "index_tracks_on_name"
+  add_index "tracks", ["updated_at"], :name => "index_tracks_on_updated_at"
 
   create_table "users", :force => true do |t|
     t.string   "email",           :null => false

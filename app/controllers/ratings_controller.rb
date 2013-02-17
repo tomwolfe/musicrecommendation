@@ -39,6 +39,13 @@ class RatingsController < ApplicationController
 	# GET /rated/page/:page
 	def rated
 		@page = params[:page] || "1"
-		@ratings = current_user.ratings.includes(:track).where("value IS NOT NULL").select("id, user_id, track_id, value, prediction, updated_at, abs(prediction-value) AS difference").page(@page).order("updated_at DESC")
+		@ratings = current_user.ratings.rated.page(@page).order("updated_at DESC")
+	end
+
+	# GET /unrated_predictions/page/:page
+	def unrated
+		@page = params[:page] || "1"
+		@unrated_predictions = current_user.ratings.unrated.page(@page).order("prediction DESC")
+		render :unrated
 	end
 end

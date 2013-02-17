@@ -49,11 +49,11 @@ class TracksController < ApplicationController
 	
 	# GET /tracks/search
 	def search
-		# should still use index even w/ LIKE since there's no wildcard
+		# should still use index even w/ LIKE
 		# http://stackoverflow.com/questions/6142235/sql-like-vs-performance
 		@search = Search.new(params[:search])
 		if @search.valid?
-			@tracks = Track.where("name LIKE ? AND artist_name LIKE ?", "#{params[:search][:track_name]}%", "#{params[:search][:artist_name]}%").limit(20)
+			@tracks = Track.where("name LIKE ? AND artist_name LIKE ?", "#{params[:search][:track_name]}%", "#{params[:search][:artist_name]}%")
 			@tracks_in_musicbrainz_and_not_db = @search.find_in_musicbrainz(@tracks.pluck(:mb_id))
 		else
 			redirect_to home_signedin_path(search: params[:search]), flash: { alert: "Invalid search parameters." }

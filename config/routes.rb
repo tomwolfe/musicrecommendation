@@ -5,14 +5,15 @@ Musicrecommendation::Application.routes.draw do
 	delete 'signout', to: 'sessions#destroy', as: 'signout'
 	get 'signin', to: 'sessions#new', as: 'signin'
 
-	# TODO: make search restful:
-	# get 'tracks/search/artist/:artist/name/:name', to: 'tracks#search'
 	get 'tracks/search'
+	
 	get 'tracks/page/:page', to: 'tracks#index'
 
-	get 'rated/page/:page', to: 'ratings#rated'
+	get 'ratings/rated/page/:page', to: 'ratings#rated'
 	get 'ratings/rated'
-	#get 'unrated_predictions/page/:page', to: 'ratings#unrated'
+	
+	get 'ratings/unrated/page/:page', to: 'ratings#unrated'
+	get 'ratings/unrated'
 
 	resources :sessions, :users, :tracks, :ratings
 	

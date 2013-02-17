@@ -2,6 +2,10 @@ class Rating < ActiveRecord::Base
 	attr_accessible :value, :track_id
 	after_save :average_rating, :generate_predictions
 
+	# .includes should solve the N+1 problem in the view http://guides.rubyonrails.org/active_record_querying.html#eager-loading-associations
+	scope :rated, includes(:track).where("value IS NOT NULL").select("id, user_id, track_id, value, prediction, updated_at, abs(prediction-value) AS difference")
+	scope :unrated, includes(:track).where("value IS NULL")
+
 	belongs_to :track
 	belongs_to :user
 	

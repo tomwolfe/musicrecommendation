@@ -29,6 +29,6 @@ When /^I search for a track that is already in musicrec$/ do
 end
 
 When /^I should( not)? see the track in the "(.*)" area$/ do |negate, area|
-	track_name = Track.first.name
-	negate ? find(area).should(have_no_content(track_name)) : find(area).should(have_content(track_name))
+	mb_id = Track.first.mb_id
+	negate ? find(area).should(have_no_content(mb_id)) : find(area).should(have_content(mb_id))
 end

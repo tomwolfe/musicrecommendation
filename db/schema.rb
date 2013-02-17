@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(:version => 20120131095828) do
 
   add_index "ratings", ["created_at"], :name => "index_ratings_on_created_at"
   add_index "ratings", ["track_id"], :name => "index_ratings_on_track_id"
+  add_index "ratings", ["updated_at"], :name => "index_ratings_on_updated_at"
   add_index "ratings", ["user_id"], :name => "index_ratings_on_user_id"
   add_index "ratings", ["value"], :name => "index_ratings_on_value"
 

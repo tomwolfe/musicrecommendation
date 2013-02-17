@@ -87,6 +87,9 @@ th {
 	color: $main-color;
 	padding: 1% 1%;
 	margin: 1% 1%;
+	a {
+		font-weight: bold;
+		color: $main-color; }
 	#info {
 		clear: both; }
 	.item, #search {
@@ -98,8 +101,6 @@ th {
 		margin: 1% 1%; } }
 
 #users {
-	a {
-		color: $main-color; } 
 	label {
 		width: 10%;
 		float: left; } }
@@ -108,3 +109,8 @@ th {
 	label {
 		width: 6%;
 		float: left; } }
+
+#home {
+	a {
+		text-align: center;
+		display: block; } }

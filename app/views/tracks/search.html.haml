@@ -1,31 +1,36 @@
 - title "Search"
 
+- cache_params = { action: "search", controller: "tracks", track_name: @search.track_name, artist_name: @search.artist_name }
+
 #search
   = render 'search_form'
 
-.item
-  #musicrec
-    %h1 Tracks in our database
-    %table
-      %tr
-        %th Artist name
-        %th Track name
-        %th Average rating
-        %th Releases
-        %th MusicBrainz id
-        %th Your Rating
-      = render(@tracks) || nil
-    = @tracks.empty? ? "No tracks found." : nil
+- cache(cache_key("track", cache_params)) do
+  .item
+    #musicrec
+      %h1 Tracks in our database
+      %table
+        %tr
+          %th Artist name
+          %th Track name
+          %th Average rating
+          %th Releases
+          %th MusicBrainz id
+          %th Your Rating
+        = render(@tracks) || nil
+      = @tracks.empty? ? "No tracks found." : nil
 
-.item
-  #musicbrainz
-    %h1 Tracks in MusicBrainz that are not in our database
-    %table
-      %tr
-        %th Artist name
-        %th Track name
-        %th Releases
-        %th MusicBrainz id
-        %th Add to our database
-      = render(:partial => "mbtrack", :collection => @tracks_in_musicbrainz_and_not_db) || nil
-    = @tracks_in_musicbrainz_and_not_db.empty? ? "No tracks found in MusicBrainz" : nil
+- cache_params[:remote_musicbrainz] = "mb_search"
+- cache(cache_key("track", cache_params), expires_in: 2.hours) do # additional expires_in since musicbrainz will change
+  .item
+    #musicbrainz
+      %h1 Tracks in MusicBrainz that are not in our database
+      %table
+        %tr
+          %th Artist name
+          %th Track name
+          %th Releases
+          %th MusicBrainz id
+          %th Add to our database
+        = render(:partial => "mbtrack", :collection => @tracks_in_musicbrainz_and_not_db) || nil
+      = @tracks_in_musicbrainz_and_not_db.empty? ? "No tracks found in MusicBrainz" : nil

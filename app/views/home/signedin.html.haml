@@ -13,12 +13,12 @@
         %th Prediction
         %th Difference from prediction
       = render(@ratings)
-    = @ratings.empty? ? "You have not yet rated any tracks. Search below to find a track to rate." : link_to("More", "/rated/page/1")
+    = @ratings.empty? ? "You have not yet rated any tracks. Search below to find a track to rate." : link_to("More", "/ratings/rated/page/1")
 
 - cache_params[:fragment_name] = "unrated_prediction"
 - cache(cache_key("rating", cache_params)) do
   .item
-    %h1 Top rated predictions (unrated)
+    %h1 Top rated predictions (unrated):
     %table
       %tr
         %th Artist name
@@ -27,7 +27,7 @@
         %th Your rating
         %th Prediction
       = render(:partial => "ratings/unrated_prediction", :collection => @unrated_predictions)
-    = @unrated_predictions.empty? ? "No predictions available that you have not already rated." : nil
+    = @unrated_predictions.empty? ? "No predictions available that you have not already rated." : link_to("More", "/ratings/unrated/page/1")
 
 #search
   %h1 Search for a Track to rate

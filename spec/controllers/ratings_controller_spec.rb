@@ -116,4 +116,19 @@ describe RatingsController do
 			response.should render_template(:rated)
 		end
 	end
+
+	describe '#unrated' do
+		before :each do
+			get :unrated
+		end
+		it 'makes @page available to the view' do
+			assigns(:page).should == "1"
+		end
+		it 'makes @unrated_predictions available to the view' do
+			assigns(:unrated_predictions).should be_empty
+		end
+		it 'renders the rated template' do
+			response.should render_template(:unrated)
+		end
+	end
 end

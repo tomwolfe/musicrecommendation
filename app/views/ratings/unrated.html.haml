@@ -1,0 +1,14 @@
+- title "Top rated predictions (unrated)"
+- cache_params = { action: "unrated", controller: "ratings", page: @page }
+
+- cache(cache_key("rating", cache_params)) do
+  .item
+    %table
+      %tr
+        %th Artist name
+        %th Track name
+        %th Releases
+        %th Your rating
+        %th Prediction
+      = render(:partial => "ratings/unrated_prediction", :collection => @unrated_predictions)
+    = @unrated_predictions.empty? ? "No predictions available that you have not already rated." : will_paginate(@unrated_predictions)

@@ -20,9 +20,9 @@ Tested on Debian Wheezy.
 		 bundle install --without production    (to avoid using the 'thin' webserver in test/development)
 		 rake db:migrate
 [Get your own keys](http://recaptcha.net/whyrecaptcha.html) for recaptcha.
-Setup your recaptcha keys in config/initializers/recaptcha.rb
+Setup your recaptcha keys in `config/initializers/recaptcha.rb`
 
-To use the app run 'rails server' in the projects root directory and navigate to http://localhost:3000 in your web browser
+To use the application run `rails server` in the projects root directory and navigate to http://localhost:3000 in your web browser
 
 I might be missing something, I think that's all I needed to get it running from scratch.
 
@@ -43,13 +43,13 @@ You can setup a Heroku account for free [https://devcenter.heroku.com/articles/q
 
 We use RSpec and Cucumber for tests.
 
-Run 'rake db:test:prepare' to create/setup the test database.
+Run `rake db:test:prepare` to create/setup the test database.
 
-Run 'bundle exec rake cucumber spec' to run the tests.
+Run `bundle exec rake cucumber spec` to run the tests.
 
 ## Caching
 
-Currently caching is turned on for the development environment (cache stored in /tmp/cache). Set config.action_controller.perform_caching = false in config/environments/development.rb to turn it off.
+Currently caching is turned on for the development environment (cache stored in `/tmp/cache`). Set `config.action_controller.perform_caching = false` in `config/environments/development.rb` to turn it off.
 
 ## To-do/completed task list
 

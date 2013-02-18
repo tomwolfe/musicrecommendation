@@ -31,6 +31,7 @@ I might be missing something, I think that's all I needed to get it running from
 ## Deploying to [Heroku](http://www.heroku.com)
 
 You can setup a Heroku account for free [https://devcenter.heroku.com/articles/quickstart](https://devcenter.heroku.com/articles/quickstart)
+
     wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
     heroku login
     #bundle install   #might need this to update gemfile.lock to include thin?

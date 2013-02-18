@@ -41,7 +41,7 @@ rake secret  # to generate SECRET_TOKEN
 heroku config:add RECAPTCHA_PUBLIC_KEY=YOUR_PUBLIC_KEY RECAPTCHA_PRIVATE_KEY=YOUR_PRIVATE_KEY SECRET_TOKEN=YOUR_SECRET_TOKEN BUILDPACK_URL=https://github.com/tomwolfe/heroku-buildpack-gsl-ruby # needs a custom buildpack that builds the native extension GSL
 git push heroku master
 heroku run rake db:migrate
-'''
+```
 
 ## Running Tests
 

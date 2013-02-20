@@ -78,10 +78,11 @@ th {
 	background-color: $main-color; }
 
 #footer {
-	clear: both;
-	a {
-		display: block;
-		text-align: right; } }
+	clear: both; }
+
+#footer_links {
+	display: block;
+	text-align: right; }
 
 #home, #tracks, #ratings, #users, #sessions {
 	color: $main-color;

@@ -13,6 +13,8 @@ class Track < ActiveRecord::Base
 	validates :mb_id, uniqueness: true
 
 	QUERY = MusicBrainz::Webservice::Query.new
+	AFFILIATE_WRAPPER = "http://click.linksynergy.com/fs-bin/stat?id=CBIMl*gYY/8&offerid=146261&type=3&subid=0&tmpid=1826&RD_PARM1="
+	PARTNER_ID = "30"
 
 	def must_be_in_musicbrainz
 		# FIXME (not sure of best solution, ideas below that won't work w/ reasons)
@@ -29,6 +31,22 @@ class Track < ActiveRecord::Base
 		errors.add(:name, "name #{name} (#{mbtrack.title}) not the same as the track with mb_id #{mb_id} (#{mbtrack.id.uuid}) in MusicBrainz") if (mbtrack.title != name)
 		
 		errors.add(:mb_id, "mb_id #{mb_id} not found in Musicbrainz") if (mbtrack.id.uuid != mb_id)
+	end
+
+	def itunes_links
+		results = ITunesSearchAPI.search(term: "#{self.artist_name} #{self.name}", media: "music", entity: "song")
+		return [] if results.empty?
+		results.collect {|result| result["trackViewUrl"]}
+	end
+
+	def itunes_affiliate_links
+		base_links = self.itunes_links
+		return [] if base_links.empty?
+		base_links.collect {|link| "#{AFFILIATE_WRAPPER}#{Track.escape_link(link)}"}
+	end
+
+	def self.escape_link(link)
+		CGI.escape(CGI.escape("#{link}&partnerId=#{PARTNER_ID}"))
 	end
 	
 	def create_empty_ratings

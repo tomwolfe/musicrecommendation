@@ -59,4 +59,10 @@ class TracksController < ApplicationController
 			redirect_to home_signedin_path(search: params[:search]), flash: { alert: "Invalid search parameters." }
 		end
 	end
+
+	# GET /tracks/:id/itunes
+	def itunes
+		@track = Track.find(params[:id])
+		@itunes = ITunesSearchAPI.search(term: "#{@track.artist_name} #{@track.name}", media: "music", entity: "song")
+	end
 end

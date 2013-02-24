@@ -6,7 +6,7 @@ Musicrecommendation::Application.routes.draw do
 	get 'signin', to: 'sessions#new', as: 'signin'
 
 	get 'tracks/search'
-	
+
 	get 'tracks/page/:page', to: 'tracks#index'
 
 	get 'ratings/rated/page/:page', to: 'ratings#rated'
@@ -15,7 +15,11 @@ Musicrecommendation::Application.routes.draw do
 	get 'ratings/unrated/page/:page', to: 'ratings#unrated'
 	get 'ratings/unrated'
 
-	resources :sessions, :users, :tracks, :ratings
+	resources :sessions, :users, :ratings
+
+	resources :tracks do
+		get 'itunes', on: :member
+	end
 	
 	get 'home/signedout'
 	get 'home/signedin'

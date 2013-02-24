@@ -40,8 +40,7 @@ describe TracksController do
 	
 	describe '#show' do
 		before :each do
-			@show_hash = { id: 1 }
-			get :show, @show_hash
+			get :show, { id: @track.id }
 		end
 		it 'renders the show template' do
 			response.should render_template(:show)
@@ -105,6 +104,23 @@ describe TracksController do
 		end
 		it 'makes @page available to the view' do
 			assigns(:page).should == "1"
+		end
+	end
+	
+	describe '#itunes' do
+		before :each do
+			@itunes = [{"trackViewUrl": "https://itunes.apple.com/us/album/bound-for-the-floor/id255169?i=255076&uo=4"}]
+			ITunesSearchAPI.stub(:search).and_return(@tunes)
+			get :itunes, { id: @track.id }
+		end
+		it 'makes @itunes available to the view' do
+			assigns(:itunes).should == @itunes
+		end
+		it 'renders the itunes template' do
+			response.should render_template(:itunes)
+		end
+		it 'makes @track available to the view' do
+			assigns(:track).should == @track
 		end
 	end
 end

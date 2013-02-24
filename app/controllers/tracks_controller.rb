@@ -1,5 +1,5 @@
 class TracksController < ApplicationController
-	skip_before_filter :authorize, only: [:show, :index]
+	skip_before_filter :authorize, only: [:show, :index, :itunes]
 
 	# GET /tracks/1
 	# GET /tracks/1.json

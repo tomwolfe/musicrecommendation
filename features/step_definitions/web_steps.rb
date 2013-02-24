@@ -7,6 +7,10 @@ When /^I should( not)? see "(.*)"$/ do |negate, see|
 	negate ? page.should(have_no_content(see)) : page.should(have_content(see))
 end
 
+When /^I should( not)? see the link "(.*)" pointing to "(.*)"$/ do |negate, see, ref|
+	negate ? page.should(have_no_link(see, href: ref)) : page.should(have_link(see, href: ref))
+end
+
 When /^(.*) (.*) exists?$/ do |quantity, thing|
 	quantity == "a" ? quantity = 1 : quantity = quantity.to_i
 	case
@@ -41,6 +45,11 @@ end
 When /^I am on the show page for the first "(.*)"$/ do |page|
 	page = format_path(page)
 	eval("visit #{page}_path(page.classify.constantize.first)")
+end
+
+When /^I am on the itunes track page for the first track$/ do |page|
+	ITunesSearchAPI.stub(:search).and_return([{"trackViewUrl": "https://itunes.apple.com/us/album/bound-for-the-floor/id255169?i=255076&uo=4"}])
+	visit itunes_track_path(Track.first)
 end
 
 When /^I press the "(.*)" button$/ do |button|

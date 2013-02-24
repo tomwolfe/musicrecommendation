@@ -109,12 +109,15 @@ describe TracksController do
 	
 	describe '#itunes' do
 		before :each do
+			# TODO: change to check @affiliate_should_return once account is setup
+			# @affiliate_should_return = ["http://click.linksynergy.com/fs-bin/stat?id=CBIMl*gYY/8&offerid=146261&type=3&subid=0&tmpid=1826&RD_PARM1=https%253A%252F%252Fitunes.apple.com%252Fus%252Falbum%252Fbound-for-the-floor%252Fid255169%253Fi%253D255076%2526uo%253D4%2526partnerId%253D30"]
 			@itunes = [{"trackViewUrl": "https://itunes.apple.com/us/album/bound-for-the-floor/id255169?i=255076&uo=4"}]
 			ITunesSearchAPI.stub(:search).and_return(@tunes)
 			get :itunes, { id: @track.id }
 		end
 		it 'makes @itunes available to the view' do
-			assigns(:itunes).should == @itunes
+			# TODO: should == @affiliate_should_return when account is setup
+			assigns(:itunes).should == [@itunes.first["trackViewUrl"]]
 		end
 		it 'renders the itunes template' do
 			response.should render_template(:itunes)

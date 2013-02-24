@@ -63,6 +63,7 @@ class TracksController < ApplicationController
 	# GET /tracks/:id/itunes
 	def itunes
 		@track = Track.find(params[:id])
-		@itunes = ITunesSearchAPI.search(term: "#{@track.artist_name} #{@track.name}", media: "music", entity: "song")
+		# TODO: change this to @track.itunes_affiliate_links when account is setup
+		@itunes = @track.itunes_links
 	end
 end

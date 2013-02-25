@@ -33,16 +33,20 @@ class Track < ActiveRecord::Base
 		errors.add(:mb_id, "mb_id #{mb_id} not found in Musicbrainz") if (mbtrack.id.uuid != mb_id)
 	end
 
-	def itunes_links
+	def itunes_track_data
 		results = ITunesSearchAPI.search(term: "#{self.artist_name} #{self.name}", media: "music", entity: "song")
-		return [] if results.empty?
-		results.collect {|result| result["trackViewUrl"]}
+		results.empty? ? [] : results
 	end
 
 	def itunes_affiliate_links
-		base_links = self.itunes_links
-		return [] if base_links.empty?
-		base_links.collect {|link| "#{AFFILIATE_WRAPPER}#{Track.escape_link(link)}"}
+		base_data = self.itunes_track_data
+		return [] if base_data.empty?
+		urls_to_modify = %w{artistViewUrl collectionViewUrl trackViewUrl}
+		base_data.collect do |hash|
+			urls_to_modify.each do |url|
+				hash[url] = "#{AFFILIATE_WRAPPER}#{Track.escape_link(hash[url])}"
+			end
+		end
 	end
 
 	def self.escape_link(link)

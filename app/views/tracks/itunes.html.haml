@@ -1,0 +1,14 @@
+- title "iTunes results for track #{@track.name} by #{@track.artist_name}"
+
+%table
+  %tr
+    %th Artist view
+    %th Track view
+		%th Albumn view
+    %th Preview
+    %th Artwork
+    %th Albumn price
+		%th Track price
+    %th Your rating
+  = render(@track)
+= "Track not found found" unless @track

@@ -4,7 +4,7 @@
     %td= track.name
     %td= track.average_rating
     %td= track.releases
-    %td= track.mb_id
+    %td= link_to("iTunes", itunes_track_path(track))
     %td
       = form_for track do |f|
         = f.fields_for :ratings do |builder|

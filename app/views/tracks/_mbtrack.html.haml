@@ -2,7 +2,7 @@
 	%td= mbtrack.artist_name
 	%td= mbtrack.name
 	%td= mbtrack.releases
-	%td= mbtrack.mb_id
+	%td= link_to("iTunes", itunes_track_page(mbtrack))
 	%td
 		= form_for mbtrack do |f|
 			= f.hidden_field :mb_id

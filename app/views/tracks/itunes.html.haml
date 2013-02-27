@@ -1,13 +1,16 @@
-- title "iTunes results for track #{@track.name} by #{@track.artist_name}"
+- title %Q{iTunes results for track "#{@track.name}" by "#{@track.artist_name}"}
 
-%table
-  %tr
-    %th Artist
-    %th Track
-    %th Albumn
-    %th Preview
-    %th Artwork
-    %th Albumn price
-    %th Track price
-  = render(:partial => "itune", :collection => @itunes)
-= "Track not found found in iTunes" if @itunes.empty?
+- cache_params = { action: "itunes", controller: "tracks", mb_id: @track.mb_id }
+
+- cache(cache_key(nil, cache_params), expires_in: 2.hours) do # additional expires_in since itunes will change
+  %table
+    %tr
+      %th Artist
+      %th Track
+      %th Albumn
+      %th Preview
+      %th Artwork
+      %th Albumn price
+      %th Track price
+    = render(:partial => "itune", :collection => @itunes)
+  = "Track not found found in iTunes" if @itunes.empty?

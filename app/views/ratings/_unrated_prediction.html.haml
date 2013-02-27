@@ -7,4 +7,4 @@
     %td
       = render "ratings/form", target: unrated_prediction
     %td= number_with_precision(unrated_prediction.prediction, precision: 2)
-    %td= link_to("iTunes", itunes_link(unrated_prediction.track.artist_name, unrated_prediction.track.name))
+    %td= link_to("iTunes", itunes_track_path(unrated_prediction.track))

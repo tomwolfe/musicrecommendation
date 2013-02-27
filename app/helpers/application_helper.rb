@@ -4,8 +4,11 @@ module ApplicationHelper
 	end
 
 	def cache_key(model_name, optional_attributes={})
-		count, max_updated_at = count_and_max_updated_at(model_name.classify.constantize)
-		base = "model_name-#{model_name}/count-#{count}/updated-#{max_updated_at}"
+		base = ""
+		unless model_name.nil? # skip this for non active-record models
+			count, max_updated_at = count_and_max_updated_at(model_name.classify.constantize)
+			base = "model_name-#{model_name}/count-#{count}/updated-#{max_updated_at}"
+		end
 		optional_attributes.each { |name, value| base << "/#{name}-#{value}" } if optional_attributes
 		base
 	end

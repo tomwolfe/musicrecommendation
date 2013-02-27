@@ -1,9 +1,9 @@
 - cache("trackId=#{itune["trackId"]}") do
   %tr
-    %td= itune["artistName"]
-    %td= itune["trackName"]
-    %td= itune["collectionName"]
+    %td= link_to(itune["artistName"], itune["artistViewUrl"])
+    %td= link_to(itune["trackName"], itune["trackViewUrl"])
+    %td= link_to(itune["collectionName"], itune["collectionViewUrl"])
     %td= link_to("Listen", itune["previewUrl"])
-    %td= image_tag(itune["artworkUrl30"])
-    %td= number_to_currency(itune["collectionPrice"])
-    %td= number_to_currency(itune["trackPrice"])
+    %td= link_to(image_tag(itune["artworkUrl30"]), itune["collectionViewUrl"])
+    %td= link_to(number_to_currency(itune["collectionPrice"]), itune["collectionViewUrl"])
+    %td= link_to(number_to_currency(itune["trackPrice"]), itune["trackViewUrl"])

@@ -19,7 +19,7 @@ end
 When /^I search for a track that is already in musicrec$/ do
 	track = Track.first
 	@title = track.name
-	@track = MusicBrainz::Model::Track.new("http://musicbrainz.org/track/c992037c-1c88-4094-af97-bf466f7d0a87", @title)
+	@track = MusicBrainz::Model::Track.new("http://musicbrainz.org/track/#{track.mb_id}", @title)
 	@track.artist = track.artist_name
 	@scored_collection = MusicBrainz::Model::ScoredCollection.new << @track
 	MusicBrainz::Webservice::Query.any_instance.stub(:get_tracks).and_return(@scored_collection)
@@ -29,6 +29,7 @@ When /^I search for a track that is already in musicrec$/ do
 end
 
 When /^I should( not)? see the track in the "(.*)" area$/ do |negate, area|
-	mb_id = Track.first.mb_id
-	negate ? find(area).should(have_no_content(mb_id)) : find(area).should(have_content(mb_id))
+	#debugger if negate && area == "#musicbrainz"
+	artist_name = Track.first.artist_name
+	negate ? find(area).should(have_no_content(artist_name)) : find(area).should(have_content(artist_name))
 end

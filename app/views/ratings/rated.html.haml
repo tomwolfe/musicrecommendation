@@ -11,5 +11,6 @@
         %th Your rating
         %th Prediction
         %th Difference from prediction
+        %th Buy
       = render(@ratings)
     = @ratings.empty? ? "No ratings." : will_paginate(@ratings)

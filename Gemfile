@@ -1,32 +1,27 @@
-source 'https://rubygems.org'
-
-group :development do
-  gem 'nifty-generators'
-end
+source "https://rubygems.org"
 
 group :development, :test do
-  gem 'sqlite3'
-  gem 'rspec-rails'
-  gem 'debugger'
+	gem "sqlite3", "~> 1.3"
+	gem "rspec-rails", "~> 2.13"
+	gem "debugger", "~> 1.3"
 end
 
 group :production do
-  gem 'pg'
-	gem 'thin'
-	gem 'dalli'
+	gem "pg", "~> 0.14"
+	gem "thin", "~> 1.5"
+	gem "dalli", "~> 2.6"
 end
 
 group :test do
-  #gem 'mocha'
-  gem 'cucumber-rails'
-  gem 'database_cleaner'
-  gem 'capybara'
-  gem 'rspec-expectations'
-  gem 'factory_girl_rails'
-  gem 'ZenTest'
+	gem "cucumber-rails", "~> 1.3"
+	gem "database_cleaner", "~> 0.9"
+	gem "capybara", "~> 2.0"
+	gem "rspec-expectations", "~> 2.13"
+	gem "factory_girl_rails", "~> 4.2"
+	#gem "ZenTest"
 end
 
-gem 'rails'
+gem "rails", "~> 3.2"
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -34,19 +29,12 @@ gem 'rails'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails'
-  gem 'coffee-rails'
-
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer'
-
-  gem 'uglifier'
+	gem "sass-rails", "~> 3.2"
+	gem "coffee-rails", "~> 3.2"
+	gem "uglifier", "~> 1.3"
 end
 
-gem 'jquery-rails'
-
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
+gem "jquery-rails", "~> 2.2"
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
@@ -57,25 +45,23 @@ gem 'jquery-rails'
 # Deploy with Capistrano
 # gem 'capistrano'
 
-# To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'
+# To use ActiveModel has_secure_password
+gem "bcrypt-ruby", "~> 3.0"
 
-gem 'bcrypt-ruby'
+gem "haml", "~> 4.0"
 
-gem 'haml'
+gem "haml-rails", "~> 0.4"
 
-gem 'haml-rails'
+gem "cofi_cost", "~> 0.0"
 
-gem 'cofi_cost', '>=0.0.4'
+gem "narray", "~> 0.6.0"
 
-gem 'narray'
+gem "gsl", git: "git://github.com/romanbsd/rb-gsl.git", ref: "fd601dfcd0b05319fa8f66f1e73cd711d5ba9ed9"
 
-gem 'gsl', git: 'git://github.com/romanbsd/rb-gsl.git'
+gem "rbrainz", "~> 0.5"
 
-gem 'rbrainz'
-
-gem "recaptcha", require: "recaptcha/rails"
+gem "recaptcha", "~> 0.3", require: "recaptcha/rails"
 
 gem "will_paginate", "~> 3.0"
 
-gem "itunes-search-api"
+gem "itunes-search-api", "~> 0.1"

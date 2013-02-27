@@ -29,7 +29,6 @@ When /^I search for a track that is already in musicrec$/ do
 end
 
 When /^I should( not)? see the track in the "(.*)" area$/ do |negate, area|
-	#debugger if negate && area == "#musicbrainz"
 	artist_name = Track.first.artist_name
 	negate ? find(area).should(have_no_content(artist_name)) : find(area).should(have_content(artist_name))
 end

@@ -19,7 +19,7 @@ Tested on Debian Wheezy.
     git clone git@github.com:tomwolfe/musicrecommendation.git
     cd musicrecommendation
     bundle install --without production    (to avoid using the 'thin' webserver in test/development)
-    rake db:migrate
+    bundle exec rake db:migrate
 
 [Get your own keys](http://recaptcha.net/whyrecaptcha.html) for recaptcha.
 Setup your recaptcha keys in `config/initializers/recaptcha.rb`
@@ -33,26 +33,28 @@ I might be missing something, I think that's all I needed to get it running from
 You can setup a Heroku account for free [https://devcenter.heroku.com/articles/quickstart](https://devcenter.heroku.com/articles/quickstart)
 
     wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+		rm install-ubuntu.sh
     heroku login
     #bundle install   #might need this to update gemfile.lock to include thin?
     heroku create
     heroku addons:add memcache  # for caching
-    rake secret  # to generate SECRET_TOKEN
-    heroku config:add RECAPTCHA_PUBLIC_KEY=YOUR_PUBLIC_KEY RECAPTCHA_PRIVATE_KEY=YOUR_PRIVATE_KEY SECRET_TOKEN=YOUR_SECRET_TOKEN BUILDPACK_URL=https://github.com/tomwolfe/heroku-buildpack-gsl-ruby # needs a custom buildpack that builds the native extension GSL
+    bundle exec rake secret  # to generate SECRET_TOKEN
+    heroku config:add RECAPTCHA_PUBLIC_KEY=YOUR_PUBLIC_KEY RECAPTCHA_PRIVATE_KEY=YOUR_PRIVATE_KEY SECRET_TOKEN=YOUR_SECRET_TOKEN BUILDPACK_URL=https://github.com/tomwolfe/heroku-buildpack-gsl-ruby # needs a custom buildpack that builds the native extension GSL. These environment variables are persistent and only need to be set once.
     git push heroku master
     heroku run rake db:migrate
+		heroku restart # to reload the schema and pickup schema changes
 
 ## Running Tests
 
 We use RSpec and Cucumber for tests.
 
-Run `rake db:test:prepare` to create/setup the test database.
+Run `bundle exec rake db:test:prepare` to create/setup the test database.
 
 Run `bundle exec rake cucumber spec` to run the tests.
 
 ## Caching
 
-Currently caching is turned on for the development environment (cache stored in `/tmp/cache`). Set `config.action_controller.perform_caching = false` in `config/environments/development.rb` to turn it off.
+Currently caching is turned on for the development environment (cache stored in `tmp/cache`). Set `config.action_controller.perform_caching = false` in `config/environments/development.rb` to turn it off. Eventually I'll probably get tired of manually [testing caching](http://stackoverflow.com/a/5293902/477788).
 
 ## To-do/completed task list
 

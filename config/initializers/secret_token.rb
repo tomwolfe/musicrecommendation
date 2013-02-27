@@ -7,7 +7,7 @@
 #
 # thanks to:
 # https://github.com/jeremyw/voter-registration/commit/2fa8796658fdbf18490cd2a3d7bf173e53b1cab8
-if Rails.env.production? && ENV['SECRET_TOKEN'].blank?
+if Rails.env.production? && ENV['SECRET_TOKEN'].blank? && ENV['RAILS_GROUPS'] != 'assets'
 	raise 'SECRET_TOKEN environment variable must be set!'
 end
 

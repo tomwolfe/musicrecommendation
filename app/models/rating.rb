@@ -13,7 +13,7 @@ class Rating < ActiveRecord::Base
 	validates :user_id, presence: true
 	validates :value, inclusion: { in: (1..5).to_a << nil }
 
-	def generate_predictions(iterations=10, num_features = 5, lambda = 1)
+	def generate_predictions(iterations=10, num_features = 5, regularization = 1)
 		@user_count, @track_count = User.count, Track.count
 		ratings = Rating.select([:user_id, :track_id, :value]).where("value IS NOT NULL")
 		
@@ -21,7 +21,7 @@ class Rating < ActiveRecord::Base
 		#		alternate solution https://github.com/tomwolfe/musicrecommendation/commit/ebd68d29f34d6da2c7b1ca6dc4b201399aa87423#app/models/rating.rb
 		#		hashes id => index
 		rating_table = build_rating_table(ratings)
-		calc = CofiCost.new(rating_table, num_features, lambda, iterations, nil, nil)
+		calc = CofiCost.new(rating_table, num_features, regularization, iterations, nil, nil)
 		calc.min_cost
 		@predictions = calc.predictions
 		add_predictions

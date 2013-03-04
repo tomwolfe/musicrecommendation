@@ -8,6 +8,10 @@ It's still under active development.
 
 [![Build Status](https://travis-ci.org/tomwolfe/musicrecommendation.png)](https://travis-ci.org/tomwolfe/musicrecommendation)
 
+# Demo (not quite ready for prime time, mostly because the collaborative filtering algorithm needs more love)
+
+You can see a running version of the application at [https://musicrec.herokuapp.com/](https://musicrec.herokuapp.com) (Currently down)
+
 # Hacking
 
 ## Installation

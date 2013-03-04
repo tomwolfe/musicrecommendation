@@ -1,4 +1,5 @@
 # courtesy: http://stackoverflow.com/a/14524721/477788
+# FIXME: I don't think it's working...
 
 if Rake::Task.task_defined?("assets:precompile:nondigest")
 	Rake::Task["assets:precompile:nondigest"].enhance do

@@ -68,3 +68,15 @@ I'd love to use Pivitol Tracker, but I kind of like just using a spreadsheet and
 ## License
 
 See COPYING	for legal information. It's an MIT license.
+
+# Thank you
+
+Professor Andrew Ng for his wonderful [Machine learning](https://www.coursera.org/course/ml) class.
+
+Professor Armando Fox and David Patterson for their wonderful [SaaS class](https://www.edx.org/courses/BerkeleyX/CS169.1x/2012_Fall/about).
+
+The many people who made all of the other wonderful tools with which this application is built on (GSL/Ruby/Rails/rspec/cucumber/narray/etc).
+
+[Heroku](http://www.heroku.com) for providing a wonderful platform on which to run this application.
+
+Hopefully I did not forget anyone.

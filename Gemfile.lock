@@ -55,7 +55,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.0)
-    cofi_cost (0.0.6)
+    cofi_cost (0.0.7)
       gsl
       narray
     columnize (0.3.6)

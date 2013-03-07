@@ -64,6 +64,6 @@ class TracksController < ApplicationController
 	def itunes
 		@track = Track.find(params[:id])
 		# TODO: change this to Itunes.itunes_affiliate_data(@track) when account is setup
-		@itunes = Itunes.itunes_data(@track)
+		@itunes = Itunes.itunes_affiliate_data(@track)
 	end
 end

@@ -8,6 +8,9 @@ When /^I should( not)? see "(.*)"$/ do |negate, see|
 end
 
 When /^I should( not)? see the link "(.*)" pointing to "(.*)"$/ do |negate, see, ref|
+	# handle itunes affiliate links/replace with actual Itunes::AFFILIATE_ID
+	match = /stat\?id=(.*)&offer/.match ref
+	ref.sub!(match[1], Itunes::AFFILIATE_ID) if match
 	negate ? page.should(have_no_link(see, href: ref)) : page.should(have_link(see, href: ref))
 end
 

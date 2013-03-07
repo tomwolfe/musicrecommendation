@@ -3,10 +3,12 @@ class Itunes
 	AFFILIATE_WRAPPER = "http://click.linksynergy.com/fs-bin/stat?id=#{AFFILIATE_ID}&offerid=146261&type=3&subid=0&tmpid=1826&RD_PARM1="
 	PARTNER_ID = "30"
 
+	# non affiliate version of #itunes_affiliate_data
 	def self.itunes_data(track)
 		ITunesSearchAPI.search(term: "#{track.artist_name} #{track.name}", media: "music", entity: "song")
 	end
 
+	# affiliate version of #itunes_data
 	def self.itunes_affiliate_data(track)
 		base_data = self.itunes_data(track)
 		return [] if base_data.empty?

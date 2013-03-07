@@ -1,5 +1,5 @@
 class Itunes
-	AFFILIATE_ID = "CBIMl*gYY/8"
+	AFFILIATE_ID = "EZoLiqecFIY"
 	AFFILIATE_WRAPPER = "http://click.linksynergy.com/fs-bin/stat?id=#{AFFILIATE_ID}&offerid=146261&type=3&subid=0&tmpid=1826&RD_PARM1="
 	PARTNER_ID = "30"
 

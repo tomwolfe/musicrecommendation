@@ -7,10 +7,10 @@
     %tr
       %th Artist
       %th Track
-      %th Albumn
+      %th Album
       %th Preview
       %th Artwork
-      %th Albumn price
+      %th Album price
       %th Track price
     = render(:partial => "itune", :collection => @itunes)
   = "Track not found found in iTunes" if @itunes.empty?

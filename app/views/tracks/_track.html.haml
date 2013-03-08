@@ -7,6 +7,6 @@
     %td= link_to("iTunes", itunes_track_path(track))
     %td
       = form_for track do |f|
-        = f.fields_for :ratings do |builder|
+        = f.fields_for :rating do |builder|
           = render "ratings/nestedform", f: builder
         = f.submit

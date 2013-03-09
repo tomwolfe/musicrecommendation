@@ -14,6 +14,5 @@
         %th Average Rating
         %th Releases
         %th Buy
-        %th Your Rating
       = render(@tracks)
     = @tracks.empty? ? "No tracks." : link_to("More top rated tracks", "/tracks/page/1")

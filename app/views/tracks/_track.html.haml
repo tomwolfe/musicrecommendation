@@ -5,6 +5,6 @@
     %td= track.average_rating
     %td= track.releases
     %td= link_to("iTunes", itunes_track_path(track))
-    %td
-      - if current_user
+    - if current_user
+      %td
         = render "ratings/form", target: track.ratings.find_by_user_id(current_user)

@@ -71,9 +71,11 @@ See COPYING	for legal information. It's an MIT license.
 
 # Thank you
 
-Professor Andrew Ng for his wonderful [Machine learning](https://www.coursera.org/course/ml) class.
+Professor Andrew Ng of Stanford University for his wonderful [Machine learning](https://www.coursera.org/course/ml) class.
 
-Professor Armando Fox and David Patterson for their wonderful [SaaS class](https://www.edx.org/courses/BerkeleyX/CS169.1x/2012_Fall/about).
+Professor Armando Fox and David Patterson of Berkeley for their wonderful [SaaS class](https://www.edx.org/courses/BerkeleyX/CS169.1x/2012_Fall/about).
+
+Professor John Gudenas of Aurora University for getting me interested in artificial intelligence/machine learning.
 
 The many people who made all of the other wonderful tools with which this application is built on (GSL/Ruby/Rails/rspec/cucumber/narray/etc).
 

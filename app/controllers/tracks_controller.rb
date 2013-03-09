@@ -6,11 +6,9 @@ class TracksController < ApplicationController
 	def show
 		@track = Track.find(params[:id])
 
-		if stale?(@track)
-			respond_to do |format|
-				format.html # show.html.erb
-				format.json { render json: @track }
-			end
+		respond_to do |format|
+			format.html
+			format.json { render json: @track }
 		end
 	end
 
@@ -29,15 +27,6 @@ class TracksController < ApplicationController
 				format.html { redirect_to root_path, flash: { alert: "Unable to create track." } }
 				format.json { render json: @track.errors, status: :unprocessable_entity }
 			end
-		end
-	end
-
-	def update
-		@track = Track.find(params[:id])
-		if @track.update_attributes(params[:track])
-			redirect_to home_signedin_path, notice: "Successfully updated track."
-		else
-			redirect_to home_signedin_path, flash: { alert: "Unable to update track." }
 		end
 	end
 	

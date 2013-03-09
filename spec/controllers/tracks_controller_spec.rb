@@ -50,28 +50,6 @@ describe TracksController do
 		end
 	end
 
-	describe '#update' do
-		before :each do
-			Track.any_instance.stub(:must_be_in_musicbrainz).and_return(true)
-			Rating.skip_callback(:save, :after, :generate_predictions)
-			@rating = FactoryGirl.create(:rating)
-			@update_hash = {"track"=>{"ratings_attributes"=>{"#{@rating.user_id}"=>{"value"=>"5", "id"=>"#{@rating.id}"}}}, "id"=>"#{@rating.track_id}"}
-			put :update, @update_hash
-		end
-		it 'redirects to the signedin home page' do
-			response.should redirect_to(home_signedin_path)
-		end
-		it 'makes @track available to the view' do
-			assigns(:track).should == stub_model(Track, id: @rating.track_id, name: @rating.track, artist_name: @rating.track)
-		end
-		it 'assigns a rating' do
-			Rating.find(@rating).value.should == 5
-		end
-		it 'sets the flash' do
-			flash[:notice].should == 'Successfully updated track.'
-		end
-	end
-
 	describe '#create' do
 		before :each do
 			Track.any_instance.stub(:must_be_in_musicbrainz).and_return(true)

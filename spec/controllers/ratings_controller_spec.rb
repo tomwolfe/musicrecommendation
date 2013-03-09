@@ -31,7 +31,7 @@ describe RatingsController do
       	Rating.count.should == 2
       end
       it 'redirects to the home page' do
-        response.should redirect_to(root_path)
+        response.should redirect_to(home_signedin_path)
       end
       it 'displays a success message' do
         flash[:notice].should == 'Rating successfully created'
@@ -44,7 +44,7 @@ describe RatingsController do
         post :create, @rating_hash
       end
       it 'redirects to the home page' do
-        response.should redirect_to(root_path)
+        response.should redirect_to(home_signedin_path)
       end
       it 'displays an error message' do
         flash[:alert].should == 'Unable to create rating'
@@ -69,7 +69,7 @@ describe RatingsController do
 		  	Rating.first.value.should == 1
 		  end
 		  it 'redirects to the home page' do
-		  	response.should redirect_to(root_path)
+		  	response.should redirect_to(home_signedin_path)
 		  end
 		end
   end
@@ -85,8 +85,8 @@ describe RatingsController do
 			it 'destroys the rating' do
 				Rating.count.should == 0
 			end
-			it 'redirects to the ratings_path' do
-				response.should redirect_to(root_path)
+			it 'redirects to the home_signedin_path' do
+				response.should redirect_to(home_signedin_path)
 			end
 			it 'displays a message that it deleted the rating' do
 				flash[:notice].should == "Rating deleted"

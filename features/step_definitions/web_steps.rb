@@ -60,7 +60,7 @@ When /^I press the "(.*)" button$/ do |button|
 		when button =~ /sign up/i
 			UsersController.any_instance.stub(:verify_recaptcha).and_return(true)
 			click_button(button)
-		when button =~ /update track/i
+		when button =~ /update rating/i
 			Rating.without_callback(:save, :after, :generate_predictions) { click_button(button) }
 		when button =~ /create track/i
 			Track.any_instance.stub(:must_be_in_musicbrainz).and_return(true)

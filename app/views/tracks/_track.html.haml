@@ -6,7 +6,5 @@
     %td= track.releases
     %td= link_to("iTunes", itunes_track_path(track))
     %td
-      = form_for track do |f|
-        = f.fields_for :rating do |builder|
-          = render "ratings/nestedform", f: builder
-        = f.submit
+      - if current_user
+        = render "ratings/form", target: track.ratings.find_by_user_id(current_user)

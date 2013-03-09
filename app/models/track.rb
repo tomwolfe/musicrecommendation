@@ -1,8 +1,7 @@
 class Track < ActiveRecord::Base
 	has_many :ratings, dependent: :destroy
 	has_many :raters, :through => :ratings, :source => :users
-	attr_accessible :ratings_attributes, :name, :artist_name, :mb_id, :releases
-	accepts_nested_attributes_for :ratings, allow_destroy: true
+	attr_accessible :name, :artist_name, :mb_id, :releases
 	# FIXME: (identical issue in User model) creates User.count ratings
 	# would like to pass a block (I can't get it to work w/ skip_callback,
 	# I can only get it to work with a method name)

@@ -70,7 +70,8 @@ class Rating < ActiveRecord::Base
 			# config/initializers/without_callback.rb
 			Rating.without_callback(:save, :after, :generate_predictions) do
 				if user_or_track =~ /^Track/
-					Rating.create({user_id: id_of_track_or_user, track_id: i+1}, without_protection: true)
+					# prediction should be the average of that track for new users without ratings
+					Rating.create({user_id: id_of_track_or_user, track_id: i+1, prediction: Track.find(i+1).average_rating}, without_protection: true)
 				else
 					Rating.create({user_id: i+1, track_id: id_of_track_or_user}, without_protection: true)
 				end

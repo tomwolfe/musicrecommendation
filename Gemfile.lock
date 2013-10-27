@@ -1,7 +1,6 @@
 GIT
   remote: git://github.com/romanbsd/rb-gsl.git
-  revision: fd601dfcd0b05319fa8f66f1e73cd711d5ba9ed9
-  ref: fd601dfcd0b05319fa8f66f1e73cd711d5ba9ed9
+  revision: 8c012d6199fd08fe60d60ceb4a7021fc3c0be7a6
   specs:
     gsl (1.14.7)
       narray (>= 0.5.9)

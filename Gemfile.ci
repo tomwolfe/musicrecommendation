@@ -64,7 +64,7 @@ gem "cofi_cost", "~> 0.0"
 
 gem "narray", "~> 0.6.0"
 
-gem "gsl", git: "git://github.com/romanbsd/rb-gsl.git", ref: "fd601dfcd0b05319fa8f66f1e73cd711d5ba9ed9"
+gem "gsl", github: "romanbsd/rb-gsl"
 
 gem "recaptcha", "~> 0.3", require: "recaptcha/rails"
 

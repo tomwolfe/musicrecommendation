@@ -4,24 +4,24 @@ ruby "1.9.3"
 
 group :development, :test do
 	gem "sqlite3", "~> 1.3"
-	gem "rspec-rails", "~> 2.13"
-	gem "debugger", "~> 1.3"
+	gem "rspec-rails"
+	gem "debugger", "~> 1.6"
 end
 
 group :production do
-	gem "pg", "~> 0.14"
-	gem "thin", "~> 1.5"
+	gem "pg", "~> 0.17"
+	gem "thin"
 	gem "dalli", "~> 2.6"
 	gem "memcachier", "~> 0.0.2"
 end
 
 group :test do
-	gem "cucumber-rails", "~> 1.3"
-	gem "cucumber", "1.2.1"	# temp, problems with 1.2.2
-	gem "selenium-webdriver", "2.30.0" # problems with 2.31.0
-	gem "database_cleaner", "~> 0.9"
-	gem "capybara", "~> 2.0"
-	gem "rspec-expectations", "~> 2.13"
+	gem "cucumber-rails", "~> 1.4"
+	gem "cucumber", "~> 1.3"	# temp, problems with 1.2.2
+	gem "selenium-webdriver", "~> 2.37" # problems with 2.31.0
+	gem "database_cleaner", "~> 1.2"
+	gem "capybara", "~> 2.1"
+	gem "rspec-expectations", "~> 2.14"
 	gem "factory_girl_rails", "~> 4.2"
 	#gem "ZenTest"
 end
@@ -35,11 +35,11 @@ gem "rails", "~> 3.2"
 # in production environments by default.
 group :assets do
 	gem "sass-rails", "~> 3.2"
-	gem "coffee-rails", "~> 3.2"
-	gem "uglifier", "~> 1.3"
+	gem "coffee-rails"
+	gem "uglifier", "~> 2.3"
 end
 
-gem "jquery-rails", "~> 2.2"
+gem "jquery-rails", "~> 3.0"
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
@@ -51,11 +51,11 @@ gem "jquery-rails", "~> 2.2"
 # gem 'capistrano'
 
 # To use ActiveModel has_secure_password
-gem "bcrypt-ruby", "~> 3.0"
+gem "bcrypt-ruby", "~> 3.0.0" # 3.0 needed, else dependency problem
 
 gem "haml", "~> 4.0"
 
-gem "haml-rails", "~> 0.4"
+gem "haml-rails"
 
 gem "cofi_cost", "~> 0.0"
 

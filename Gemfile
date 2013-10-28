@@ -10,7 +10,7 @@ end
 
 group :production do
 	gem "pg", "~> 0.17"
-	gem "thin"
+	gem "thin", "~> 1.6.0"
 	gem "dalli", "~> 2.6"
 	gem "memcachier", "~> 0.0.2"
 end
@@ -35,7 +35,7 @@ gem "rails", "~> 3.2"
 # in production environments by default.
 group :assets do
 	gem "sass-rails", "~> 3.2"
-	gem "coffee-rails"
+	gem "coffee-rails", "~> 3.2.0"
 	gem "uglifier", "~> 2.3"
 end
 
@@ -55,7 +55,7 @@ gem "bcrypt-ruby", "~> 3.0.0" # 3.0 needed, else dependency problem
 
 gem "haml", "~> 4.0"
 
-gem "haml-rails"
+gem "haml-rails", "~> 0.4.0"
 
 gem "cofi_cost", "~> 0.0"
 

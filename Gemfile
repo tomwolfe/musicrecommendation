@@ -10,7 +10,7 @@ end
 
 group :production do
 	gem "pg", "~> 0.17"
-	gem "thin", "~> 1.5.0" # rack dependency issue w/ coffee-rails
+	gem "thin", "~> 1.5.1" # rack dependency issue w/ coffee-rails
 	gem "dalli", "~> 2.6"
 	gem "memcachier", "~> 0.0.2"
 end

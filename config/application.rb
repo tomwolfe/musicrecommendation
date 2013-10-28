@@ -61,5 +61,6 @@ module Musicrecommendation
 
 		# default pagination per_page
 		WillPaginate.per_page = 10
+		config.assets.initialize_on_precompile = false
 	end
 end

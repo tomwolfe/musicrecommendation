@@ -5,7 +5,7 @@ ruby "1.9.3"
 group :development, :test do
 	gem "sqlite3", "~> 1.3"
 	gem "rspec-rails"
-	gem "debugger", "~> 1.6"
+	gem "debugger"
 end
 
 group :production do
@@ -16,7 +16,7 @@ group :production do
 end
 
 group :test do
-	gem "cucumber-rails", "~> 1.4"
+	gem "cucumber-rails", "~> 1.4", :require => false
 	gem "cucumber", "~> 1.3"	# temp, problems with 1.2.2
 	gem "selenium-webdriver", "~> 2.37" # problems with 2.31.0
 	gem "database_cleaner", "~> 1.2"
@@ -69,4 +69,4 @@ gem "will_paginate", "~> 3.0"
 
 gem "itunes-search-api", "~> 0.1"
 
-gem "rbrainz", "~> 0.5"
+gem "musicbrainz", github: "tomwolfe/musicbrainz", branch: "fix_tracksearch"

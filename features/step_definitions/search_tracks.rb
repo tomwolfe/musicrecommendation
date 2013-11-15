@@ -19,7 +19,8 @@ When /^I search for a track that is already in musicrec$/ do
 	track = Track.first
 	@title = track.name
 	@artist = track.artist_name
-	@collection = [{:id=>"c992037c-1c88-4094-af97-bf466f7d0102", :mbid=>"c992037c-1c88-4094-af97-bf466f7d0102", :title=>@title, :artist=>@artist, :releases=>["As Good as Dead", "Over the Edge"], :score=>100}]
+	@mb_id = track.mb_id
+	@collection = [{:id=>@mb_id, :mbid=>@mb_id, :title=>@title, :artist=>@artist, :releases=>["As Good as Dead", "Over the Edge"], :score=>100}]
 	MusicBrainz::Recording.stub(:search).and_return(@collection)
 	fill_in "search_track_name", with: @title
 	fill_in "search_artist_name", with: @artist

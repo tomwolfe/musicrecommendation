@@ -7,22 +7,38 @@ end
 describe Track do
 	before :each do
 		@title = "Bound for the Floor"
-		@track = MusicBrainz::Model::Track.new("http://musicbrainz.org/track/ea0ad976-5750-4885-9f33-2c656dfc4a42", @title)
-		@track.artist = "local h"
+		@artist = "local h"
+		@valid_mb_id = "ea0ad976-5750-4885-9f33-2c656dfc4a42"
+		@mb_recording = MusicBrainz::Recording.new(id: @valid_mb_id, mbid: @valid_mb_id, title: @title, artist: @artist)
 	end
 	
 	describe '#must_be_in_musicbrainz' do
 		it 'creates no errors given a valid track' do
-			Track::QUERY.stub(:get_track_by_id).and_return(@track)
-			FactoryGirl.build(:track, name: @title, mb_id: @track.id.uuid).should be_valid
+			MusicBrainz::Recording.stub(:find).and_return(@mb_recording)
+			FactoryGirl.build(:track, name: @title, mb_id: @valid_mb_id, artist_name: @artist).should be_valid
 		end
-		it 'raises an InvalidMBIDError given an invalid mb_id' do
-			FactoryGirl.build(:track, mb_id: "hi")
-			lambda { FactoryGirl.build(:track, mb_id: "hi").valid?.should raise_error(MusicBrainz::Model::InvalidMBIDError) }
+		it 'creates errors given an invalid mb_id' do
+			MusicBrainz::Recording.stub(:find).and_return(nil)
+			FactoryGirl.build(:track, mb_id: "hi").should_not be_valid
 		end
 		it 'creates errors given a valid mb_id but non-matching name' do
-			Track::QUERY.stub(:get_track_by_id).and_return(@track)
-			FactoryGirl.build(:track, name: "wrong name", mb_id: @track.id.uuid).should_not be_valid
+			MusicBrainz::Recording.stub(:find).and_return(@mb_recording)
+			FactoryGirl.build(:track, name: "wrong name", mb_id: @valid_mb_id).should_not be_valid
+		end
+	end
+
+	describe '#add_errors(title, track_id)' do
+		it 'gets called with (no title) and (no id) if the mb_id is not found' do
+			MusicBrainz::Recording.stub(:find).and_return(nil)
+			track = FactoryGirl.build(:track, mb_id: "hi")
+			track.should_receive(:add_errors).with("(no title)", "(no id)")
+			track.valid?
+		end
+		it 'gets called with the correct title/id if the mb_id is found' do
+			MusicBrainz::Recording.stub(:find).and_return(@mb_recording)
+			track = FactoryGirl.build(:track, name: @title, mb_id: @valid_mb_id, artist_name: @artist)
+			track.should_receive(:add_errors).with(@title, @valid_mb_id)
+			track.valid?
 		end
 	end
 end

@@ -32,4 +32,4 @@
           %th Releases
           %th Add to our database
         = render(:partial => "mbtrack", :collection => @tracks_in_musicbrainz_and_not_db) || nil
-      = @tracks_in_musicbrainz_and_not_db.empty? ? "No tracks found in MusicBrainz" : nil
+      = @tracks_in_musicbrainz_and_not_db.nil? ? "No tracks found in MusicBrainz" : nil

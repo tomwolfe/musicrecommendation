@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: git://github.com/tomwolfe/musicbrainz.git
-  revision: 0ea0269427667114f06e595c33d12d6392d61d57
+  revision: e60caef02a9c6ea54b2f86b295deffcbf07ad47c
   branch: fix_tracksearch
   specs:
     musicbrainz (0.7.5)

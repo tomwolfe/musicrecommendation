@@ -1,5 +1,5 @@
 When /^I search for a track that is in neither musicrec or musicbrainz$/ do
-	MusicBrainz::Webservice::Query.any_instance.stub(:get_tracks).and_return(nil)
+	MusicBrainz::Recording.stub(:search).and_return(nil)
 	fill_in "search_track_name", with: "dne"
 	fill_in "search_artist_name", with: "dne"
 	click_button("Search")
@@ -7,24 +7,22 @@ end
 
 When /^I search for a track that is only in musicbrainz$/ do
 	@title = "Bound for the Floor"
-	@track = MusicBrainz::Model::Track.new("http://musicbrainz.org/track/ea0ad976-5750-4885-9f33-2c656dfc4a42", @title)
-	@track.artist = "local h"
-	@scored_collection = MusicBrainz::Model::ScoredCollection.new << @track
-	MusicBrainz::Webservice::Query.any_instance.stub(:get_tracks).and_return(@scored_collection)
+	@artist = "local h"
+	@collection = [{:id=>"c992037c-1c88-4094-af97-bg466f7d0101", :mbid=>"c992037c-1c88-4094-af97-bg466f7d0101", :title=>@title, :artist=>@artist, :releases=>["As Good as Dead", "Over the Edge"], :score=>100}]
+	MusicBrainz::Recording.stub(:search).and_return(@collection)
 	fill_in "search_track_name", with: @title
-	fill_in "search_artist_name", with: @track.artist
+	fill_in "search_artist_name", with: @artist
 	click_button("Search")
 end
 
 When /^I search for a track that is already in musicrec$/ do
 	track = Track.first
 	@title = track.name
-	@track = MusicBrainz::Model::Track.new("http://musicbrainz.org/track/#{track.mb_id}", @title)
-	@track.artist = track.artist_name
-	@scored_collection = MusicBrainz::Model::ScoredCollection.new << @track
-	MusicBrainz::Webservice::Query.any_instance.stub(:get_tracks).and_return(@scored_collection)
+	@artist = track.artist_name
+	@collection = [{:id=>"c992037c-1c88-4094-af97-bf466f7d0102", :mbid=>"c992037c-1c88-4094-af97-bf466f7d0102", :title=>@title, :artist=>@artist, :releases=>["As Good as Dead", "Over the Edge"], :score=>100}]
+	MusicBrainz::Recording.stub(:search).and_return(@collection)
 	fill_in "search_track_name", with: @title
-	fill_in "search_artist_name", with: @track.artist
+	fill_in "search_artist_name", with: @artist
 	click_button("Search")
 end
 

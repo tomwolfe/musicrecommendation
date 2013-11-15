@@ -1,5 +1,5 @@
 When /^I search for a track that is in neither musicrec or musicbrainz$/ do
-	MusicBrainz::Recording.stub(:search).and_return(nil)
+	MusicBrainz::Recording.stub(:search).and_return([])
 	fill_in "search_track_name", with: "dne"
 	fill_in "search_artist_name", with: "dne"
 	click_button("Search")

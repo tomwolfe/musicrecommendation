@@ -20,10 +20,8 @@ class Search
 
 	def find_in_musicbrainz(existing_tracks)
 		mb_tracks = MusicBrainz::Recording.search(@track_name, @artist_name)
-		if mb_tracks.respond_to?(:delete_if)
-			mb_tracks.delete_if { |track| existing_tracks.include? track[:id] }
-			ar_mb_tracks = create_tracks_array(mb_tracks)
-		end
+		mb_tracks.delete_if { |track| existing_tracks.include? track[:id] }
+		ar_mb_tracks = create_tracks_array(mb_tracks)
 	end
 	
 	def create_tracks_array(mb_tracks)

@@ -21,7 +21,7 @@ class Rating < ActiveRecord::Base
 		#		alternate solution https://github.com/tomwolfe/musicrecommendation/commit/ebd68d29f34d6da2c7b1ca6dc4b201399aa87423#app/models/rating.rb
 		#		hashes id => index
 		rating_table = build_rating_table(ratings)
-		calc = CofiCost.new(rating_table, num_features, regularization, iterations, nil, nil)
+		calc = CofiCost.new(rating_table, num_features, regularization, iterations, 5, nil, nil)
 		calc.min_cost
 		@predictions = calc.predictions
 		add_predictions

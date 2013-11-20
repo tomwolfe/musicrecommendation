@@ -101,15 +101,9 @@ th {
 		padding: 1% 1%;
 		margin: 1% 1%; } }
 
-#users {
-	label {
-		width: 10%;
-		float: left; } }
-
-#sessions {
-	label {
-		width: 6%;
-		float: left; } }
+#users, #sessions {
+	label, input {
+		display: block; } }
 
 #home {
 	a {

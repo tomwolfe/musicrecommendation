@@ -49,6 +49,7 @@ class Rating < ActiveRecord::Base
 		# Rails v4 FIXME: @rating.update_columns(hash)
 		# where: hash = { prediction: value }
 		@rating.update_column(:prediction, value)
+		@rating.touch
 	end
 	
 	def add_prediction_logic

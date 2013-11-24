@@ -1,7 +1,7 @@
 class RatingsController < ApplicationController
   
   def create
-    @rating = Rating.new(params[:rating])
+    @rating = Rating.new(rating_params)
     @rating.user_id = current_user.id
     respond_to do |format|
     	if @rating.save
@@ -17,7 +17,7 @@ class RatingsController < ApplicationController
   def update
 		@rating = current_user.ratings.find_by_id(params[:id])
     respond_to do |format|
-    	if @rating.update_attributes(params[:rating])
+    	if @rating.update(rating_params)
 		    format.html { redirect_to home_signedin_path, notice: "Rating successfully updated" }
 		    format.js
 		  else
@@ -48,4 +48,9 @@ class RatingsController < ApplicationController
 		@unrated_predictions = current_user.ratings.unrated.page(@page).order("prediction DESC")
 		render :unrated
 	end
+
+	private
+		def rating_params
+			params.require(:rating).permit(:value, :track_id)
+		end
 end

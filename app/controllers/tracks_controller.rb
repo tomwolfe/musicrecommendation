@@ -15,7 +15,7 @@ class TracksController < ApplicationController
 	# POST /tracks
 	# POST /tracks.json
 	def create
-		@track = Track.new(params[:track])
+		@track = Track.new(track_params)
 
 		respond_to do |format|
 			if @track.save
@@ -55,4 +55,9 @@ class TracksController < ApplicationController
 		# TODO: change this to Itunes.itunes_affiliate_data(@track) when account is setup
 		@itunes = Itunes.itunes_affiliate_data(@track)
 	end
+	
+	private
+		def track_params
+			params.require(:track).permit(:name, :artist_name, :mb_id, :releases)
+		end
 end

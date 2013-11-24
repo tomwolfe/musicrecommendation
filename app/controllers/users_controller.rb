@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 	end
 
 	def create
-		@user = User.new(params[:user])
+		@user = User.new(user_params)
 		if verify_recaptcha(model: @user, message: "reCaptcha error") && @user.save
 			session[:user_id] = @user.id
 			redirect_to home_signedin_path, notice: "Thanks for joining!"
@@ -22,10 +22,15 @@ class UsersController < ApplicationController
 
 	def update
 		@user = current_user
-		if @user.update_attributes(params[:user])
+		if @user.update(user_params)
 			redirect_to home_signedin_path, notice: "Your profile has been updated."
 		else
 			render :edit
 		end
 	end
+
+	private
+		def user_params
+			params.require(:user).permit(:email, :password, :password_confirmation)
+		end
 end

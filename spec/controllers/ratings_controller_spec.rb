@@ -54,11 +54,11 @@ describe RatingsController do
   
   describe '#update' do
     it 'calls find_by_id' do
-      @rating.user.ratings.should_receive(:find_by_id).with('1').and_return(@rating)
-      put :update, id: 1
-    end
-    it 'calls updates attributes' do
-      Rating.any_instance.should_receive(:update_attributes).with("track_id" => '1', "value" => '1').and_return(true)
+      Rating.should_receive(:find_by_id).with('1').and_return(@rating)
+      put :update, {id: 1, rating: { value: 1, track_id: 1 }}
+		end
+    it 'calls update' do
+      Rating.any_instance.should_receive(:update).with("track_id" => '1', "value" => '1').and_return(true)
       put :update, {id: 1, rating: { value: 1, track_id: 1 }}
     end
     context 'after update' do

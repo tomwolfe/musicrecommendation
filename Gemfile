@@ -10,15 +10,15 @@ end
 
 group :production do
 	gem "pg", "~> 0.17"
-	gem "thin", "~> 1.5.1" # rack dependency issue w/ coffee-rails
+	gem "thin", "~> 1.6"
 	gem "dalli", "~> 2.6"
 	gem "memcachier", "~> 0.0.2"
 end
 
 group :test do
 	gem "cucumber-rails", "~> 1.4", :require => false
-	gem "cucumber", "~> 1.3"	# temp, problems with 1.2.2
-	gem "selenium-webdriver", "~> 2.37" # problems with 2.31.0
+	gem "cucumber", "~> 1.3"
+	gem "selenium-webdriver", "~> 2.37"
 	gem "database_cleaner", "~> 1.2"
 	gem "capybara", "~> 2.1"
 	gem "rspec-expectations", "~> 2.14"
@@ -48,7 +48,7 @@ gem "jquery-rails", "~> 3.0"
 # gem 'capistrano'
 
 # To use ActiveModel has_secure_password
-gem "bcrypt-ruby", "~> 3.0.0" # 3.0 needed, else dependency problem
+gem "bcrypt-ruby"
 
 gem "haml", "~> 4.0"
 

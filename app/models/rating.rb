@@ -2,8 +2,8 @@ class Rating < ActiveRecord::Base
 	after_save :average_rating, :generate_predictions
 
 	# .includes should solve the N+1 problem in the view http://guides.rubyonrails.org/active_record_querying.html#eager-loading-associations
-	scope :rated, includes(:track).where("value IS NOT NULL").select("id, user_id, track_id, value, prediction, updated_at, abs(prediction-value) AS difference")
-	scope :unrated, includes(:track).where("value IS NULL")
+	scope :rated, -> { includes(:track).where("value IS NOT NULL").select("id, user_id, track_id, value, prediction, updated_at, abs(prediction-value) AS difference") }
+	scope :unrated, -> { includes(:track).where("value IS NULL") }
 
 	belongs_to :track
 	belongs_to :user
@@ -71,9 +71,9 @@ class Rating < ActiveRecord::Base
 			Rating.without_callback(:save, :after, :generate_predictions) do
 				if user_or_track =~ /^Track/
 					# prediction should be the average of that track for new users without ratings
-					Rating.create({user_id: id_of_track_or_user, track_id: i+1, prediction: Track.find(i+1).average_rating}, without_protection: true)
+					Rating.create(user_id: id_of_track_or_user, track_id: i+1, prediction: Track.find(i+1).average_rating)
 				else
-					Rating.create({user_id: i+1, track_id: id_of_track_or_user}, without_protection: true)
+					Rating.create(user_id: i+1, track_id: id_of_track_or_user)
 				end
 			end
 		end

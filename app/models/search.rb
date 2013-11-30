@@ -28,7 +28,7 @@ class Search
 		ar_mb_tracks = Array.new
 		if mb_tracks.respond_to?(:each)
 			mb_tracks.each do |track|
-				ar_mb_tracks << Track.new({name: track[:title], artist_name: track[:artist], mb_id: track[:id], releases: track[:releases].to_s.tr('"', '')}, without_protection: true)
+				ar_mb_tracks << Track.new(name: track[:title], artist_name: track[:artist], mb_id: track[:id], releases: track[:releases].to_s.tr('"', ''))
 			end
 		end
  		ar_mb_tracks

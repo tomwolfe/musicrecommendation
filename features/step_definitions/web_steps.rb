@@ -29,11 +29,16 @@ When /^(.*) (.*) exists?$/ do |quantity, thing|
 end
 
 When /^I am signed in$/ do
-	@current_user = FactoryGirl.create(:user)
+	@user = FactoryGirl.create(:user)
+	visit("signin")
+	fill_in("email", :with => @user.email)
+	fill_in("password", :with => @user.password)
+	click_button("Sign In")
+	# broken with Rails 3.2->4 upgrade
 	# http://stackoverflow.com/questions/1271788/session-variables-with-cucumber-stories
-	rack_test_browser = Capybara.current_session.driver.browser
-	cookie_jar = rack_test_browser.current_session.instance_variable_get(:@rack_mock_session).cookie_jar
-	cookie_jar[:stub_user_id] = @current_user.id
+	#rack_test_browser = Capybara.current_session.driver.browser
+	#cookie_jar = rack_test_browser.current_session.instance_variable_get(:@rack_mock_session).cookie_jar
+	#cookie_jar[:stub_user_id] = @current_user.id
 end
 
 When /^I am on the "(.+)" page$/ do |page|

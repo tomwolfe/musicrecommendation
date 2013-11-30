@@ -13,6 +13,7 @@ group :production do
 	gem "thin", "~> 1.6"
 	gem "dalli", "~> 2.6"
 	gem "memcachier", "~> 0.0.2"
+	gem "rails_12factor"
 end
 
 group :test do

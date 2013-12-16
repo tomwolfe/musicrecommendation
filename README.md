@@ -42,7 +42,7 @@ You can setup a Heroku account for free [https://devcenter.heroku.com/articles/q
     heroku addons:add memcache  # for caching
     bundle exec rake secret  # to generate SECRET_TOKEN, run again to generate SECRET_KEY_BASE
     # needs a custom buildpack that builds the native extension GSL. These environment variables are persistent and only need to be set once.
-    heroku config:add RECAPTCHA_PUBLIC_KEY=YOUR_PUBLIC_KEY RECAPTCHA_PRIVATE_KEY=YOUR_PRIVATE_KEY SECRET_TOKEN=YOUR_SECRET_TOKEN SECRET_KEY_BASE=YOUR_SECRET_KEY_BASE BUILDPACK_URL=https://github.com/tomwolfe/heroku-buildpack-gsl-ruby
+    heroku config:add RECAPTCHA_PUBLIC_KEY=YOUR_PUBLIC_KEY RECAPTCHA_PRIVATE_KEY=YOUR_PRIVATE_KEY SECRET_TOKEN=YOUR_SECRET_TOKEN SECRET_KEY_BASE=YOUR_SECRET_KEY_BASE BUILDPACK_URL=https://github.com/tomwolfe/heroku-buildpack-gsl-ruby WEB_CONCURRENCY=3
     git push heroku master
     heroku run rake db:migrate
     heroku restart # to reload the schema and pickup schema changes

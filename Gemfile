@@ -10,10 +10,11 @@ end
 
 group :production do
 	gem "pg", "~> 0.17"
-	gem "thin", "~> 1.6"
+	gem "unicorn"
 	gem "dalli", "~> 2.6"
 	gem "memcachier", "~> 0.0.2"
 	gem "rails_12factor"
+	gem "rack-timeout"
 end
 
 group :test do

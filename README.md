@@ -18,15 +18,16 @@ You can see a running version of the application at [https://musicrec.herokuapp.
 
 Tested on Debian Wheezy.
 
-    sudo apt-get install libgsl0-dev ruby ruby-dev rubygems-integration # not tested
+    sudo apt-get install libgsl0-dev ruby ruby-dev rubygems-integration libxslt-dev libxml2-dev # not tested, xslt/xml needed for nokogiri
     follow these instructions: https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager to install nodejs. You'll have to compile it since it's not in Wheezy's repos.
     git clone git@github.com:tomwolfe/musicrecommendation.git
     cd musicrecommendation
+	sudo gem install bundler
     bundle install --without production  # to avoid using the 'thin' webserver in test/development
     bundle exec rake db:migrate
 
 [Get your own keys](http://recaptcha.net/whyrecaptcha.html) for recaptcha.
-Setup your recaptcha keys in `config/initializers/recaptcha.rb`
+Setup your recaptcha keys in `config/initializers/recaptcha.rb` use 'config/initializers/recaptcha.rb.example' as a guide.
 
 To use the application run `rails server` in the projects root directory and navigate to http://localhost:3000 in your web browser
 
@@ -54,10 +55,6 @@ We use RSpec and Cucumber for tests.
 Run `bundle exec rake db:test:prepare` to create/setup the test database.
 
 Run `bundle exec rake cucumber spec` to run the tests.
-
-## Caching
-
-Currently caching is turned on for the development environment (cache stored in `tmp/cache`). Set `config.action_controller.perform_caching = false` in `config/environments/development.rb` to turn it off. Eventually I'll probably get tired of manually [testing caching](http://stackoverflow.com/a/5293902/477788).
 
 ## To-do/completed task list
 

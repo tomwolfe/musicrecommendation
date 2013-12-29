@@ -16,7 +16,6 @@ group :production do
 	gem "dalli", "~> 2.6"
 	gem "memcachier", "~> 0.0.2"
 	gem "rails_12factor"
-	gem "rack-timeout"
 end
 
 group :test do
@@ -73,3 +72,5 @@ gem "will_paginate", "~> 3.0"
 gem "itunes-search-api", "~> 0.1"
 
 gem "musicbrainz", github: "tomwolfe/musicbrainz", branch: "fix_tracksearch"
+
+gem "rack-timeout"

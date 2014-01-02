@@ -26,7 +26,7 @@ class Prediction < ActiveRecord::Base
   
   def add_predictions
     # would like to use .select but that returns read-only objects
-    ratings = Rating.includes(:prediction).all
+    ratings = Rating.includes(:prediction).to_a
     ratings.each do |rating|
       @rating = rating
       add_prediction_logic

@@ -38,7 +38,7 @@ describe Prediction do
       end
       it 'adds the generated predictions to the database' do
         @prediction.add_predictions
-        Prediction.pluck(:value).should eq([1.0])
+        Prediction.first.value.should eq(1.0)
       end
     end
     describe '#add_prediction_logic' do
@@ -47,13 +47,13 @@ describe Prediction do
         @prediction.instance_variable_set(:@predictions, NArray[[0.7]])
         @prediction.instance_variable_set(:@rating, @rating)
         @prediction.add_prediction_logic
-        expect(Prediction.pluck(:value)).to eq([0.7])
+        expect(Prediction.first.value).to eq(0.7)
       end
       it 'does not update the prediction if it has changed by less than 0.2' do
         @prediction.instance_variable_set(:@predictions, NArray[[0.9]])
         @prediction.instance_variable_set(:@rating, @rating)
         @prediction.add_prediction_logic
-        expect(Prediction.pluck(:value)).to eq([1.0])
+        expect(Prediction.first.value).to eq(1.0)
       end
       it 'sets the prediction if it is currently nil' do
         @prediction = FactoryGirl.create(:nil_prediction)
@@ -61,7 +61,7 @@ describe Prediction do
         @prediction.instance_variable_set(:@predictions, NArray[[0.0, 0.0],[0.0, 0.9]])
         @prediction.instance_variable_set(:@rating, @rating)
         @prediction.add_prediction_logic
-        expect(Prediction.pluck(:value)).to eq([1.0, 0.9])
+        expect(Prediction.find(2).value).to eq(0.9)
       end
     end
   end

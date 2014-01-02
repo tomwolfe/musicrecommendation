@@ -6,9 +6,6 @@ describe HomeController do
 		Track.any_instance.stub(:must_be_in_musicbrainz).and_return(true)
                 @prediction = FactoryGirl.create(:prediction)
 		@rating = @prediction.rating
-                #prediction_table = NArray[[0.8, 0.8]]
-		#CofiCost.any_instance.stub(:predictions).and_return(prediction_table)
-		#CofiCost.any_instance.stub(:min_cost).and_return(nil)
 	end
 
 	describe '#signedin' do

@@ -39,13 +39,13 @@ class RatingsController < ApplicationController
 	# GET /rated/page/:page
 	def rated
 		@page = params[:page] || "1"
-		@ratings = current_user.ratings.rated.page(@page).order("updated_at DESC")
+		@ratings = current_user.ratings.rated.page(@page).order(updated_at: :desc)
 	end
 
 	# GET /unrated_predictions/page/:page
 	def unrated
 		@page = params[:page] || "1"
-		@unrated_predictions = current_user.ratings.unrated.page(@page).order("prediction DESC")
+		@unrated_predictions = current_user.ratings.unrated.page(@page).order("predictions.value DESC")
 		render :unrated
 	end
 

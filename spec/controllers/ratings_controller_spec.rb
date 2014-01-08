@@ -3,9 +3,9 @@ require_relative '../spec_helper'
 describe RatingsController do
   before :each do
     Rating.skip_callback(:save, :after, :generate_predictions)
-		Track.any_instance.stub(:must_be_in_musicbrainz).and_return(true)
+    Track.any_instance.stub(:must_be_in_musicbrainz).and_return(true)
     @rating = FactoryGirl.create(:rating)
-		@rating_hash = {rating: {track_id: @rating, value: @rating}}
+    @rating_hash = {rating: {track_id: @rating, value: @rating}}
     ApplicationController.any_instance.stub(:current_user).and_return(@rating.user)
   end
   

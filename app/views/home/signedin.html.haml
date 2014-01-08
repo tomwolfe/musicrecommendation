@@ -11,7 +11,6 @@
         %th Releases
         %th Your rating
         %th Prediction
-        %th Difference from prediction
         %th Buy
       = render(@ratings)
     = @ratings.empty? ? "You have not yet rated any tracks. Search below to find a track to rate." : link_to("More", "/ratings/rated/page/1")

@@ -6,8 +6,6 @@ class CreatePredictions < ActiveRecord::Migration
 
       t.timestamps
     end
-    Rating.all.each do |r|
-      r.create_prediction(:value => r.prediction)
-    end
+    Rating.all.to_a.each { |r| r.create_prediction(value: r.prediction) }
   end
 end
